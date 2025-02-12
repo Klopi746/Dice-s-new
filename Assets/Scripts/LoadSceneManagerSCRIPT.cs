@@ -1,16 +1,18 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadSceneManagerSCRIPT : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static LoadSceneManagerSCRIPT Instance;
+
+    private void Awake()
     {
-        
+        Instance = this;
+        DontDestroyOnLoad(this);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadNewScene(int sceneNumber = 0)
     {
-        
+        SceneManager.LoadScene(sceneNumber);
     }
 }
