@@ -8,6 +8,8 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
     private EnemyData enemyData; // for JSON parse
     void Awake()
     {
+        AssignOwnedCubesToArray();
+
         enemyId = PlayerPrefs.GetInt("EnemyId", 1);
 
         // load enemyData
