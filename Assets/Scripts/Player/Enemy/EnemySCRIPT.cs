@@ -3,14 +3,14 @@ using Newtonsoft.Json;
 
 public class EnemySCRIPT : PlayerPapaSCRIPT
 {
-    public int enemyId;
+    public int enemyId; // that's type of enemy - loading from PlayerPrefs
 
-    private EnemyData enemyData;
+    private EnemyData enemyData; // for JSON parse
     void Awake()
     {
-        // Load Enemy Data
         enemyId = PlayerPrefs.GetInt("EnemyId", 1);
 
+        // load enemyData
         var enemySetUpFile = Resources.Load<TextAsset>($"Enemy/SetUp{enemyId}");
         if (enemySetUpFile == null) { Debug.LogError($"Failed to load EnemySetUp for ID: {enemyId}"); return; }
 
@@ -28,6 +28,7 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
     void Start()
     {
+        // assing enemyData to this GameObj - O, maybe use enemyData... I need to think about that - MOMMY
         playerName = enemyData.enemyName;
         ownedCubes = enemyData.ownedCubes;
     }
