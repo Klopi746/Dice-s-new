@@ -273,8 +273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: SusIsNumberOne
-  playerMoney: 50
   playerCubesInWorld: {fileID: 313668789}
+  playerMoney: 50
 --- !u!1 &208124463
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,8 +768,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerName: SusIsNumberOne
-  playerMoney: 50
   playerCubesInWorld: {fileID: 208124464}
+  enemyId: 1
 --- !u!1001 &847229006
 PrefabInstance:
   m_ObjectHideFlags: 0
