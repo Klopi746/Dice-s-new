@@ -4,7 +4,6 @@ using UnityEngine;
 public abstract class PlayerPapaSCRIPT : MonoBehaviour
 {
     public string playerName = "SusIsNumberOne";
-    public int playerMoney = 50;
-    public Dictionary<int,int> ownedCubes = new Dictionary<int, int>();
+    public Dictionary<string,int> ownedCubes = new Dictionary<string, int>();
     [SerializeField] protected Transform playerCubesInWorld;
 }
