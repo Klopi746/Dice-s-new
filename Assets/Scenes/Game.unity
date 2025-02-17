@@ -236,6 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 187320450}
+  - component: {fileID: 187320451}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -259,6 +260,21 @@ Transform:
   - {fileID: 1591108811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &187320451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187320449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd710547a947654197635b3c401b016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: SusIsNumberOne
+  playerMoney: 50
+  playerCubesInWorld: {fileID: 313668789}
 --- !u!1 &208124463
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +677,7 @@ GameObject:
   m_Component:
   - component: {fileID: 815406985}
   - component: {fileID: 815406984}
+  - component: {fileID: 815406986}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -738,6 +755,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &815406986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815406983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 652e0309cd08511449fcfe0c54d1eac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: SusIsNumberOne
+  playerMoney: 50
+  playerCubesInWorld: {fileID: 208124464}
 --- !u!1001 &847229006
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPapaSCRIPT : MonoBehaviour
+public abstract class PlayerPapaSCRIPT : MonoBehaviour
 {
     public string playerName = "SusIsNumberOne";
     public int playerMoney = 50;
     public Dictionary<int,int> ownedCubes = new Dictionary<int, int>();
-    [SerializeField] Transform playerCubesInWorld;
+    [SerializeField] protected Transform playerCubesInWorld;
 }
