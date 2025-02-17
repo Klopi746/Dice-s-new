@@ -10,4 +10,14 @@ public class GameHandlerSCRIPT : MonoBehaviour
     }
 
     public bool IsPlayerTurn { get; set; } = true;
+
+    private bool _isGameStarted = false;
+    public void StartTheGame()
+    {
+        if (!_isGameStarted) _isGameStarted = true;
+    }
+    public bool isGameStarted()
+    {
+        return _isGameStarted;
+    }
 }
