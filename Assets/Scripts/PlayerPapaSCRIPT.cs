@@ -1,16 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPapaSCRIPT : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public string playerName = "SusIsNumberOne";
+    public int playerMoney = 50;
+    public Dictionary<int,int> ownedCubes = new Dictionary<int, int>();
+    [SerializeField] Transform playerCubesInWorld;
 }
