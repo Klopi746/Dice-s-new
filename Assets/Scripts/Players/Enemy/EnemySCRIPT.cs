@@ -6,9 +6,9 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
     public int enemyId; // that's type of enemy - loading from PlayerPrefs
 
     private EnemyData enemyData; // for JSON parse
-    void Awake()
+    override protected void Awake()
     {
-        AssignOwnedCubesToArray();
+        base.Awake();
 
         enemyId = PlayerPrefs.GetInt("EnemyId", 1);
 

@@ -29,5 +29,15 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         {
             cubesArray[i] = playerCubesInWorld.GetChild(i).gameObject;
         }
+        Debug.Log($"Cubes for {gameObject.name} succesfully initialized");
+    }
+
+
+    /// <summary>
+    /// Do PaPa's things, that's the same for each player
+    /// </summary>
+    protected virtual void Awake()
+    {
+        AssignOwnedCubesToArray();
     }
 }
