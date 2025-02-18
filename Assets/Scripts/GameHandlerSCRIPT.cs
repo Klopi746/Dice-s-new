@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameHandlerSCRIPT : MonoBehaviour
 {
@@ -9,7 +10,20 @@ public class GameHandlerSCRIPT : MonoBehaviour
     }
 
 
-    public bool IsPlayerTurn { get; set; } = true;
+    private bool _isPlayerTurn = true;
+    public UnityEvent<bool> OnTurnChanged;
+    public bool IsPlayerTurn
+    {
+        get => _isPlayerTurn;
+        set
+        {
+            if (_isPlayerTurn != value)
+            {
+                _isPlayerTurn = value;
+                OnTurnChanged.Invoke(_isPlayerTurn);
+            }
+        }
+    }
 
 
     private bool _isGameStarted = false;
