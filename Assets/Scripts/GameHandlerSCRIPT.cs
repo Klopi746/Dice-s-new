@@ -47,4 +47,13 @@ public class GameHandlerSCRIPT : MonoBehaviour
     {
         return _isGameStarted;
     }
+
+
+    private void OnDestroy()
+    {
+        if (Instance != null)
+        {
+            Instance.OnTurnChanged.RemoveAllListeners();
+        }
+    }
 }
