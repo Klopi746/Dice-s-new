@@ -19,9 +19,9 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
     }
     private void HandleTurnChange(bool isPlayerTurn)
     {
-        if (isPlayerTurn)
-        {
-            Debug.Log("Player turn started!");
-        }
+        if (!isPlayerTurn) return;
+
+
+        Debug.Log("Player turn started!");
     }
 }

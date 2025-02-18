@@ -43,10 +43,10 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
     }
     private void HandleTurnChange(bool isPlayerTurn)
     {
-        if (!isPlayerTurn)
-        {
-            Debug.Log("Enemy turn started! ;)");
-        }
+        if (isPlayerTurn) return;
+
+
+        Debug.Log("Enemy turn started! ;)");
     }
 
     private void OnDestroy()
