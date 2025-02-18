@@ -12,7 +12,10 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
         enemyId = PlayerPrefs.GetInt("EnemyId", 1);
 
-        // load enemyData
+        LoadEnemyData();
+    }
+    private void LoadEnemyData()
+    {
         var enemySetUpFile = Resources.Load<TextAsset>($"Enemy/SetUp{enemyId}");
         if (enemySetUpFile == null) { Debug.LogError($"Failed to load EnemySetUp for ID: {enemyId}"); return; }
 
@@ -28,10 +31,29 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
         }
     }
 
+
     void Start()
     {
         // assing enemyData to this GameObj - O, maybe use enemyData... I need to think about that - MOMMY
         playerName = enemyData.enemyName;
         ownedCubes = enemyData.ownedCubes;
+
+        // Subscribe to OnTurnChanged event
+        GameHandlerSCRIPT.Instance.OnTurnChanged.AddListener(HandleTurnChange);
+    }
+    private void HandleTurnChange(bool isPlayerTurn)
+    {
+        if (!isPlayerTurn)
+        {
+            Debug.Log("Enemy turn started! ;)");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (GameHandlerSCRIPT.Instance != null)
+        {
+            GameHandlerSCRIPT.Instance.OnTurnChanged.RemoveListener(HandleTurnChange);
+        }
     }
 }
