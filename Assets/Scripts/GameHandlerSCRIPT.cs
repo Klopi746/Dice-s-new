@@ -31,6 +31,10 @@ public class GameHandlerSCRIPT : MonoBehaviour
             }
         }
     }
+    public void EndTurn()
+    {
+        IsPlayerTurn = !IsPlayerTurn;
+    }
 
 
     // UnUsed for now
