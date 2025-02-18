@@ -6,11 +6,18 @@ public class GameHandlerSCRIPT : MonoBehaviour
     public static GameHandlerSCRIPT Instance;
     private void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
 
-    private bool _isPlayerTurn = true;
+    private bool _isPlayerTurn = false;
     public UnityEvent<bool> OnTurnChanged;
     public bool IsPlayerTurn
     {
@@ -26,6 +33,7 @@ public class GameHandlerSCRIPT : MonoBehaviour
     }
 
 
+    // UnUsed for now
     private bool _isGameStarted = false;
     public void StartTheGame()
     {
