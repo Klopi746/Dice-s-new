@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerSCRIPT : PlayerPapaSCRIPT
 {
-    public int playerLives = 50;
+    public int playerLives = 50; // some sort of money)
 
     override protected void Awake()
     {
@@ -23,5 +23,6 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
 
 
         Debug.Log("Player turn started!");
+        GetAndDropCubes();
     }
 }

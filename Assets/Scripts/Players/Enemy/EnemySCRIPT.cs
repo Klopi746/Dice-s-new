@@ -47,13 +47,6 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
 
         Debug.Log("Enemy turn started! ;)");
-    }
-
-    private void OnDestroy()
-    {
-        if (GameHandlerSCRIPT.Instance != null)
-        {
-            GameHandlerSCRIPT.Instance.OnTurnChanged.RemoveListener(HandleTurnChange);
-        }
+        GetAndDropCubes();
     }
 }

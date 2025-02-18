@@ -40,4 +40,9 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     {
         AssignOwnedCubesToArray();
     }
+
+    protected void GetAndDropCubes()
+    {
+
+    }
 }
