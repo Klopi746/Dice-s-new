@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8efcf2d5f8eff14b81a6f3f9eebbccc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  faceProbabilities:
+  _faceProbabilities:
   - 0.1666
   - 0.1666
   - 0.1666

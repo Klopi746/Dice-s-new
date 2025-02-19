@@ -1,3 +1,5 @@
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class DicePapaSCRIPT : MonoBehaviour
@@ -14,7 +16,7 @@ public class DicePapaSCRIPT : MonoBehaviour
 
     [Header("Вероятности выпадения граней (1-6)")]
     [Range(0f, 1f)] 
-    public float[] faceProbabilities = new float[6] { 
+    public float[] _faceProbabilities = new float[6] { 
         0.1666f, // 1
         0.1666f, // 2
         0.1666f, // 3
@@ -29,18 +31,18 @@ public class DicePapaSCRIPT : MonoBehaviour
     {
         CurrentNumber = Random.Range(1, 7);
         transform.localRotation = Quaternion.Euler(_numberRotations[CurrentNumber - 1]);
+        gameObject.SetActive(true);
     }
     public void ResetDice()
     {
         CurrentNumber = 1;
         transform.localRotation = Quaternion.identity;
+        gameObject.SetActive(false);
     }
 
 
-    private void Awake()
+    private void Start()
     {
         ResetDice();
-        Roll();
-        Debug.Log($"{this.name}: rolled {CurrentNumber}");
     }
 }
