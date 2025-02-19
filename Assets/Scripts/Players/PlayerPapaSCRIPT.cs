@@ -17,6 +17,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     /// Store gameobjects of all own cubes.
     /// </summary>
     protected GameObject[] cubesArray = new GameObject[6];
+    protected DicePapaSCRIPT[] cubesScripts = new DicePapaSCRIPT[6];
     /// <summary>
     /// Must used to assign ownedCubesToArray to operate with each individually.
     /// </summary>
@@ -27,7 +28,9 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     {
         for (int i = 0; i < playerCubesInWorld.childCount; i++)
         {
-            cubesArray[i] = playerCubesInWorld.GetChild(i).gameObject;
+            GameObject gameObject = playerCubesInWorld.GetChild(i).gameObject;
+            cubesArray[i] = gameObject;
+            cubesScripts[i] = gameObject.GetComponent<DicePapaSCRIPT>();
         }
         Debug.Log($"Cubes for {gameObject.name} succesfully initialized");
     }
@@ -43,6 +46,14 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
     protected void GetAndDropCubes()
     {
-        
+        // bottle animation realization
+        RollAllCubes();
+    }
+    private void RollAllCubes()
+    {
+        foreach (DicePapaSCRIPT script in cubesScripts)
+        {
+            script.Roll();
+        }
     }
 }
