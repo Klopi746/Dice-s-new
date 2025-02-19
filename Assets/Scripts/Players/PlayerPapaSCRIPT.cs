@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 
@@ -44,10 +46,38 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         AssignOwnedCubesToArray();
     }
 
-    protected void GetAndDropCubes()
+
+    [SerializeField] Transform cubeMixerTransform;
+    protected IEnumerator GetAndDropCubes()
     {
+        ResetAllCubes(); // hide cubes
+
         // bottle animation realization
-        RollAllCubes();
+        cubeMixerTransform.gameObject.SetActive(true);
+        yield return StartCoroutine(BottleMixerAnimation());
+
+        RollAllCubes(); // show cubes
+        cubeMixerTransform.gameObject.SetActive(false);
+        yield return null;
+    }
+    private IEnumerator BottleMixerAnimation()
+    {
+        Tween tween = cubeMixerTransform.DOLocalMove(new Vector3(0f,0f,-15f), 0.5f);
+        yield return tween.WaitForCompletion();
+        tween = cubeMixerTransform.DOShakePosition(2f, strength: new Vector3(0, 0, 2f), vibrato: 5, randomness: 10, fadeOut: false, randomnessMode: ShakeRandomnessMode.Harmonic);
+        yield return tween.WaitForCompletion();
+        tween = cubeMixerTransform.DOLocalMove(new Vector3(0f,0f,-15f), 0.1f);
+        yield return tween.WaitForCompletion();
+        tween = cubeMixerTransform.DOLocalMove(new Vector3(0,0,0), 0.5f);
+        yield return tween.WaitForCompletion();
+        yield return null;
+    }
+    private void ResetAllCubes()
+    {
+        foreach (DicePapaSCRIPT script in cubesScripts)
+        {
+            script.ResetDice();
+        }
     }
     private void RollAllCubes()
     {
