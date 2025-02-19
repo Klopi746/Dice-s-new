@@ -48,5 +48,8 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
         Debug.Log("Enemy turn started! ;)");
         GetAndDropCubes();
+
+        
+        GameHandlerSCRIPT.Instance.EndTurn();
     }
 }
