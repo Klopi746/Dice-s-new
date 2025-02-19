@@ -1,5 +1,6 @@
 using UnityEngine;
 using Newtonsoft.Json;
+using System.Collections;
 
 public class EnemySCRIPT : PlayerPapaSCRIPT
 {
@@ -47,9 +48,13 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
 
         Debug.Log("Enemy turn started! ;)");
-        GetAndDropCubes();
-
-        
+        StartCoroutine(DoAIthings());
+        StartCoroutine(GetAndDropCubes());
+    }
+    private IEnumerator DoAIthings()
+    {
+        yield return StartCoroutine(GetAndDropCubes());
+        yield return new WaitForSeconds(1f); // HERE WILL BE AI LOGIC
         GameHandlerSCRIPT.Instance.EndTurn();
     }
 }

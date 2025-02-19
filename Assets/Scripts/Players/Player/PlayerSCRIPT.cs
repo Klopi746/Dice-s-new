@@ -23,6 +23,6 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
 
 
         Debug.Log("Player turn started!");
-        GetAndDropCubes();
+        StartCoroutine(GetAndDropCubes());
     }
 }
