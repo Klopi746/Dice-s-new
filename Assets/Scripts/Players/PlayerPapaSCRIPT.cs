@@ -38,11 +38,15 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     }
 
 
+    private Transform cameraTransform;
     /// <summary>
     /// Do PaPa's things, that's the same for each player
     /// </summary>
     protected virtual void Awake()
     {
+        cameraTransform = Camera.main.transform;
+        camStartPos = cameraTransform.position;
+
         AssignOwnedCubesToArray();
     }
 
@@ -58,17 +62,19 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
         RollAllCubes(); // show cubes
         cubeMixerTransform.gameObject.SetActive(false);
+
+        MoveCameraToFromCubes();
         yield return null;
     }
     private IEnumerator BottleMixerAnimation()
     {
-        Tween tween = cubeMixerTransform.DOLocalMove(new Vector3(0f,0f,-15f), 0.5f);
+        Tween tween = cubeMixerTransform.DOLocalMove(new Vector3(0f, 0f, -15f), 0.5f);
         yield return tween.WaitForCompletion();
         tween = cubeMixerTransform.DOShakePosition(2f, strength: new Vector3(0, 0, 2f), vibrato: 5, randomness: 10, fadeOut: false, randomnessMode: ShakeRandomnessMode.Harmonic);
         yield return tween.WaitForCompletion();
-        tween = cubeMixerTransform.DOLocalMove(new Vector3(0f,0f,-15f), 0.1f);
+        tween = cubeMixerTransform.DOLocalMove(new Vector3(0f, 0f, -15f), 0.1f);
         yield return tween.WaitForCompletion();
-        tween = cubeMixerTransform.DOLocalMove(new Vector3(0,0,0), 0.5f);
+        tween = cubeMixerTransform.DOLocalMove(new Vector3(0, 0, 0), 0.5f);
         yield return tween.WaitForCompletion();
         yield return null;
     }
@@ -85,5 +91,20 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         {
             script.Roll();
         }
+    }
+    Vector3 camStartPos;
+    private void MoveCameraToFromCubes()
+    {
+        if (camStartPos == cameraTransform.position)
+        {
+            cameraTransform.DOLocalMove(new Vector3(0, 0, 20), 1);
+            cameraTransform.DOLocalRotate(new Vector3(75, 0, 0), 1);
+        }
+        else
+        {
+            cameraTransform.DOLocalMove(new Vector3(0, 0, 0), 1);
+            cameraTransform.DOLocalRotate(new Vector3(15, 0, 0), 1);
+        }
+
     }
 }
