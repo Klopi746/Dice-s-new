@@ -62,8 +62,6 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
         RollAllCubes(); // show cubes
         cubeMixerTransform.gameObject.SetActive(false);
-
-        MoveCameraToFromCubes();
         yield return null;
     }
     private IEnumerator BottleMixerAnimation()
