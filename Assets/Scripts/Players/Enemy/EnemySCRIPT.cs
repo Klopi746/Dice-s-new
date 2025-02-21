@@ -49,7 +49,6 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
         Debug.Log("Enemy turn started! ;)");
         StartCoroutine(DoAIthings());
-        StartCoroutine(GetAndDropCubes());
     }
     private IEnumerator DoAIthings()
     {
