@@ -405,7 +405,6 @@ MonoBehaviour:
   position2: {x: 0, y: 5, z: -33}
   rotation2: {x: 45, y: 0, z: 0}
   transitionSpeed: 0.4
-  targetButton: {fileID: 2091927759}
   actionOverride: 0
 --- !u!1 &208124463
 GameObject:
@@ -1516,6 +1515,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 313668789}
     m_Modifications:
+    - target: {fileID: -4380549710058571247, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 974690162012318552, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
       propertyPath: m_Name
       value: Dice (1)
@@ -1546,15 +1549,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7626593602036397321, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7626593602036397321, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7626593602036397321, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7626593602036397321, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1568,10 +1571,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4380549710058571247, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 974690162012318552, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1915580569}
   m_SourcePrefab: {fileID: 100100000, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
 --- !u!4 &1307370129 stripped
 Transform:
@@ -1981,6 +1988,30 @@ Transform:
   - {fileID: 27912111}
   m_Father: {fileID: 109273844}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1915580563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 974690162012318552, guid: bbeea9b9f35d4144ba9cf4a879023c90, type: 3}
+  m_PrefabInstance: {fileID: 1307370126}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1915580569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915580563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8efcf2d5f8eff14b81a6f3f9eebbccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _faceProbabilities:
+  - 0.16666667
+  - 0.16666667
+  - 0.16666667
+  - 0.16666667
+  - 0.16666667
+  - 0.16666667
 --- !u!1001 &1957518547
 PrefabInstance:
   m_ObjectHideFlags: 0
