@@ -14,8 +14,6 @@ public class UnUsualNotNormalDice : DicePapaSCRIPT
         float randomPoint = Random.value;
         float cumulative = 0f;
 
-        // Normalize probabilities first
-        NormalizeProbabilities();
 
         for(int i = 0; i < _faceProbabilities.Length; i++)
         {
@@ -26,6 +24,6 @@ public class UnUsualNotNormalDice : DicePapaSCRIPT
             }
         }
 
-        return 6;
+        return 6; // if sum !=1, but < 1, so randomPoint > MAXcumulative
     }
 }

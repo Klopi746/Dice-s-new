@@ -27,7 +27,7 @@ public class DicePapaSCRIPT : MonoBehaviour
     {
         NormalizeProbabilities();
     }
-    protected void NormalizeProbabilities()
+    private void NormalizeProbabilities()
     {
         float total = 0f;
         foreach (float prob in _faceProbabilities)
@@ -46,7 +46,7 @@ public class DicePapaSCRIPT : MonoBehaviour
     }
 #if UNITY_EDITOR
     [ContextMenu("Test Roll")]
-    private void TestRoll()
+    public void TestRoll()
     {
         Roll();
         Debug.Log($"Rolled: {CurrentNumber}");
@@ -54,7 +54,7 @@ public class DicePapaSCRIPT : MonoBehaviour
     }
 
     [ContextMenu("Print Probability Sum")]
-    private void PrintProbabilitySum()
+    public void PrintProbabilitySum()
     {
         float sum = 0f;
         foreach (float p in _faceProbabilities) sum += p;
