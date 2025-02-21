@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DicePapaSCRIPT : MonoBehaviour
 {
-    private static readonly Vector3[] _numberRotations = {
+    protected static readonly Vector3[] _numberRotations = {
         Vector3.zero, // 1
         new Vector3(-90, 0, 0), // 2
         new Vector3(90, 0, 0), // 3
@@ -14,19 +14,56 @@ public class DicePapaSCRIPT : MonoBehaviour
     };
 
 
-    [Header("Вероятности выпадения граней (1-6)")]
-    [Range(0f, 1f)] 
-    public float[] _faceProbabilities = new float[6] { 
-        0.1666f, // 1
-        0.1666f, // 2
-        0.1666f, // 3
-        0.1666f, // 4
-        0.1666f, // 5
-        0.1666f  // 6
+    [Header("Face Probabilities (1-6)")]
+    [Tooltip("Probabilities should sum to 1")]
+    [SerializeField]
+    protected float[] _faceProbabilities = new float[6] {
+        0.5f, 0f, 0f, 0f, 0f, 0.5f // 50% for 1, 50% for 6
     };
 
 
-    public int CurrentNumber { get; private set; } = 1;
+    // Validate and normalize probabilities in editor
+    private void OnValidate()
+    {
+        NormalizeProbabilities();
+    }
+    protected void NormalizeProbabilities()
+    {
+        float total = 0f;
+        foreach (float prob in _faceProbabilities)
+        {
+            total += prob;
+        }
+
+        // Avoid division by zero
+        if (total <= Mathf.Epsilon) return;
+
+        // Normalize probabilities
+        for (int i = 0; i < _faceProbabilities.Length; i++)
+        {
+            _faceProbabilities[i] /= total;
+        }
+    }
+#if UNITY_EDITOR
+    [ContextMenu("Test Roll")]
+    private void TestRoll()
+    {
+        Roll();
+        Debug.Log($"Rolled: {CurrentNumber}");
+        Debug.Log($"Current probabilities: {string.Join(", ", _faceProbabilities)}");
+    }
+
+    [ContextMenu("Print Probability Sum")]
+    private void PrintProbabilitySum()
+    {
+        float sum = 0f;
+        foreach (float p in _faceProbabilities) sum += p;
+        Debug.Log($"Probability sum: {sum}");
+    }
+#endif
+
+
+    public int CurrentNumber { get; protected set; } = 1;
     public virtual void Roll()
     {
         CurrentNumber = Random.Range(1, 7);
