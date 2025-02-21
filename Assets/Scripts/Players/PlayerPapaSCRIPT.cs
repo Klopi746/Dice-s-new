@@ -58,6 +58,8 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
         RollAllCubes(); // show cubes
         cubeMixerTransform.gameObject.SetActive(false);
+
+        if (GameHandlerSCRIPT.Instance.IsPlayerTurn) EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
         yield return null;
     }
     private IEnumerator BottleMixerAnimation()

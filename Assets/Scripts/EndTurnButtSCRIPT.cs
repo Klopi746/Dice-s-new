@@ -5,10 +5,13 @@ using UnityEngine.UI;
 public class EndTurnButtSCRIPT : MonoBehaviour
 {
     private Button button;
+    public static EndTurnButtSCRIPT Instance;
     private void Awake()
     {
+        Instance = this;
         button = gameObject.GetComponent<Button>();
         button.onClick.AddListener(OnButtonClicked);
+        button.interactable = false;
     }
     private void Start()
     {
@@ -25,6 +28,12 @@ public class EndTurnButtSCRIPT : MonoBehaviour
 
     private void HandleTurnChange(bool isPlayerTurn)
     {
-        if (isPlayerTurn) button.interactable = true;
+        //if (isPlayerTurn) button.interactable = true; // Butt is changing in PlayerPapa.GetAndDropCubes();
+    }
+
+
+    public void ChangeButtInteractable(bool value)
+    {
+        button.interactable = value;
     }
 }
