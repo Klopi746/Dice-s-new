@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EndTurnButtSCRIPT : MonoBehaviour, IPointerClickHandler
+public class EndTurnButtSCRIPT : MonoBehaviour
 {
     private Button button;
     private void Awake()
     {
         button = gameObject.GetComponent<Button>();
+        button.onClick.AddListener(OnButtonClicked);
     }
     private void Start()
     {
@@ -15,7 +16,7 @@ public class EndTurnButtSCRIPT : MonoBehaviour, IPointerClickHandler
     }
 
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnButtonClicked()
     {
         button.interactable = false;
         GameHandlerSCRIPT.Instance.EndTurn();
