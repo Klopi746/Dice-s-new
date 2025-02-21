@@ -348,6 +348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 187320450}
   - component: {fileID: 187320451}
+  - component: {fileID: 187320452}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -387,6 +388,25 @@ MonoBehaviour:
   playerCubesInWorld: {fileID: 313668789}
   cubeMixerTransform: {fileID: 27912111}
   playerLives: 50
+--- !u!114 &187320452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187320449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f72c7877bfc16df40b1ae1d3035f3c3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position1: {x: 0, y: 15, z: -50}
+  rotation1: {x: 0, y: 0, z: 0}
+  position2: {x: 0, y: 5, z: -33}
+  rotation2: {x: 45, y: 0, z: 0}
+  transitionSpeed: 0.4
+  targetButton: {fileID: 2091927759}
+  actionOverride: 0
 --- !u!1 &208124463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,7 +1609,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnTurnChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 187320452}
+        m_TargetAssemblyTypeName: CameraControllerSCRIPT, Assembly-CSharp
+        m_MethodName: ChangeLockOverride
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1426730263
 Transform:
   m_ObjectHideFlags: 0
@@ -1692,13 +1724,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591108808}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.13052616, y: -0, z: -0, w: 0.9914449}
+  m_LocalRotation: {x: 0.1564345, y: 0, z: 0, w: 0.98768836}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 187320450}
-  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 18, y: 0, z: 0}
 --- !u!114 &1591108812
 MonoBehaviour:
   m_ObjectHideFlags: 0

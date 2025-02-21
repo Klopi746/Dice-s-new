@@ -42,6 +42,7 @@ public class GameHandlerSCRIPT : MonoBehaviour
     public void StartTheGame()
     {
         if (!_isGameStarted) _isGameStarted = true;
+        CameraControllerSCRIPT.Instance.actionOverride = false;
     }
     public bool isGameStarted()
     {
