@@ -13,9 +13,6 @@ public class CameraControllerSCRIPT : MonoBehaviour
 
     public float transitionSpeed = 0.5f;
 
-    [Header("UI Elements")]
-    public Button targetButton;
-
 
     [Header("Misc")]
     public bool actionOverride = false;
@@ -29,7 +26,6 @@ public class CameraControllerSCRIPT : MonoBehaviour
     void Start()
     {
         SetCamera(position1, rotation1);
-        targetButton.interactable = false;
     }
 
     void Update()
@@ -44,7 +40,6 @@ public class CameraControllerSCRIPT : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.S) && isAtPos2)
         {
             SetCamera(position1, rotation1);
-            targetButton.interactable = false;
             isAtPos2 = false;
         }
     }
@@ -59,7 +54,6 @@ public class CameraControllerSCRIPT : MonoBehaviour
     private IEnumerator WaitforMovementEnd()
     {
         yield return new WaitForSeconds(transitionSpeed);
-        targetButton.interactable = true;
     }
 
     public void SetCloseCamView()

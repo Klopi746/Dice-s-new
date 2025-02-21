@@ -38,15 +38,11 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     }
 
 
-    private Transform cameraTransform;
     /// <summary>
     /// Do PaPa's things, that's the same for each player
     /// </summary>
     protected virtual void Awake()
     {
-        cameraTransform = Camera.main.transform;
-        camStartPos = cameraTransform.position;
-
         AssignOwnedCubesToArray();
     }
 
@@ -89,20 +85,5 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         {
             script.Roll();
         }
-    }
-    Vector3 camStartPos;
-    private void MoveCameraToFromCubes()
-    {
-        if (camStartPos == cameraTransform.position)
-        {
-            cameraTransform.DOLocalMove(new Vector3(0, 0, 20), 1);
-            cameraTransform.DOLocalRotate(new Vector3(75, 0, 0), 1);
-        }
-        else
-        {
-            cameraTransform.DOLocalMove(new Vector3(0, 0, 0), 1);
-            cameraTransform.DOLocalRotate(new Vector3(15, 0, 0), 1);
-        }
-
     }
 }
