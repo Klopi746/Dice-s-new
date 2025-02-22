@@ -10,6 +10,8 @@ public class CameraControllerSCRIPT : MonoBehaviour
     public Vector3 rotation1 = new Vector3(18, 0, 0);
     public Vector3 position2 = new Vector3(0, -5, 15);
     public Vector3 rotation2 = new Vector3(60, 0, 0);
+    public Vector3 position3 = new Vector3(0, -5, 15);
+    public Vector3 rotation3 = new Vector3(60, 0, 0);
 
     public float transitionSpeed = 0.5f;
 
