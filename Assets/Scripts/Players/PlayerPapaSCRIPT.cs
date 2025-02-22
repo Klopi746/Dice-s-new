@@ -62,8 +62,8 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         cubeMixerTransform.gameObject.SetActive(false);
 
-        curCombos = FindAllCombos(cubesScripts);
-        curCombos.ForEach(combo => Debug.Log(combo));
+        // curCombos = FindAllCombos(cubesScripts);
+        // curCombos.ForEach(combo => Debug.Log(combo));
 
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn) EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
         yield return null;
@@ -127,72 +127,34 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         {"23456",750},
         {"123456",1500}
     };
-    public List<string> FindAllCombos(DicePapaSCRIPT[] cubesScripts)
+    // public List<string> FindAllCombos(DicePapaSCRIPT[] cubesScripts)
+    // {
+    //     List<int> rolledDice = new();
+    //     foreach (DicePapaSCRIPT script in cubesScripts)
+    //     {
+    //         rolledDice.Add(script.CurrentNumber);
+    //     }
+    //     rolledDice.Sort();
+    //     string rolledDiceString = rolledDice.ToString();
+
+    //     List<string> foundCombos = new List<string>();
+
+    //     return foundCombos;
+    // }
+
+    public Dictionary<string, int> FindAllCombos(Dictionary<int, int> diceValues)
     {
         List<int> rolledDice = new();
         foreach (DicePapaSCRIPT script in cubesScripts)
         {
             rolledDice.Add(script.CurrentNumber);
         }
+        rolledDice.Sort();
+        string rolledDiceString = rolledDice.ToString();
 
-        // Count occurrences of each number
-        Dictionary<int, int> diceCounts = new Dictionary<int, int>();
-        foreach (int num in rolledDice)
-        {
-            if (diceCounts.ContainsKey(num))
-                diceCounts[num]++;
-            else
-                diceCounts[num] = 1;
-        }
-
-        List<string> foundCombos = new List<string>();
-
-        foreach (KeyValuePair<string, int> combo in _cubesCombos)
-        {
-            string key = combo.Key;
-            // Check if all characters in the key are the same (count-based combo)
-            bool isCountCombo = key.All(c => c == key[0]);
-            if (isCountCombo)
-            {
-                int digit = int.Parse(key[0].ToString());
-                int requiredCount = key.Length;
-                if (diceCounts.TryGetValue(digit, out int count) && count >= requiredCount)
-                {
-                    foundCombos.Add(key);
-                }
-            }
-            else
-            {
-                // Check if the key forms a consecutive sequence
-                List<int> digits = key.Select(c => int.Parse(c.ToString())).ToList();
-                bool isConsecutive = true;
-                for (int i = 1; i < digits.Count; i++)
-                {
-                    if (digits[i] != digits[i - 1] + 1)
-                    {
-                        isConsecutive = false;
-                        break;
-                    }
-                }
-                if (isConsecutive)
-                {
-                    // Check if all required numbers are present
-                    bool allPresent = true;
-                    foreach (int d in digits)
-                    {
-                        if (!diceCounts.ContainsKey(d) || diceCounts[d] < 1)
-                        {
-                            allPresent = false;
-                            break;
-                        }
-                    }
-                    if (allPresent)
-                    {
-                        foundCombos.Add(key);
-                    }
-                }
-            }
-        }
+        Dictionary<string, int> foundCombos = new Dictionary<string, int>(){
+            { "5", 50 }, { "1", 100 }, { "15", 150 }
+        };
 
         return foundCombos;
     }
