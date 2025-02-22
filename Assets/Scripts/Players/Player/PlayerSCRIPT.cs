@@ -25,4 +25,10 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
         Debug.Log("Player turn started!");
         StartCoroutine(GetAndDropCubes());
     }
+
+
+    public void OnEndButtClick()
+    {
+        CameraControllerSCRIPT.Instance.SetFarCamView();
+    }
 }
