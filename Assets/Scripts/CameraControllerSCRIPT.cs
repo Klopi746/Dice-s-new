@@ -61,11 +61,13 @@ public class CameraControllerSCRIPT : MonoBehaviour
     public void SetCloseCamView()
     {
         SetCamera(position2, rotation2);
+        isAtPos2 = true;
     }
 
     public void SetFarCamView()
     {
         SetCamera(position1, rotation1);
+        isAtPos2 = false;
     }
 
     public void ChangeLockOverride()
