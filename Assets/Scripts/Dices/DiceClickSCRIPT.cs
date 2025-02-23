@@ -3,18 +3,18 @@ using UnityEngine.EventSystems;
 
 public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
 {
-    private SpriteRenderer clickedSpriteRenderer;
+    public OutlineSCRIPT outlineScript;
+
     void Awake()
     {
-        clickedSpriteRenderer = transform.Find("ClickedSprite").GetComponent<SpriteRenderer>();
-        if (clickedSpriteRenderer == null) Debug.Log($"{this.name} can't find clickedSprite");
+        outlineScript = GetComponent<OutlineSCRIPT>();
+        if (outlineScript == null) Debug.LogWarning($"{this.name} can't find outline script!");
     }
 
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        clickedSpriteRenderer.transform.rotation = Quaternion.Euler(90, 0, 0);
-        if (!clickedSpriteRenderer.enabled) clickedSpriteRenderer.enabled = true;
-        else clickedSpriteRenderer.enabled = false;
+        if (!outlineScript.enabled) outlineScript.enabled = true;
+        else outlineScript.enabled = false;
     }
 }
