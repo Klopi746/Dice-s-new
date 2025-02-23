@@ -119,7 +119,7 @@ public class ComboTestSCRIPT
             {6,1},
         };
         Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
-        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "1", 100 }, { "12345", 500 }, { "112345", 600 } }));
+        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "112345", 600 } }));
     }
 
     [Test]
@@ -134,6 +134,51 @@ public class ComboTestSCRIPT
             {6,5},
         };
         Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
-        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "5", 100 }, { "1", 100 }, { "55", 100 }, { "11", 200 }, { "555", 500 }, { "111", 600 } }));
+        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "111555", 1500 } }));
+    }
+
+    [Test]
+    public void FourOfAKindWithExtraOneAndFive()
+    {
+        Dictionary<int, int> diceValues = new Dictionary<int, int>(){
+            {1,4},
+            {2,1},
+            {3,4},
+            {4,5},
+            {5,4},
+            {6,4},
+        };
+        Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
+        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "144445", 950 } }));
+    }
+
+    [Test]
+    public void FourOfAKindWithExtraFives()
+    {
+        Dictionary<int, int> diceValues = new Dictionary<int, int>(){
+            {1,5},
+            {2,4},
+            {3,4},
+            {4,5},
+            {5,4},
+            {6,4},
+        };
+        Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
+        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "444455", 900 } }));
+    }
+    
+    [Test]
+    public void FiveOfAKindWithExtraFive()
+    {
+        Dictionary<int, int> diceValues = new Dictionary<int, int>(){
+            {1,4},
+            {2,4},
+            {3,4},
+            {4,4},
+            {5,4},
+            {6,5},
+        };
+        Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
+        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "444445", 1650 } }));
     }
 }
