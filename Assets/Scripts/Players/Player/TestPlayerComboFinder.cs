@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 public class TestPlayerComboFinder : MonoBehaviour
@@ -19,7 +18,18 @@ public class TestPlayerComboFinder : MonoBehaviour
         values.Sort();
 
         string valuesStr = string.Join("", values);
-
+        // Find FullSequence
+        bool noSequenceInValues = false;
+        KeyValuePair<string, int> newpair = FindSequence(valuesStr);
+        if (newpair.Value == 0) noSequenceInValues = true;
+        else if (newpair.Key == "123456")
+        {
+            Dictionary<string, int> fullCombo = new Dictionary<string, int>() { { newpair.Key, newpair.Value } };
+            Debug.Log("End Test FULL!");
+            return fullCombo;
+        }
+        else { foundCombos.Add(newpair.Key, newpair.Value); valuesStr = valuesStr.Replace(newpair.Key, ""); }
+        Debug.Log($"Combo Sequence: {newpair.Key} Value: {newpair.Value}");
         // Find All three or more & two or less
         int[] valuesCount = new int[6];
         for (int i = 1; i <= valuesStr.Length; i++)
@@ -28,28 +38,31 @@ public class TestPlayerComboFinder : MonoBehaviour
         }
 
         int cubesUsed = 0;
-        // Find All three or more
-        for (int i = 0; i < valuesCount.Length; i++)
+        if (noSequenceInValues)
         {
-            if (valuesCount[i] >= 3)
+            // Find All three or more
+            for (int i = 0; i < valuesCount.Length; i++)
             {
-                cubesUsed += valuesCount[i];
+                if (valuesCount[i] >= 3)
+                {
+                    cubesUsed += valuesCount[i];
 
-                string key = string.Concat(Enumerable.Repeat((i + 1).ToString(), valuesCount[i]));
+                    string key = string.Concat(Enumerable.Repeat((i + 1).ToString(), valuesCount[i]));
 
-                int value;
-                if (FindComboInCombinations(key)) value = _cubesCombos[key];
-                else value = SumTheCombosLessThanTwo(key);
+                    int value;
+                    if (FindComboInCombinations(key)) value = _cubesCombos[key];
+                    else value = SumTheCombosLessThanThree(key);
 
-                Debug.Log($"Combo: {key} Value: {value}");
-                foundCombos.Add(key, value);
+                    Debug.Log($"Combo: {key} Value: {value}");
+                    foundCombos.Add(key, value);
+                }
             }
-        }
-        if (cubesUsed == 6)
-        {
-            Dictionary<string, int> fullCombo = SumToFullCombo(foundCombos);
-            Debug.Log("End Test FULL!");
-            return fullCombo;
+            if (cubesUsed == values.Count)
+            {
+                Dictionary<string, int> fullCombo = SumToFullCombo(foundCombos);
+                Debug.Log("End Test FULL!");
+                return fullCombo;
+            }
         }
         // Find All two or less
         for (int i = 0; i < valuesCount.Length; i++)
@@ -61,15 +74,16 @@ public class TestPlayerComboFinder : MonoBehaviour
 
                 string key = string.Concat(Enumerable.Repeat((i + 1).ToString(), valuesCount[i]));
 
-                int value;
+                int value = 0;
                 if (FindComboInCombinations(key)) value = _cubesCombos[key];
-                else value = SumTheCombosLessThanTwo(key);
+                else value = SumTheCombosLessThanThree(key);
 
+                if (value == 0) continue;
                 Debug.Log($"Combo: {key} Value: {value}");
                 foundCombos.Add(key, value);
             }
         }
-        if (cubesUsed == 6)
+        if (cubesUsed == values.Count)
         {
             Dictionary<string, int> fullCombo = SumToFullCombo(foundCombos);
             Debug.Log("End Test FULL!");
@@ -90,7 +104,7 @@ public class TestPlayerComboFinder : MonoBehaviour
         if (_cubesCombos.ContainsKey(key)) return true;
         else return false;
     }
-    private int SumTheCombosLessThanTwo(string Key)
+    private int SumTheCombosLessThanThree(string Key)
     {
         if (Key.Length > 2) Debug.LogWarning("Error!");
 
@@ -119,9 +133,10 @@ public class TestPlayerComboFinder : MonoBehaviour
             newKey += combo.Key;
             newValue += combo.Value;
         }
-        fullCombo.Add(newKey, newValue);
+        string sortedKey = new string(newKey.OrderBy(c => c).ToArray());
+        fullCombo.Add(sortedKey, newValue);
 
-        Debug.Log($"Combo: {newKey} Value: {newValue}");
+        Debug.Log($"Combo: {sortedKey} Value: {newValue}");
         return fullCombo;
     }
     private KeyValuePair<string, int> SumCombos(Dictionary<string, int> foundCombos)
@@ -133,10 +148,18 @@ public class TestPlayerComboFinder : MonoBehaviour
             newKey += combo.Key;
             newValue += combo.Value;
         }
-        KeyValuePair<string, int> allComboPair = new KeyValuePair<string, int>(newKey, newValue);
+        string sortedKey = new string(newKey.OrderBy(c => c).ToArray());
+        KeyValuePair<string, int> allComboPair = new KeyValuePair<string, int>(sortedKey, newValue);
 
-        Debug.Log($"Combo: {newKey} Value: {newValue}");
+        Debug.Log($"Combo: {sortedKey} Value: {newValue}");
         return allComboPair;
+    }
+    private KeyValuePair<string, int> FindSequence(string valuesStr)
+    {
+        if (valuesStr.Contains("123456")) return new KeyValuePair<string, int>(valuesStr, 1500);
+        else if (valuesStr.Contains("12345")) return new KeyValuePair<string, int>("12345", 500);
+        else if (valuesStr.Contains("23456")) return new KeyValuePair<string, int>("23456", 750);
+        else return new KeyValuePair<string, int>("0", 0);
     }
 
 

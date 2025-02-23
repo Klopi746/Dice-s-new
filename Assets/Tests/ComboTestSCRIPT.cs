@@ -119,7 +119,7 @@ public class ComboTestSCRIPT
             {6,1},
         };
         Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
-        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "112345", 600 } }));
+        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "12345", 500 }, { "1", 100 }, { "112345", 600 } }));
     }
 
     [Test]
@@ -166,7 +166,7 @@ public class ComboTestSCRIPT
         Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
         Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "444455", 900 } }));
     }
-    
+
     [Test]
     public void FiveOfAKindWithExtraFive()
     {
