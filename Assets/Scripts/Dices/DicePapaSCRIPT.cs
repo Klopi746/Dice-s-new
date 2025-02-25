@@ -7,10 +7,10 @@ public class DicePapaSCRIPT : MonoBehaviour
     protected static readonly Vector3[] _numberRotations = {
         Vector3.zero, // 1
         new Vector3(-90, 0, 0), // 2
-        new Vector3(90, 0, 0), // 3
-        new Vector3(0, 0, 90), // 4
-        new Vector3(180, 0, 0), // 5
-        new Vector3(0, 0, -90) // 6
+        new Vector3(0, 0, 90), // 3
+        new Vector3(0, 0, -90), // 4
+        new Vector3(90, 0, 0), // 5
+        new Vector3(180, 0, 0) // 6
     };
 
 
@@ -73,7 +73,7 @@ public class DicePapaSCRIPT : MonoBehaviour
     public void ResetDice()
     {
         CurrentNumber = 1;
-        transform.localRotation = Quaternion.identity;
+        transform.localRotation = Quaternion.Euler(_numberRotations[0]);;
         gameObject.SetActive(false);
     }
 
