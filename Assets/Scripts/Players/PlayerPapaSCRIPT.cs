@@ -49,7 +49,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
 
     [SerializeField] Transform cubeMixerTransform;
-    protected List<string> curCombos;
+    Dictionary<string, int> curCombos;
     protected IEnumerator GetAndDropCubes()
     {
         ResetAllCubes(); // hide cubes
@@ -59,11 +59,10 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         yield return StartCoroutine(BottleMixerAnimation());
 
         RollAllCubes(); // show cubes
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.4f);
+        FindCombos();
         cubeMixerTransform.gameObject.SetActive(false);
 
-        // curCombos = FindAllCombos(cubesScripts);
-        // curCombos.ForEach(combo => Debug.Log(combo));
 
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn) EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
         yield return null;
@@ -94,68 +93,17 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
             script.Roll();
         }
     }
-
-
-    protected static readonly Dictionary<string, int> _cubesCombos = new Dictionary<string, int>(){
-        {"1",100},
-        {"5",50},
-        {"111",1000},
-        {"1111",2000},
-        {"11111",4000},
-        {"111111",8000},
-        {"222",200},
-        {"2222",400},
-        {"22222",800},
-        {"222222",1600},
-        {"333",300},
-        {"3333",600},
-        {"33333",1200},
-        {"333333",2400},
-        {"444",400},
-        {"4444",800},
-        {"44444",1600},
-        {"444444",3200},
-        {"555",500},
-        {"5555",1000},
-        {"55555",2000},
-        {"555555",4000},
-        {"666",600},
-        {"6666",1200},
-        {"66666",2400},
-        {"666666",4800},
-        {"12345",500},
-        {"23456",750},
-        {"123456",1500}
-    };
-    // public List<string> FindAllCombos(DicePapaSCRIPT[] cubesScripts)
-    // {
-    //     List<int> rolledDice = new();
-    //     foreach (DicePapaSCRIPT script in cubesScripts)
-    //     {
-    //         rolledDice.Add(script.CurrentNumber);
-    //     }
-    //     rolledDice.Sort();
-    //     string rolledDiceString = rolledDice.ToString();
-
-    //     List<string> foundCombos = new List<string>();
-
-    //     return foundCombos;
-    // }
-
-    public Dictionary<string, int> FindAllCombos(Dictionary<int, int> diceValues)
+    protected void FindCombos()
     {
-        List<int> rolledDice = new();
-        foreach (DicePapaSCRIPT script in cubesScripts)
+        Dictionary<int, int> diceValues = new Dictionary<int, int>();
+        for (int i = 0; i < cubesScripts.Length; i++)
         {
-            rolledDice.Add(script.CurrentNumber);
+            diceValues.Add(i+1, cubesScripts[i].CurrentNumber);
         }
-        rolledDice.Sort();
-        string rolledDiceString = rolledDice.ToString();
-
-        Dictionary<string, int> foundCombos = new Dictionary<string, int>(){
-            { "5", 50 }, { "1", 100 }, { "15", 150 }
-        };
-
-        return foundCombos;
+        curCombos = ComboFinder.Instance.FindAllCombos(diceValues);
+        foreach (var combo in curCombos)
+        {
+            Debug.Log($"combo: {combo.Key}; value: {combo.Value}");
+        }
     }
 }

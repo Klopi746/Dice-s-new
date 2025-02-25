@@ -2,8 +2,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TestPlayerComboFinder : MonoBehaviour
+public class ComboFinder : MonoBehaviour
 {
+    public static ComboFinder Instance;
+    void Awake()
+    {
+        Instance = this;
+    }
+
+
     public Dictionary<string, int> FindAllCombos(Dictionary<int, int> diceValues)
     {
         Dictionary<string, int> foundCombos = new Dictionary<string, int>() { };
@@ -15,6 +22,7 @@ public class TestPlayerComboFinder : MonoBehaviour
             values.Add(item.Value);
         }
 
+        Debug.Log(string.Join("", values));
         values.Sort();
 
         string valuesStr = string.Join("", values);
@@ -25,11 +33,11 @@ public class TestPlayerComboFinder : MonoBehaviour
         else if (newpair.Key == "123456")
         {
             Dictionary<string, int> fullCombo = new Dictionary<string, int>() { { newpair.Key, newpair.Value } };
-            Debug.Log("End Test FULL!");
+            // Debug.Log("End Test FULL!");
             return fullCombo;
         }
         else { foundCombos.Add(newpair.Key, newpair.Value); valuesStr = valuesStr.Replace(newpair.Key, ""); }
-        Debug.Log($"Combo Sequence: {newpair.Key} Value: {newpair.Value}");
+        // Debug.Log($"Combo Sequence: {newpair.Key} Value: {newpair.Value}");
         // Find All three or more & two or less
         int[] valuesCount = new int[6];
         for (int i = 1; i <= valuesStr.Length; i++)
@@ -51,16 +59,16 @@ public class TestPlayerComboFinder : MonoBehaviour
 
                     int value;
                     if (FindComboInCombinations(key)) value = _cubesCombos[key];
-                    else value = SumTheCombosLessThanThree(key);
+                    else value = SumTheCombosLessThanThree(key, foundCombos);
 
-                    Debug.Log($"Combo: {key} Value: {value}");
+                    // Debug.Log($"Combo: {key} Value: {value}");
                     foundCombos.Add(key, value);
                 }
             }
             if (cubesUsed == values.Count)
             {
                 Dictionary<string, int> fullCombo = SumToFullCombo(foundCombos);
-                Debug.Log("End Test FULL!");
+                // Debug.Log("End Test FULL!");
                 return fullCombo;
             }
         }
@@ -76,17 +84,17 @@ public class TestPlayerComboFinder : MonoBehaviour
 
                 int value = 0;
                 if (FindComboInCombinations(key)) value = _cubesCombos[key];
-                else value = SumTheCombosLessThanThree(key);
+                else value = SumTheCombosLessThanThree(key, foundCombos);
 
                 if (value == 0) continue;
-                Debug.Log($"Combo: {key} Value: {value}");
+                // Debug.Log($"Combo: {key} Value: {value}");
                 foundCombos.Add(key, value);
             }
         }
         if (cubesUsed == values.Count)
         {
             Dictionary<string, int> fullCombo = SumToFullCombo(foundCombos);
-            Debug.Log("End Test FULL!");
+            // Debug.Log("End Test FULL!");
             return fullCombo;
         }
 
@@ -96,7 +104,7 @@ public class TestPlayerComboFinder : MonoBehaviour
             foundCombos.Add(sumOfCombos.Key, sumOfCombos.Value);
         }
 
-        Debug.Log("End Test!");
+        // Debug.Log("End Test!");
         return foundCombos;
     }
     private bool FindComboInCombinations(string key)
@@ -104,11 +112,12 @@ public class TestPlayerComboFinder : MonoBehaviour
         if (_cubesCombos.ContainsKey(key)) return true;
         else return false;
     }
-    private int SumTheCombosLessThanThree(string Key)
+    private int SumTheCombosLessThanThree(string Key, Dictionary<string, int> foundCombos)
     {
         if (Key.Length > 2) Debug.LogWarning("Error!");
 
         int value = 0;
+        bool added = false; // to check that it's gooing second +
         foreach (var c in Key)
         {
             switch (c)
@@ -120,11 +129,16 @@ public class TestPlayerComboFinder : MonoBehaviour
                     value += 50;
                     break;
             }
+            if (!added && Key.Length == 2) { foundCombos.Add(Key[0].ToString(), value); itsTwoTheSame = true; }
+            added = true;
         }
         return value;
     }
     private Dictionary<string, int> SumToFullCombo(Dictionary<string, int> foundCombos)
     {
+        if (itsTwoTheSame) { string minKey = foundCombos.Keys.OrderBy(k => k.Length).First(); foundCombos.Remove(minKey); }
+
+
         Dictionary<string, int> fullCombo = new Dictionary<string, int>();
         string newKey = "";
         int newValue = 0;
@@ -136,11 +150,15 @@ public class TestPlayerComboFinder : MonoBehaviour
         string sortedKey = new string(newKey.OrderBy(c => c).ToArray());
         fullCombo.Add(sortedKey, newValue);
 
-        Debug.Log($"Combo: {sortedKey} Value: {newValue}");
+        // Debug.Log($"Combo: {sortedKey} Value: {newValue}");
         return fullCombo;
     }
+    bool itsTwoTheSame = false;
     private KeyValuePair<string, int> SumCombos(Dictionary<string, int> foundCombos)
     {
+        if (itsTwoTheSame) { string minKey = foundCombos.Keys.OrderBy(k => k.Length).First(); foundCombos.Remove(minKey); }
+
+
         string newKey = "";
         int newValue = 0;
         foreach (var combo in foundCombos)
@@ -151,7 +169,7 @@ public class TestPlayerComboFinder : MonoBehaviour
         string sortedKey = new string(newKey.OrderBy(c => c).ToArray());
         KeyValuePair<string, int> allComboPair = new KeyValuePair<string, int>(sortedKey, newValue);
 
-        Debug.Log($"Combo: {sortedKey} Value: {newValue}");
+        // Debug.Log($"Combo: {sortedKey} Value: {newValue}");
         return allComboPair;
     }
     private KeyValuePair<string, int> FindSequence(string valuesStr)
@@ -220,6 +238,8 @@ public class TestPlayerComboFinder : MonoBehaviour
         }
     }
 
+
+    // Обратился к чуваку за помощью. Но решил оставить свой код)
     public Dictionary<string, int> FindAllCombosSanya(Dictionary<int, int> diceValues)
     {
         var sortedDictionary = diceValues.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);

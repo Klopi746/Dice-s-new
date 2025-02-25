@@ -23,28 +23,44 @@ public class ComboTestSCRIPT
         yield return null;
     }
 
-    private TestPlayerComboFinder playerScript;
+    private ComboFinder playerScript;
 
     [SetUp]
     public void Setup()
     {
         GameObject gameObject = new GameObject();
-        playerScript = gameObject.AddComponent<TestPlayerComboFinder>();
+        playerScript = gameObject.AddComponent<ComboFinder>();
     }
 
     [Test]
     public void SingleDiceCombos()
     {
         Dictionary<int, int> diceValues = new Dictionary<int, int>(){
-            {1,5},
-            {2,1},
-            {3,4},
+            {1,3},
+            {2,5},
+            {3,2},
             {4,2},
-            {5,4},
-            {6,2},
+            {5,3},
+            {6,1},
         };
         Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
         Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "5", 50 }, { "1", 100 }, { "15", 150 } }));
+    }
+
+
+    [Test]
+    public void TwoDiceCombos()
+    {
+        Dictionary<int, int> diceValues = new Dictionary<int, int>(){
+            {1,3},
+            {2,5},
+            {3,2},
+            {4,4},
+            {5,6},
+            {6,5},
+        };
+        Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
+        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "5", 50 }, { "55", 100 } }));
     }
 
     [Test]
