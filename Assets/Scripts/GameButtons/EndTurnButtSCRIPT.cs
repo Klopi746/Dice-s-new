@@ -21,6 +21,7 @@ public class EndTurnButtSCRIPT : MonoBehaviour
     public void OnButtonClicked()
     {
         button.interactable = false;
+        ContinueButtSCRIPT.Instance.ChangeButtInteractable(false);
         GameHandlerSCRIPT.Instance.EndTurn();
     }
 

@@ -27,8 +27,7 @@ public class PassButtSCRIPT : MonoBehaviour
 
     private void HandleTurnChange(bool isPlayerTurn)
     {
-        if (isPlayerTurn) button.interactable = true;
-        else button.interactable = false;
+        if (!isPlayerTurn) button.interactable = false;
     }
 
 

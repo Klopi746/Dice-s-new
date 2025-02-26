@@ -66,6 +66,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn) EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn) ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
+        if (GameHandlerSCRIPT.Instance.IsPlayerTurn) PassButtSCRIPT.Instance.ChangeButtInteractable(true);
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn) CameraControllerSCRIPT.Instance.SetCloseCamView();
         yield return null;
     }
@@ -107,5 +108,10 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         {
             Debug.Log($"combo: {combo.Key}; value: {combo.Value}");
         }
+    }
+    public virtual void ContinuePlay() // throw cubes again
+    {
+        EndTurnButtSCRIPT.Instance.ChangeButtInteractable(false);
+        StartCoroutine(GetAndDropCubes());
     }
 }

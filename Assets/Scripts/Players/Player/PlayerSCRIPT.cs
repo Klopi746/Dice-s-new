@@ -30,10 +30,7 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
     }
 
 
-    public void ContinuePlay() // throw cubes again
-    {
-        HandleTurnChange(true);
-    }
+    
 
 
     public void OnEndButtClick()
