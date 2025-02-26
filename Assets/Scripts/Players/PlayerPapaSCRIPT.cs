@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using TMPro;
 
 
 /// <summary>
@@ -39,6 +39,10 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     }
 
 
+    [SerializeField] protected TextMeshProUGUI temporaryScoreText;
+    [SerializeField] protected TextMeshProUGUI scoreText;
+
+
     /// <summary>
     /// Do PaPa's things, that's the same for each player
     /// </summary>
@@ -49,7 +53,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
 
     [SerializeField] Transform cubeMixerTransform;
-    Dictionary<string, int> curCombos;
+    protected Dictionary<string, int> curCombos;
     protected IEnumerator GetAndDropCubes()
     {
         ResetAllCubes(); // hide cubes
