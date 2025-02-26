@@ -415,6 +415,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: SusIsNumberOne
   playerCubesInWorld: {fileID: 313668789}
+  temporaryScoreText: {fileID: 1982258267}
+  scoreText: {fileID: 424578335}
   cubeMixerTransform: {fileID: 27912111}
   playerLives: 50
 --- !u!114 &187320452
@@ -1742,6 +1744,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: SusIsNumberOne
   playerCubesInWorld: {fileID: 208124464}
+  temporaryScoreText: {fileID: 1761055313}
+  scoreText: {fileID: 1845190876}
   cubeMixerTransform: {fileID: 2077487939}
   enemyId: 1
 --- !u!1001 &847229006
