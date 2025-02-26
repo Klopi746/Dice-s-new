@@ -59,12 +59,13 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         yield return StartCoroutine(BottleMixerAnimation());
 
         RollAllCubes(); // show cubes
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.1f);
         FindCombos();
         cubeMixerTransform.gameObject.SetActive(false);
 
 
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn) EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
+        if (GameHandlerSCRIPT.Instance.IsPlayerTurn) CameraControllerSCRIPT.Instance.SetCloseCamView();
         yield return null;
     }
     protected IEnumerator BottleMixerAnimation()
@@ -98,7 +99,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         Dictionary<int, int> diceValues = new Dictionary<int, int>();
         for (int i = 0; i < cubesScripts.Length; i++)
         {
-            diceValues.Add(i+1, cubesScripts[i].CurrentNumber);
+            diceValues.Add(i + 1, cubesScripts[i].CurrentNumber);
         }
         curCombos = ComboFinder.Instance.FindAllCombos(diceValues);
         foreach (var combo in curCombos)
