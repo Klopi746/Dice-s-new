@@ -78,8 +78,16 @@ public class DicePapaSCRIPT : MonoBehaviour
     }
 
 
+    private DiceClickSCRIPT diceClickSCRIPT;
     private void Start()
     {
+        diceClickSCRIPT = transform.GetComponent<DiceClickSCRIPT>();
         ResetDice();
+    }
+
+
+    public void TurnOffDiceOutline()
+    {
+        diceClickSCRIPT.TurnOffDiceOutline();
     }
 }

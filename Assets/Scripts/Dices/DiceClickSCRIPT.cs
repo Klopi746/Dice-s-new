@@ -34,4 +34,12 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
     {
         outlineScript.enabled = !outlineScript.enabled;
     }
+
+
+    public void TurnOffDiceOutline()
+    {
+        if (outlineScript.enabled) outlineScript.enabled = false;
+        if (wasClicked) PlayerSCRIPT.Instance.UpdateClickedCubesDigits(cubeGameScript.CurrentNumber.ToString(), -1);
+        wasClicked = false;
+    }
 }

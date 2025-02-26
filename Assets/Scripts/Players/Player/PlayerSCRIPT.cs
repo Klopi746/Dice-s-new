@@ -45,7 +45,7 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
 
         clickedCubesDigitsSequence = new string(clickedCubesDigitsSequence.OrderBy(c => c).ToArray());
         Debug.Log($"Выбранная игроком последовательность: {clickedCubesDigitsSequence}");
-        
+
         CheckThatClickedSequenceIsCombo(clickedCubesDigitsSequence);
     }
     private void CheckThatClickedSequenceIsCombo(string playerSequence)
@@ -54,10 +54,12 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
         {
             int temporaryScore = curCombos[playerSequence];
             temporaryScoreText.text = temporaryScore.ToString();
+            ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
         }
         else
         {
             temporaryScoreText.text = "0";
+            ContinueButtSCRIPT.Instance.ChangeButtInteractable(false);
         }
     }
 }

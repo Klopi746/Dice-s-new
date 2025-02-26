@@ -56,6 +56,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     protected Dictionary<string, int> curCombos;
     protected IEnumerator GetAndDropCubes()
     {
+        TurnOffCubesOutline();
         ResetAllCubes(); // hide cubes
 
         // bottle animation realization
@@ -71,7 +72,6 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn && isFindCombo)
         {
             EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
-            ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
             PassButtSCRIPT.Instance.ChangeButtInteractable(true);
             CameraControllerSCRIPT.Instance.SetCloseCamView();
         }
@@ -124,9 +124,20 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         if (curCombos == null) return false;
         else return true;
     }
+
+
     public virtual void ContinuePlay() // throw cubes again
     {
         EndTurnButtSCRIPT.Instance.ChangeButtInteractable(false);
         StartCoroutine(GetAndDropCubes());
+    }
+
+
+    public void TurnOffCubesOutline()
+    {
+        foreach (DicePapaSCRIPT script in cubesScripts)
+        {
+            script.TurnOffDiceOutline();
+        }
     }
 }
