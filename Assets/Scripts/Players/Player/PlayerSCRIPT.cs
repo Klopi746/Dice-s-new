@@ -21,6 +21,7 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
         GameHandlerSCRIPT.Instance.OnTurnChanged.AddListener(HandleTurnChange);
         GameHandlerSCRIPT.Instance.IsPlayerTurn = true; // the Player always go the first
     }
+    int startTemporaryScore = 0;
     private void HandleTurnChange(bool isPlayerTurn)
     {
         if (!isPlayerTurn) return;
@@ -34,6 +35,9 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
     public void OnEndButtClick()
     {
         CameraControllerSCRIPT.Instance.SetFarCamView();
+        scoreText.text = (int.Parse(scoreText.text) + int.Parse(temporaryScoreText.text)).ToString();
+        temporaryScoreText.text = "0";
+        startTemporaryScore = 0;
     }
 
 
@@ -53,13 +57,20 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
         if (curCombos.ContainsKey(playerSequence))
         {
             int temporaryScore = curCombos[playerSequence];
-            temporaryScoreText.text = temporaryScore.ToString();
+            temporaryScoreText.text = (startTemporaryScore+temporaryScore).ToString();
             ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
         }
         else
         {
-            temporaryScoreText.text = "0";
+            temporaryScoreText.text = startTemporaryScore.ToString();
             ContinueButtSCRIPT.Instance.ChangeButtInteractable(false);
         }
+    }
+
+
+    public override void ContinuePlay()
+    {
+        startTemporaryScore = int.Parse(temporaryScoreText.text);
+        base.ContinuePlay();
     }
 }
