@@ -65,6 +65,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
 
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn) EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
+        if (GameHandlerSCRIPT.Instance.IsPlayerTurn) ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn) CameraControllerSCRIPT.Instance.SetCloseCamView();
         yield return null;
     }

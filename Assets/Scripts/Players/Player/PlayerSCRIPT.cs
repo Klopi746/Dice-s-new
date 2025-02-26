@@ -4,11 +4,14 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
 {
     public int playerLives = 50; // some sort of money)
 
+    public static PlayerSCRIPT Instance;
     override protected void Awake()
     {
         base.Awake();
 
         playerLives = PlayerPrefs.GetInt("PlayerLives", 50);
+
+        Instance = this;
     }
 
     void Start()
@@ -24,6 +27,12 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
 
         Debug.Log("Player turn started!");
         StartCoroutine(GetAndDropCubes());
+    }
+
+
+    public void ContinuePlay() // throw cubes again
+    {
+        HandleTurnChange(true);
     }
 
 
