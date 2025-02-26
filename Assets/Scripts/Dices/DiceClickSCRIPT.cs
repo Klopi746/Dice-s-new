@@ -14,10 +14,11 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
     }
 
 
+    public bool enemyDices = false;
     private bool wasClicked = false;
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!GameHandlerSCRIPT.Instance.IsPlayerTurn) return;
+        if (enemyDices) return;
 
         wasClicked = !wasClicked;
 

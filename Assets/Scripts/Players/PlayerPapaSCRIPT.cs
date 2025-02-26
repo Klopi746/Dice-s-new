@@ -64,14 +64,22 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
         RollAllCubes(); // show cubes
         yield return new WaitForSeconds(0.1f);
-        FindCombos();
+        bool isFindCombo = FindCombos();
         cubeMixerTransform.gameObject.SetActive(false);
 
 
-        if (GameHandlerSCRIPT.Instance.IsPlayerTurn) EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
-        if (GameHandlerSCRIPT.Instance.IsPlayerTurn) ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
-        if (GameHandlerSCRIPT.Instance.IsPlayerTurn) PassButtSCRIPT.Instance.ChangeButtInteractable(true);
-        if (GameHandlerSCRIPT.Instance.IsPlayerTurn) CameraControllerSCRIPT.Instance.SetCloseCamView();
+        if (GameHandlerSCRIPT.Instance.IsPlayerTurn && isFindCombo)
+        {
+            EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
+            ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
+            PassButtSCRIPT.Instance.ChangeButtInteractable(true);
+            CameraControllerSCRIPT.Instance.SetCloseCamView();
+        }
+        else if (GameHandlerSCRIPT.Instance.IsPlayerTurn)
+        {
+            EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
+            CameraControllerSCRIPT.Instance.SetCloseCamView();
+        }
         yield return null;
     }
     protected IEnumerator BottleMixerAnimation()
@@ -100,7 +108,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
             script.Roll();
         }
     }
-    protected void FindCombos()
+    protected bool FindCombos()
     {
         Dictionary<int, int> diceValues = new Dictionary<int, int>();
         for (int i = 0; i < cubesScripts.Length; i++)
@@ -112,6 +120,9 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         {
             Debug.Log($"combo: {combo.Key}; value: {combo.Value}");
         }
+
+        if (curCombos == null) return false;
+        else return true;
     }
     public virtual void ContinuePlay() // throw cubes again
     {
