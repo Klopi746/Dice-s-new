@@ -25,7 +25,6 @@ public class ComboFinder : MonoBehaviour
         Dictionary<char, int> diceFreq = new Dictionary<char, int>();
         foreach (var value in diceValues.Values)
         {
-            // Преобразуем значение в строку (предполагается, что число однозначное)
             string digitStr = value.ToString();
             foreach (char c in digitStr)
             {
@@ -36,22 +35,18 @@ public class ComboFinder : MonoBehaviour
             }
         }
 
+
         // Список валидных комбинаций
         List<KeyValuePair<string, int>> validCombos = new List<KeyValuePair<string, int>>();
+
 
         // Проходим по всем комбинациям из _cubesCombos
         foreach (var combo in _cubesCombos)
         {
             string comboKey = combo.Key;
-            // Создаем словарь частот для цифр комбинации
-            Dictionary<char, int> comboFreq = new Dictionary<char, int>();
-            foreach (char c in comboKey)
-            {
-                if (comboFreq.ContainsKey(c))
-                    comboFreq[c]++;
-                else
-                    comboFreq[c] = 1;
-            }
+            // Берем словарь частот для цифр комбинации
+            Dictionary<char, int> comboFreq = _cubesCombosFreq[comboKey];
+
 
             // Проверяем, хватает ли цифр в diceFreq для формирования комбинации
             bool isValid = true;
@@ -66,6 +61,8 @@ public class ComboFinder : MonoBehaviour
                     break;
                 }
             }
+
+            // Если хватает
             if (isValid)
             {
                 validCombos.Add(new KeyValuePair<string, int>(comboKey, combo.Value));
@@ -81,7 +78,7 @@ public class ComboFinder : MonoBehaviour
     }
 
 
-    protected static readonly Dictionary<string, int> _cubesCombos = new Dictionary<string, int>(){
+    private static readonly Dictionary<string, int> _cubesCombos = new Dictionary<string, int>(){
         {"1",100},
         {"11",200},
         {"111",1000},
@@ -202,6 +199,131 @@ public class ComboFinder : MonoBehaviour
         {"66666",2400},
         {"666666",4800},
     };
+
+
+    private static readonly Dictionary<string, Dictionary<char, int>> _cubesCombosFreq = new Dictionary<string, Dictionary<char, int>>()
+    {
+        {"1", new Dictionary<char, int>{{'1',1}}},
+        {"11", new Dictionary<char, int>{{'1',2}}},
+        {"111", new Dictionary<char, int>{{'1',3}}},
+        {"1111", new Dictionary<char, int>{{'1',4}}},
+        {"11111", new Dictionary<char, int>{{'1',5}}},
+        {"111111", new Dictionary<char, int>{{'1',6}}},
+        {"111115", new Dictionary<char, int>{{'1',5}, {'5',1}}},
+        {"11115", new Dictionary<char, int>{{'1',4}, {'5',1}}},
+        {"111155", new Dictionary<char, int>{{'1',4}, {'5',2}}},
+        {"111222", new Dictionary<char, int>{{'1',3}, {'2',3}}},
+        {"111333", new Dictionary<char, int>{{'1',3}, {'3',3}}},
+        {"111444", new Dictionary<char, int>{{'1',3}, {'4',3}}},
+        {"1115", new Dictionary<char, int>{{'1',3}, {'5',1}}},
+        {"11155", new Dictionary<char, int>{{'1',3}, {'5',2}}},
+        {"111555", new Dictionary<char, int>{{'1',3}, {'5',3}}},
+        {"111666", new Dictionary<char, int>{{'1',3}, {'6',3}}},
+        {"11222", new Dictionary<char, int>{{'1',2}, {'2',3}}},
+        {"112222", new Dictionary<char, int>{{'1',2}, {'2',4}}},
+        {"112225", new Dictionary<char, int>{{'1',2}, {'2',3}, {'5',1}}},
+        {"112345", new Dictionary<char, int>{{'1',2}, {'2',1}, {'3',1}, {'4',1}, {'5',1}}},
+        {"11333", new Dictionary<char, int>{{'1',2}, {'3',3}}},
+        {"113333", new Dictionary<char, int>{{'1',2}, {'3',4}}},
+        {"113335", new Dictionary<char, int>{{'1',2}, {'3',3}, {'5',1}}},
+        {"11444", new Dictionary<char, int>{{'1',2}, {'4',3}}},
+        {"114444", new Dictionary<char, int>{{'1',2}, {'4',4}}},
+        {"114445", new Dictionary<char, int>{{'1',2}, {'4',3}, {'5',1}}},
+        {"115", new Dictionary<char, int>{{'1',2}, {'5',1}}},
+        {"1155", new Dictionary<char, int>{{'1',2}, {'5',2}}},
+        {"11555", new Dictionary<char, int>{{'1',2}, {'5',3}}},
+        {"115555", new Dictionary<char, int>{{'1',2}, {'5',4}}},
+        {"115666", new Dictionary<char, int>{{'1',2}, {'5',1}, {'6',3}}},
+        {"11666", new Dictionary<char, int>{{'1',2}, {'6',3}}},
+        {"116666", new Dictionary<char, int>{{'1',2}, {'6',4}}},
+        {"1222", new Dictionary<char, int>{{'1',1}, {'2',3}}},
+        {"12222", new Dictionary<char, int>{{'1',1}, {'2',4}}},
+        {"122222", new Dictionary<char, int>{{'1',1}, {'2',5}}},
+        {"122225", new Dictionary<char, int>{{'1',1}, {'2',4}, {'5',1}}},
+        {"12225", new Dictionary<char, int>{{'1',1}, {'2',3}, {'5',1}}},
+        {"122255", new Dictionary<char, int>{{'1',1}, {'2',3}, {'5',2}}},
+        {"12345", new Dictionary<char, int>{{'1',1}, {'2',1}, {'3',1}, {'4',1}, {'5',1}}},
+        {"123455", new Dictionary<char, int>{{'1',1}, {'2',1}, {'3',1}, {'4',1}, {'5',2}}},
+        {"123456", new Dictionary<char, int>{{'1',1}, {'2',1}, {'3',1}, {'4',1}, {'5',1}, {'6',1}}},
+        {"1333", new Dictionary<char, int>{{'1',1}, {'3',3}}},
+        {"13333", new Dictionary<char, int>{{'1',1}, {'3',4}}},
+        {"133333", new Dictionary<char, int>{{'1',1}, {'3',5}}},
+        {"133335", new Dictionary<char, int>{{'1',1}, {'3',4}, {'5',1}}},
+        {"13335", new Dictionary<char, int>{{'1',1}, {'3',3}, {'5',1}}},
+        {"133355", new Dictionary<char, int>{{'1',1}, {'3',3}, {'5',2}}},
+        {"1444", new Dictionary<char, int>{{'1',1}, {'4',3}}},
+        {"14444", new Dictionary<char, int>{{'1',1}, {'4',4}}},
+        {"144444", new Dictionary<char, int>{{'1',1}, {'4',5}}},
+        {"144445", new Dictionary<char, int>{{'1',1}, {'4',4}, {'5',1}}},
+        {"14445", new Dictionary<char, int>{{'1',1}, {'4',3}, {'5',1}}},
+        {"144455", new Dictionary<char, int>{{'1',1}, {'4',3}, {'5',2}}},
+        {"15", new Dictionary<char, int>{{'1',1}, {'5',1}}},
+        {"155", new Dictionary<char, int>{{'1',1}, {'5',2}}},
+        {"1555", new Dictionary<char, int>{{'1',1}, {'5',3}}},
+        {"15555", new Dictionary<char, int>{{'1',1}, {'5',4}}},
+        {"155555", new Dictionary<char, int>{{'1',1}, {'5',5}}},
+        {"155666", new Dictionary<char, int>{{'1',1}, {'5',2}, {'6',3}}},
+        {"15666", new Dictionary<char, int>{{'1',1}, {'5',1}, {'6',3}}},
+        {"156666", new Dictionary<char, int>{{'1',1}, {'5',1}, {'6',4}}},
+        {"1666", new Dictionary<char, int>{{'1',1}, {'6',3}}},
+        {"16666", new Dictionary<char, int>{{'1',1}, {'6',4}}},
+        {"166666", new Dictionary<char, int>{{'1',1}, {'6',5}}},
+        {"222", new Dictionary<char, int>{{'2',3}}},
+        {"2222", new Dictionary<char, int>{{'2',4}}},
+        {"22222", new Dictionary<char, int>{{'2',5}}},
+        {"222222", new Dictionary<char, int>{{'2',6}}},
+        {"222225", new Dictionary<char, int>{{'2',5}, {'5',1}}},
+        {"22225", new Dictionary<char, int>{{'2',4}, {'5',1}}},
+        {"222255", new Dictionary<char, int>{{'2',4}, {'5',2}}},
+        {"222333", new Dictionary<char, int>{{'2',3}, {'3',3}}},
+        {"222444", new Dictionary<char, int>{{'2',3}, {'4',3}}},
+        {"2225", new Dictionary<char, int>{{'2',3}, {'5',1}}},
+        {"22255", new Dictionary<char, int>{{'2',3}, {'5',2}}},
+        {"222555", new Dictionary<char, int>{{'2',3}, {'5',3}}},
+        {"222666", new Dictionary<char, int>{{'2',3}, {'6',3}}},
+        {"234556", new Dictionary<char, int>{{'2',1}, {'3',1}, {'4',1}, {'5',2}, {'6',1}}},
+        {"23456", new Dictionary<char, int>{{'2',1}, {'3',1}, {'4',1}, {'5',1}, {'6',1}}},
+        {"333", new Dictionary<char, int>{{'3',3}}},
+        {"3333", new Dictionary<char, int>{{'3',4}}},
+        {"33333", new Dictionary<char, int>{{'3',5}}},
+        {"333333", new Dictionary<char, int>{{'3',6}}},
+        {"333335", new Dictionary<char, int>{{'3',5}, {'5',1}}},
+        {"33335", new Dictionary<char, int>{{'3',4}, {'5',1}}},
+        {"333355", new Dictionary<char, int>{{'3',4}, {'5',2}}},
+        {"333444", new Dictionary<char, int>{{'3',3}, {'4',3}}},
+        {"3335", new Dictionary<char, int>{{'3',3}, {'5',1}}},
+        {"33355", new Dictionary<char, int>{{'3',3}, {'5',2}}},
+        {"333555", new Dictionary<char, int>{{'3',3}, {'5',3}}},
+        {"333666", new Dictionary<char, int>{{'3',3}, {'6',3}}},
+        {"444", new Dictionary<char, int>{{'4',3}}},
+        {"4444", new Dictionary<char, int>{{'4',4}}},
+        {"44444", new Dictionary<char, int>{{'4',5}}},
+        {"444444", new Dictionary<char, int>{{'4',6}}},
+        {"444445", new Dictionary<char, int>{{'4',5}, {'5',1}}},
+        {"44445", new Dictionary<char, int>{{'4',4}, {'5',1}}},
+        {"444455", new Dictionary<char, int>{{'4',4}, {'5',2}}},
+        {"4445", new Dictionary<char, int>{{'4',3}, {'5',1}}},
+        {"44455", new Dictionary<char, int>{{'4',3}, {'5',2}}},
+        {"444555", new Dictionary<char, int>{{'4',3}, {'5',3}}},
+        {"444666", new Dictionary<char, int>{{'4',3}, {'6',3}}},
+        {"5", new Dictionary<char, int>{{'5',1}}},
+        {"55", new Dictionary<char, int>{{'5',2}}},
+        {"555", new Dictionary<char, int>{{'5',3}}},
+        {"5555", new Dictionary<char, int>{{'5',4}}},
+        {"55555", new Dictionary<char, int>{{'5',5}}},
+        {"555555", new Dictionary<char, int>{{'5',6}}},
+        {"555666", new Dictionary<char, int>{{'5',3}, {'6',3}}},
+        {"55666", new Dictionary<char, int>{{'5',2}, {'6',3}}},
+        {"556666", new Dictionary<char, int>{{'5',2}, {'6',4}}},
+        {"5666", new Dictionary<char, int>{{'5',1}, {'6',3}}},
+        {"56666", new Dictionary<char, int>{{'5',1}, {'6',4}}},
+        {"566666", new Dictionary<char, int>{{'5',1}, {'6',5}}},
+        {"666", new Dictionary<char, int>{{'6',3}}},
+        {"6666", new Dictionary<char, int>{{'6',4}}},
+        {"66666", new Dictionary<char, int>{{'6',5}}},
+        {"666666", new Dictionary<char, int>{{'6',6}}}
+    };
+
 
     // MY GOVNO Code
     // public Dictionary<string, int> FindAllCombosD(Dictionary<int, int> diceValues)
