@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,175 +11,177 @@ public class ComboFinder : MonoBehaviour
         Instance = this;
     }
 
-
-    public Dictionary<string, int> FindAllCombos(Dictionary<int, int> diceValues)
-    {
-        Dictionary<string, int> foundCombos = new Dictionary<string, int>() { };
-
-
-        List<int> values = new List<int>(6);
-        foreach (var item in diceValues)
-        {
-            values.Add(item.Value);
-        }
-
-        Debug.Log(string.Join("", values));
-        values.Sort();
-
-        string valuesStr = string.Join("", values);
-        // Find FullSequence
-        bool noSequenceInValues = false;
-        KeyValuePair<string, int> newpair = FindSequence(valuesStr);
-        if (newpair.Value == 0) noSequenceInValues = true;
-        else if (newpair.Key == "123456")
-        {
-            Dictionary<string, int> fullCombo = new Dictionary<string, int>() { { newpair.Key, newpair.Value } };
-            // Debug.Log("End Test FULL!");
-            return fullCombo;
-        }
-        else { foundCombos.Add(newpair.Key, newpair.Value); valuesStr = valuesStr.Replace(newpair.Key, ""); }
-        // Debug.Log($"Combo Sequence: {newpair.Key} Value: {newpair.Value}");
-        // Find All three or more & two or less
-        int[] valuesCount = new int[6];
-        for (int i = 1; i <= valuesStr.Length; i++)
-        {
-            valuesCount[i - 1] = valuesStr.Count(x => x == i.ToString()[0]);
-        }
-
-        int cubesUsed = 0;
-        if (noSequenceInValues)
-        {
-            // Find All three or more
-            for (int i = 0; i < valuesCount.Length; i++)
-            {
-                if (valuesCount[i] >= 3)
-                {
-                    cubesUsed += valuesCount[i];
-
-                    string key = string.Concat(Enumerable.Repeat((i + 1).ToString(), valuesCount[i]));
-
-                    int value;
-                    if (FindComboInCombinations(key)) value = _cubesCombos[key];
-                    else value = SumTheCombosLessThanThree(key, foundCombos);
-
-                    // Debug.Log($"Combo: {key} Value: {value}");
-                    foundCombos.Add(key, value);
-                }
-            }
-            if (cubesUsed == values.Count)
-            {
-                Dictionary<string, int> fullCombo = SumToFullCombo(foundCombos);
-                // Debug.Log("End Test FULL!");
-                return fullCombo;
-            }
-        }
-        // Find All two or less
-        for (int i = 0; i < valuesCount.Length; i++)
-        {
-            if (valuesCount[i] > 0 && valuesCount[i] <= 2 && (i + 1 == 1 || i + 1 == 5))
-            {
-
-                cubesUsed += valuesCount[i];
-
-                string key = string.Concat(Enumerable.Repeat((i + 1).ToString(), valuesCount[i]));
-
-                int value = 0;
-                if (FindComboInCombinations(key)) value = _cubesCombos[key];
-                else value = SumTheCombosLessThanThree(key, foundCombos);
-
-                if (value == 0) continue;
-                // Debug.Log($"Combo: {key} Value: {value}");
-                foundCombos.Add(key, value);
-            }
-        }
-        if (cubesUsed == values.Count)
-        {
-            Dictionary<string, int> fullCombo = SumToFullCombo(foundCombos);
-            // Debug.Log("End Test FULL!");
-            return fullCombo;
-        }
-
-        if (foundCombos.Count > 1)
-        {
-            KeyValuePair<string, int> sumOfCombos = SumCombos(foundCombos);
-            foundCombos.Add(sumOfCombos.Key, sumOfCombos.Value);
-        }
-
-        // Debug.Log("End Test!");
-        return foundCombos;
-    }
-    private bool FindComboInCombinations(string key)
-    {
-        if (_cubesCombos.ContainsKey(key)) return true;
-        else return false;
-    }
-    private int SumTheCombosLessThanThree(string Key, Dictionary<string, int> foundCombos)
-    {
-        if (Key.Length > 2) Debug.LogWarning("Error!");
-
-        int value = 0;
-        bool added = false; // to check that it's gooing second +
-        foreach (var c in Key)
-        {
-            switch (c)
-            {
-                case '1':
-                    value += 100;
-                    break;
-                case '5':
-                    value += 50;
-                    break;
-            }
-            if (!added && Key.Length == 2) { foundCombos.Add(Key[0].ToString(), value); itsTwoTheSame = true; }
-            added = true;
-        }
-        return value;
-    }
-    private Dictionary<string, int> SumToFullCombo(Dictionary<string, int> foundCombos)
-    {
-        if (itsTwoTheSame) { string minKey = foundCombos.Keys.OrderBy(k => k.Length).First(); foundCombos.Remove(minKey); }
+    // MY GOVNO Code
+    // public Dictionary<string, int> FindAllCombosD(Dictionary<int, int> diceValues)
+    // {
+    //     Dictionary<string, int> foundCombos = new Dictionary<string, int>() { };
 
 
-        Dictionary<string, int> fullCombo = new Dictionary<string, int>();
-        string newKey = "";
-        int newValue = 0;
-        foreach (var combo in foundCombos)
-        {
-            newKey += combo.Key;
-            newValue += combo.Value;
-        }
-        string sortedKey = new string(newKey.OrderBy(c => c).ToArray());
-        fullCombo.Add(sortedKey, newValue);
+    //     List<int> values = new List<int>(6);
+    //     foreach (var item in diceValues)
+    //     {
+    //         values.Add(item.Value);
+    //     }
 
-        // Debug.Log($"Combo: {sortedKey} Value: {newValue}");
-        return fullCombo;
-    }
-    bool itsTwoTheSame = false;
-    private KeyValuePair<string, int> SumCombos(Dictionary<string, int> foundCombos)
-    {
-        if (itsTwoTheSame) { string minKey = foundCombos.Keys.OrderBy(k => k.Length).First(); foundCombos.Remove(minKey); }
+    //     Debug.Log(string.Join("", values));
+    //     values.Sort();
+
+    //     List<int> valuesDistinct = values.Distinct().ToList();
+    //     valuesDistinct.Sort();
+    //     string valuesStr = string.Join("", values);
+    //     // Find FullSequence
+    //     bool noSequenceInValues = false;
+    //     KeyValuePair<string, int> newpair = FindSequence(valuesStr);
+    //     if (newpair.Value == 0) noSequenceInValues = true;
+    //     else if (newpair.Key == "123456")
+    //     {
+    //         Dictionary<string, int> fullCombo = new Dictionary<string, int>() { { newpair.Key, newpair.Value } };
+    //         // Debug.Log("End Test FULL!");
+    //         return fullCombo;
+    //     }
+    //     else { foundCombos.Add(newpair.Key, newpair.Value); valuesStr = valuesStr.Replace(newpair.Key, ""); }
+    //     // Debug.Log($"Combo Sequence: {newpair.Key} Value: {newpair.Value}");
+    //     // Find All three or more & two or less
+    //     int[] valuesCount = new int[6];
+    //     for (int i = 1; i <= valuesStr.Length; i++)
+    //     {
+    //         valuesCount[i - 1] = valuesStr.Count(x => x == i.ToString()[0]);
+    //     }
+
+    //     int cubesUsed = 0;
+    //     if (noSequenceInValues)
+    //     {
+    //         // Find All three or more
+    //         for (int i = 0; i < valuesCount.Length; i++)
+    //         {
+    //             if (valuesCount[i] >= 3)
+    //             {
+    //                 cubesUsed += valuesCount[i];
+
+    //                 string key = string.Concat(Enumerable.Repeat((i + 1).ToString(), valuesCount[i]));
+
+    //                 int value;
+    //                 if (FindComboInCombinations(key)) value = _cubesCombos[key];
+    //                 else value = SumTheCombosLessThanThree(key, foundCombos);
+
+    //                 // Debug.Log($"Combo: {key} Value: {value}");
+    //                 foundCombos.Add(key, value);
+    //             }
+    //         }
+    //         if (cubesUsed == values.Count)
+    //         {
+    //             Dictionary<string, int> fullCombo = SumToFullCombo(foundCombos);
+    //             // Debug.Log("End Test FULL!");
+    //             return fullCombo;
+    //         }
+    //     }
+    //     // Find All two or less
+    //     for (int i = 0; i < valuesCount.Length; i++)
+    //     {
+    //         if (valuesCount[i] > 0 && valuesCount[i] <= 2 && (i + 1 == 1 || i + 1 == 5))
+    //         {
+
+    //             cubesUsed += valuesCount[i];
+
+    //             string key = string.Concat(Enumerable.Repeat((i + 1).ToString(), valuesCount[i]));
+
+    //             int value = 0;
+    //             if (FindComboInCombinations(key)) value = _cubesCombos[key];
+    //             else value = SumTheCombosLessThanThree(key, foundCombos);
+
+    //             if (value == 0) continue;
+    //             // Debug.Log($"Combo: {key} Value: {value}");
+    //             foundCombos.Add(key, value);
+    //         }
+    //     }
+    //     if (cubesUsed == values.Count)
+    //     {
+    //         Dictionary<string, int> fullCombo = SumToFullCombo(foundCombos);
+    //         // Debug.Log("End Test FULL!");
+    //         return fullCombo;
+    //     }
+
+    //     if (foundCombos.Count > 1)
+    //     {
+    //         KeyValuePair<string, int> sumOfCombos = SumCombos(foundCombos);
+    //         if (!foundCombos.ContainsKey(sumOfCombos.Key)) foundCombos.Add(sumOfCombos.Key, sumOfCombos.Value);
+    //     }
+
+    //     // Debug.Log("End Test!");
+    //     return foundCombos;
+    // }
+    // private bool FindComboInCombinations(string key)
+    // {
+    //     if (_cubesCombos.ContainsKey(key)) return true;
+    //     else return false;
+    // }
+    // private int SumTheCombosLessThanThree(string Key, Dictionary<string, int> foundCombos)
+    // {
+    //     if (Key.Length > 2) Debug.LogWarning("Error!");
+
+    //     int value = 0;
+    //     bool added = false; // to check that it's gooing second +
+    //     foreach (var c in Key)
+    //     {
+    //         switch (c)
+    //         {
+    //             case '1':
+    //                 value += 100;
+    //                 break;
+    //             case '5':
+    //                 value += 50;
+    //                 break;
+    //         }
+    //         if (!added && Key.Length == 2) { foundCombos.Add(Key[0].ToString(), value); itsTwoTheSame = true; }
+    //         added = true;
+    //     }
+    //     return value;
+    // }
+    // private Dictionary<string, int> SumToFullCombo(Dictionary<string, int> foundCombos)
+    // {
+    //     if (itsTwoTheSame) { string minKey = foundCombos.Keys.OrderBy(k => k.Length).First(); foundCombos.Remove(minKey); }
 
 
-        string newKey = "";
-        int newValue = 0;
-        foreach (var combo in foundCombos)
-        {
-            newKey += combo.Key;
-            newValue += combo.Value;
-        }
-        string sortedKey = new string(newKey.OrderBy(c => c).ToArray());
-        KeyValuePair<string, int> allComboPair = new KeyValuePair<string, int>(sortedKey, newValue);
+    //     Dictionary<string, int> fullCombo = new Dictionary<string, int>();
+    //     string newKey = "";
+    //     int newValue = 0;
+    //     foreach (var combo in foundCombos)
+    //     {
+    //         newKey += combo.Key;
+    //         newValue += combo.Value;
+    //     }
+    //     string sortedKey = new string(newKey.OrderBy(c => c).ToArray());
+    //     fullCombo.Add(sortedKey, newValue);
 
-        // Debug.Log($"Combo: {sortedKey} Value: {newValue}");
-        return allComboPair;
-    }
-    private KeyValuePair<string, int> FindSequence(string valuesStr)
-    {
-        if (valuesStr.Contains("123456")) return new KeyValuePair<string, int>(valuesStr, 1500);
-        else if (valuesStr.Contains("12345")) return new KeyValuePair<string, int>("12345", 500);
-        else if (valuesStr.Contains("23456")) return new KeyValuePair<string, int>("23456", 750);
-        else return new KeyValuePair<string, int>("0", 0);
-    }
+    //     // Debug.Log($"Combo: {sortedKey} Value: {newValue}");
+    //     return fullCombo;
+    // }
+    // bool itsTwoTheSame = false;
+    // private KeyValuePair<string, int> SumCombos(Dictionary<string, int> foundCombos)
+    // {
+    //     if (itsTwoTheSame) { string minKey = foundCombos.Keys.OrderBy(k => k.Length).First(); foundCombos.Remove(minKey); }
+
+
+    //     string newKey = "";
+    //     int newValue = 0;
+    //     foreach (var combo in foundCombos)
+    //     {
+    //         newKey += combo.Key;
+    //         newValue += combo.Value;
+    //     }
+    //     string sortedKey = new string(newKey.OrderBy(c => c).ToArray());
+    //     KeyValuePair<string, int> allComboPair = new KeyValuePair<string, int>(sortedKey, newValue);
+
+    //     // Debug.Log($"Combo: {sortedKey} Value: {newValue}");
+    //     return allComboPair;
+    // }
+    // private KeyValuePair<string, int> FindSequence(string valuesStr)
+    // {
+    //     if (valuesStr.Contains("123456")) return new KeyValuePair<string, int>(valuesStr, 1500);
+    //     else if (valuesStr.Contains("12345")) return new KeyValuePair<string, int>("12345", 500);
+    //     else if (valuesStr.Contains("23456")) return new KeyValuePair<string, int>("23456", 750);
+    //     else return new KeyValuePair<string, int>("0", 0);
+    // }
 
 
     //SANYA
@@ -239,8 +242,8 @@ public class ComboFinder : MonoBehaviour
     }
 
 
-    // Обратился к чуваку за помощью. Но решил оставить свой код)
-    public Dictionary<string, int> FindAllCombosSanya(Dictionary<int, int> diceValues)
+    // Обратился к чуваку за помощью. Переделал его код как мне надо
+    public Dictionary<string, int> FindAllCombosS(Dictionary<int, int> diceValues)
     {
         var sortedDictionary = diceValues.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
         List<int> boneNumbers = sortedDictionary.Keys.ToList();
@@ -258,9 +261,9 @@ public class ComboFinder : MonoBehaviour
         {
             foreach (var combination2 in combination)
             {
-                Debug.Log(combination2 + " ");
+                //Debug.Log(combination2 + " ");
             }
-            Debug.Log("\n");
+            //Debug.Log("\n");
         }
         List<Dictionary<List<int>, int>> cubes_out = new List<Dictionary<List<int>, int>>();
         List<List<int>> cubes_in = new List<List<int>>();
@@ -317,28 +320,109 @@ public class ComboFinder : MonoBehaviour
         {
             foreach (var b in a)
             {
-                Debug.Log($"{b} ");
+                //Debug.Log($"{b} ");
             }
-            Debug.Log("\n");
+            //Debug.Log("\n");
         }
         Dictionary<string, int> cubesOutDictionary = new Dictionary<string, int>();
         for (int i = 0; i < cubes_out.Count; i++)
         {
-            Debug.Log($"Словарь {i + 1}:");
             foreach (var kvp in cubes_out[i])
             {
                 // Форматируем ключ (список int) в строку
                 string keyList = string.Join("", kvp.Key);
-                // Выводим ключ и значение
-                Debug.Log($"  Ключ: {keyList}, Значение: {kvp.Value}");
-                cubesOutDictionary.Add(keyList, kvp.Value);
+                if (!cubesOutDictionary.ContainsKey(keyList)) cubesOutDictionary.Add(keyList, kvp.Value);
             }
         }
+        // Sort value by ascending
+        var cubesOutDictionarySorted = from combo in cubesOutDictionary orderby combo.Value ascending select combo;
+        // Вывод в Debug.Log
+        foreach (var combo in cubesOutDictionarySorted)
+        {
+            Debug.Log($"  Ключ: {combo.Key}, Значение: {combo.Value}");
+        }
+        Debug.Log("Test END!!!");
         return cubesOutDictionary;
         //Если что,алгоритм с рекурсией придумала нейронка ,а не я.Это во-первых.Во-вторых,я подумал,что ты должжен давать возможность в некоторых случаях выбирать<широкого> выбора, поэтому
         //    в некоторых ситуациях будет происходить такое, что игрок выбирает костей сколько хочет.Может быть я не знаю правила(по типу того, что если есть более крупная комбинация, он обязан! ее выбрать);
+    }
 
 
+    // GPT
+    public Dictionary<string, int> FindAllCombos(Dictionary<int, int> dice)
+    {
+        var result = new Dictionary<string, int>();
+        var values = dice.Values.ToList();
+        int n = values.Count;
 
+        for (int mask = 1; mask < (1 << n); mask++)
+        {
+            List<int> subset = new List<int>();
+            for (int i = 0; i < n; i++)
+            {
+                if ((mask & (1 << i)) != 0)
+                    subset.Add(values[i]);
+            }
+
+            subset.Sort();
+            string subsetKey = string.Join("", subset);
+
+            int points = CalculateSubsetPoints(subset);
+            if (points > 0)
+                result[subsetKey] = points;
+        }
+
+        return result.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
+    }
+
+    private int CalculateSubsetPoints(List<int> subset)
+    {
+        List<int> dice = new List<int>(subset);
+        int points = 0;
+
+        if (IsStraight(dice)) return 1500;
+        if (IsSmallStraight(dice)) return 500;
+        if (IsLargeStraight(dice)) return 750;
+
+        Dictionary<int, int> counts = new Dictionary<int, int>();
+        for (int i = 1; i <= 6; i++) counts[i] = 0;
+        foreach (int die in dice) counts[die]++;
+
+        for (int num = 1; num <= 6; num++)
+        {
+            int count = counts[num];
+            if (count == 0) continue;
+
+            if (count >= 3)
+            {
+                int multiplier = count - 2;
+                points += (num == 1 ? 1000 : num * 100) * multiplier;
+                counts[num] = 0;
+            }
+            else if (num == 1 || num == 5)
+            {
+                points += counts[num] * (num == 1 ? 100 : 50);
+                counts[num] = 0;
+            }
+
+            if (counts[num] > 0 && num != 1 && num != 5)
+                return 0;
+        }
+        return points;
+    }
+
+    private bool IsStraight(List<int> dice)
+    {
+        return dice.Count == 6 && dice.Distinct().OrderBy(x => x).SequenceEqual(new[] { 1, 2, 3, 4, 5, 6 });
+    }
+
+    private bool IsSmallStraight(List<int> dice)
+    {
+        return dice.Count == 5 && dice.Distinct().OrderBy(x => x).SequenceEqual(new[] { 1, 2, 3, 4, 5 });
+    }
+
+    private bool IsLargeStraight(List<int> dice)
+    {
+        return dice.Count == 5 && dice.Distinct().OrderBy(x => x).SequenceEqual(new[] { 2, 3, 4, 5, 6 });
     }
 }

@@ -1,28 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.TestTools;
 
 public class ComboTestSCRIPT
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void ComboTestSCRIPTSimplePasses()
-    {
-        // Use the Assert class to test conditions
-    }
-
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator ComboTestSCRIPTWithEnumeratorPasses()
-    {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
-    }
-
     private ComboFinder playerScript;
 
     [SetUp]
@@ -31,6 +12,23 @@ public class ComboTestSCRIPT
         GameObject gameObject = new GameObject();
         playerScript = gameObject.AddComponent<ComboFinder>();
     }
+
+
+    [Test]
+    public void SingleDiceCombo()
+    {
+        Dictionary<int, int> diceValues = new Dictionary<int, int>(){
+            {1,4},
+            {2,6},
+            {3,4},
+            {4,5},
+            {5,1},
+            {6,6},
+        };
+        Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
+        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "5", 50 }, { "1", 100 }, { "15", 150 } }));
+    }
+
 
     [Test]
     public void SingleDiceCombos()
@@ -193,6 +191,22 @@ public class ComboTestSCRIPT
             {4,4},
             {5,4},
             {6,5},
+        };
+        Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
+        Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "444445", 1650 } }));
+    }
+
+
+    [Test]
+    public void NoComboTest()
+    {
+        Dictionary<int, int> diceValues = new Dictionary<int, int>(){
+            {1,2},
+            {2,2},
+            {3,3},
+            {4,3},
+            {5,4},
+            {6,4},
         };
         Dictionary<string, int> result = playerScript.FindAllCombos(diceValues);
         Assert.That(result, Is.EquivalentTo(new Dictionary<string, int> { { "444445", 1650 } }));
