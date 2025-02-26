@@ -17,15 +17,20 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
     private bool wasClicked = false;
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!GameHandlerSCRIPT.Instance.IsPlayerTurn) return;
+
         wasClicked = !wasClicked;
 
 
         outlineScript.enabled = !outlineScript.enabled;
 
-        if (GameHandlerSCRIPT.Instance.IsPlayerTurn)
-        {
-            int AddOrRemoveValue = (wasClicked) ? 1 : -1;
-            PlayerSCRIPT.Instance.UpdateClickedCubesDigits(cubeGameScript.CurrentNumber.ToString(), AddOrRemoveValue);
-        }
+        int AddOrRemoveValue = (wasClicked) ? 1 : -1;
+        PlayerSCRIPT.Instance.UpdateClickedCubesDigits(cubeGameScript.CurrentNumber.ToString(), AddOrRemoveValue);
+    }
+
+
+    public void EnemyClick()
+    {
+        outlineScript.enabled = !outlineScript.enabled;
     }
 }
