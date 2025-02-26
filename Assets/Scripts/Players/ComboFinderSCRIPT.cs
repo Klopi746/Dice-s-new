@@ -11,6 +11,198 @@ public class ComboFinder : MonoBehaviour
         Instance = this;
     }
 
+
+    /// <summary>
+    /// Функция принимает словарь с кубиками (ключ – номер объекта, значение – число на кубике)
+    /// и возвращает все комбинации из _cubesCombos, которые можно составить из данных чисел.
+    /// Результат сортируется по возрастанию цены комбинации.
+    /// </summary>
+    /// <param name="diceValues">Словарь значений на кубиках</param>
+    /// <returns>Словарь найденных комбинаций: ключ – комбинация (отсортированные цифры), значение – сумма</returns>
+    public Dictionary<string, int> FindAllCombos(Dictionary<int, int> diceValues)
+    {
+        // Формируем словарь частот для цифр, полученных с кубиков
+        Dictionary<char, int> diceFreq = new Dictionary<char, int>();
+        foreach (var value in diceValues.Values)
+        {
+            // Преобразуем значение в строку (предполагается, что число однозначное)
+            string digitStr = value.ToString();
+            foreach (char c in digitStr)
+            {
+                if (diceFreq.ContainsKey(c))
+                    diceFreq[c]++;
+                else
+                    diceFreq[c] = 1;
+            }
+        }
+
+        // Список валидных комбинаций
+        List<KeyValuePair<string, int>> validCombos = new List<KeyValuePair<string, int>>();
+
+        // Проходим по всем комбинациям из _cubesCombos
+        foreach (var combo in _cubesCombos)
+        {
+            string comboKey = combo.Key;
+            // Создаем словарь частот для цифр комбинации
+            Dictionary<char, int> comboFreq = new Dictionary<char, int>();
+            foreach (char c in comboKey)
+            {
+                if (comboFreq.ContainsKey(c))
+                    comboFreq[c]++;
+                else
+                    comboFreq[c] = 1;
+            }
+
+            // Проверяем, хватает ли цифр в diceFreq для формирования комбинации
+            bool isValid = true;
+            foreach (var kvp in comboFreq)
+            {
+                char digit = kvp.Key;
+                int required = kvp.Value;
+                int available = diceFreq.ContainsKey(digit) ? diceFreq[digit] : 0;
+                if (available < required)
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+            if (isValid)
+            {
+                validCombos.Add(new KeyValuePair<string, int>(comboKey, combo.Value));
+            }
+        }
+
+        // Сортируем найденные комбинации по возрастанию их цены.
+        var sortedCombos = validCombos.OrderBy(x => x.Value)
+                                       .ThenBy(x => x.Key) // при равных ценах сортировка по ключу
+                                       .ToDictionary(x => x.Key, x => x.Value);
+
+        return sortedCombos;
+    }
+
+
+    protected static readonly Dictionary<string, int> _cubesCombos = new Dictionary<string, int>(){
+        {"1",100},
+        {"11",200},
+        {"111",1000},
+        {"1111",2000},
+        {"11111",4000},
+        {"111111",8000},
+        {"111115",4050},
+        {"11115",2050},
+        {"111155",2100},
+        {"111222",1200},
+        {"111333",1300},
+        {"111444",1400},
+        {"1115",1050},
+        {"11155",1100},
+        {"111555",1500},
+        {"111666",1600},
+        {"11222",400},
+        {"112222",600},
+        {"112225",450},
+        {"112345",600},
+        {"11333",500},
+        {"113333",800},
+        {"113335",550},
+        {"11444",600},
+        {"114444",1000},
+        {"114445",650},
+        {"115",250},
+        {"1155",300},
+        {"11555",700},
+        {"115555",1200},
+        {"115666",850},
+        {"11666",800},
+        {"116666",1400},
+        {"1222",300},
+        {"12222",500},
+        {"122222",900},
+        {"122225",550},
+        {"12225",350},
+        {"122255",400},
+        {"12345",500},
+        {"123455",550},
+        {"123456",1500},
+        {"1333",400},
+        {"13333",700},
+        {"133333",1300},
+        {"133335",750},
+        {"13335",450},
+        {"133355",500},
+        {"1444",500},
+        {"14444",900},
+        {"144444",1700},
+        {"144445",950},
+        {"14445",550},
+        {"144455",600},
+        {"15",150},
+        {"155",200},
+        {"1555",600},
+        {"15555",1100},
+        {"155555",2100},
+        {"155666",800},
+        {"15666",750},
+        {"156666",1350},
+        {"1666",700},
+        {"16666",1300},
+        {"166666",2500},
+        {"222",200},
+        {"2222",400},
+        {"22222",800},
+        {"222222",1600},
+        {"222225",850},
+        {"22225",450},
+        {"222255",500},
+        {"222333",500},
+        {"222444",600},
+        {"2225",250},
+        {"22255",300},
+        {"222555",700},
+        {"222666",800},
+        {"234556",800},
+        {"23456",750},
+        {"333",300},
+        {"3333",600},
+        {"33333",1200},
+        {"333333",2400},
+        {"333335",1250},
+        {"33335",650},
+        {"333355",700},
+        {"333444",700},
+        {"3335",350},
+        {"33355",400},
+        {"333555",800},
+        {"333666",900},
+        {"444",400},
+        {"4444",800},
+        {"44444",1600},
+        {"444444",3200},
+        {"444445",1650},
+        {"44445",850},
+        {"444455",900},
+        {"4445",450},
+        {"44455",500},
+        {"444555",900},
+        {"444666",1000},
+        {"5",50},
+        {"55",100},
+        {"555",500},
+        {"5555",1000},
+        {"55555",2000},
+        {"555555",4000},
+        {"555666",1100},
+        {"55666",700},
+        {"556666",1300},
+        {"5666",650},
+        {"56666",1250},
+        {"566666",2450},
+        {"666",600},
+        {"6666",1200},
+        {"66666",2400},
+        {"666666",4800},
+    };
+
     // MY GOVNO Code
     // public Dictionary<string, int> FindAllCombosD(Dictionary<int, int> diceValues)
     // {
@@ -184,245 +376,217 @@ public class ComboFinder : MonoBehaviour
     // }
 
 
-    //SANYA
-    protected static readonly Dictionary<string, int> _cubesCombos = new Dictionary<string, int>(){
-        {"1",100},
-        {"5",50},
-        {"111",1000},
-        {"1111",2000},
-        {"11111",4000},
-        {"111111",8000},
-        {"222",200},
-        {"2222",400},
-        {"22222",800},
-        {"222222",1600},
-        {"333",300},
-        {"3333",600},
-        {"33333",1200},
-        {"333333",2400},
-        {"444",400},
-        {"4444",800},
-        {"44444",1600},
-        {"444444",3200},
-        {"555",500},
-        {"5555",1000},
-        {"55555",2000},
-        {"555555",4000},
-        {"666",600},
-        {"6666",1200},
-        {"66666",2400},
-        {"666666",4800},
-        {"12345",500},
-        {"23456",750},
-        {"123456",1500}
-    };
-    private void FindCombinations(string s, List<string> substrings, List<string> currentCombination, int startIndex, List<List<string>> combinations)
-    {
-        if (startIndex == s.Length)
-        {
-            combinations.Add(new List<string>(currentCombination));
-            return;
-        }
-        foreach (var substring in substrings)
-        {
-            if (s.Length - startIndex >= substring.Length && s.Substring(startIndex, substring.Length) == substring)
-            {
-                currentCombination.Add(substring);
-                FindCombinations(s, substrings, currentCombination, startIndex + substring.Length, combinations);
-                currentCombination.RemoveAt(currentCombination.Count - 1);
-            }
-        }
-        if (startIndex < s.Length)
-        {
-            string remaining = s.Substring(startIndex, 1);
-            currentCombination.Add($"Остаток: {remaining}");
-            FindCombinations(s, substrings, currentCombination, startIndex + 1, combinations);
-            currentCombination.RemoveAt(currentCombination.Count - 1);
-        }
-    }
+    // SANYA GOVNO Code
+    // private void FindCombinations(string s, List<string> substrings, List<string> currentCombination, int startIndex, List<List<string>> combinations)
+    // {
+    //     if (startIndex == s.Length)
+    //     {
+    //         combinations.Add(new List<string>(currentCombination));
+    //         return;
+    //     }
+    //     foreach (var substring in substrings)
+    //     {
+    //         if (s.Length - startIndex >= substring.Length && s.Substring(startIndex, substring.Length) == substring)
+    //         {
+    //             currentCombination.Add(substring);
+    //             FindCombinations(s, substrings, currentCombination, startIndex + substring.Length, combinations);
+    //             currentCombination.RemoveAt(currentCombination.Count - 1);
+    //         }
+    //     }
+    //     if (startIndex < s.Length)
+    //     {
+    //         string remaining = s.Substring(startIndex, 1);
+    //         currentCombination.Add($"Остаток: {remaining}");
+    //         FindCombinations(s, substrings, currentCombination, startIndex + 1, combinations);
+    //         currentCombination.RemoveAt(currentCombination.Count - 1);
+    //     }
+    // }
 
 
-    // Обратился к чуваку за помощью. Переделал его код как мне надо
-    public Dictionary<string, int> FindAllCombosS(Dictionary<int, int> diceValues)
-    {
-        var sortedDictionary = diceValues.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
-        List<int> boneNumbers = sortedDictionary.Keys.ToList();
-        List<int> boneValues = sortedDictionary.Values.ToList();
-        List<string> combinationsDefault = _cubesCombos.Keys.ToList();
-        string value = "";
-        foreach (var val in boneValues)
-        {
-            value += val.ToString();
-        }
-        List<List<string>> combinations = new List<List<string>>();
-        FindCombinations(value, combinationsDefault, new List<string>(), 0, combinations);
-        //Тут тоже потесть
-        foreach (var combination in combinations)
-        {
-            foreach (var combination2 in combination)
-            {
-                //Debug.Log(combination2 + " ");
-            }
-            //Debug.Log("\n");
-        }
-        List<Dictionary<List<int>, int>> cubes_out = new List<Dictionary<List<int>, int>>();
-        List<List<int>> cubes_in = new List<List<int>>();
-        foreach (var list in combinations)
-        {
-            Dictionary<List<int>, int> pribavka_temp = new Dictionary<List<int>, int>();
-            List<int> played_cubes_numbers_in_event = new List<int>();
-            List<int> cubes_in_event = new List<int>();
-            int winsum = 0;
-            for (int i = 0; i < list.Count; i++)
-            {
+    // // Обратился к чуваку за помощью. Переделал его код как мне надо
+    // public Dictionary<string, int> FindAllCombosS(Dictionary<int, int> diceValues)
+    // {
+    //     var sortedDictionary = diceValues.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+    //     List<int> boneNumbers = sortedDictionary.Keys.ToList();
+    //     List<int> boneValues = sortedDictionary.Values.ToList();
+    //     List<string> combinationsDefault = _cubesCombos.Keys.ToList();
+    //     string value = "";
+    //     foreach (var val in boneValues)
+    //     {
+    //         value += val.ToString();
+    //     }
+    //     List<List<string>> combinations = new List<List<string>>();
+    //     FindCombinations(value, combinationsDefault, new List<string>(), 0, combinations);
+    //     //Тут тоже потесть
+    //     foreach (var combination in combinations)
+    //     {
+    //         foreach (var combination2 in combination)
+    //         {
+    //             //Debug.Log(combination2 + " ");
+    //         }
+    //         //Debug.Log("\n");
+    //     }
+    //     List<Dictionary<List<int>, int>> cubes_out = new List<Dictionary<List<int>, int>>();
+    //     List<List<int>> cubes_in = new List<List<int>>();
+    //     foreach (var list in combinations)
+    //     {
+    //         Dictionary<List<int>, int> pribavka_temp = new Dictionary<List<int>, int>();
+    //         List<int> played_cubes_numbers_in_event = new List<int>();
+    //         List<int> cubes_in_event = new List<int>();
+    //         int winsum = 0;
+    //         for (int i = 0; i < list.Count; i++)
+    //         {
 
 
 
 
 
-                if (list[i].IndexOf("Остаток") == -1)
-                {
-                    foreach (var s in _cubesCombos)
-                    {
-                        if (s.Key == list[i])
-                        {
+    //             if (list[i].IndexOf("Остаток") == -1)
+    //             {
+    //                 foreach (var s in _cubesCombos)
+    //                 {
+    //                     if (s.Key == list[i])
+    //                     {
 
-                            winsum = winsum + s.Value;
-                            int counter = i;
-                            for (int j = counter; j < counter + list[i].Length; j++)
-                            {
-                                played_cubes_numbers_in_event.Add(boneNumbers[j]);
-                            }
-                            // i = counter;
+    //                         winsum = winsum + s.Value;
+    //                         int counter = i;
+    //                         for (int j = counter; j < counter + list[i].Length; j++)
+    //                         {
+    //                             played_cubes_numbers_in_event.Add(boneNumbers[j]);
+    //                         }
+    //                         // i = counter;
 
-                        }
-                    }
-
-
-
-                }
-                else
-                {
-
-                    cubes_in_event.Add(boneNumbers[i]);
-                }
+    //                     }
+    //                 }
 
 
-            }
-            pribavka_temp.Add(played_cubes_numbers_in_event, winsum);
-            cubes_in.Add(cubes_in_event);
-            cubes_out.Add(pribavka_temp);
+
+    //             }
+    //             else
+    //             {
+
+    //                 cubes_in_event.Add(boneNumbers[i]);
+    //             }
 
 
-        }
-        //тестиков наделай красиво брат!
-        foreach (var a in cubes_in)
-        {
-            foreach (var b in a)
-            {
-                //Debug.Log($"{b} ");
-            }
-            //Debug.Log("\n");
-        }
-        Dictionary<string, int> cubesOutDictionary = new Dictionary<string, int>();
-        for (int i = 0; i < cubes_out.Count; i++)
-        {
-            foreach (var kvp in cubes_out[i])
-            {
-                // Форматируем ключ (список int) в строку
-                string keyList = string.Join("", kvp.Key);
-                if (!cubesOutDictionary.ContainsKey(keyList)) cubesOutDictionary.Add(keyList, kvp.Value);
-            }
-        }
-        // Sort value by ascending
-        var cubesOutDictionarySorted = from combo in cubesOutDictionary orderby combo.Value ascending select combo;
-        // Вывод в Debug.Log
-        foreach (var combo in cubesOutDictionarySorted)
-        {
-            Debug.Log($"  Ключ: {combo.Key}, Значение: {combo.Value}");
-        }
-        Debug.Log("Test END!!!");
-        return cubesOutDictionary;
-        //Если что,алгоритм с рекурсией придумала нейронка ,а не я.Это во-первых.Во-вторых,я подумал,что ты должжен давать возможность в некоторых случаях выбирать<широкого> выбора, поэтому
-        //    в некоторых ситуациях будет происходить такое, что игрок выбирает костей сколько хочет.Может быть я не знаю правила(по типу того, что если есть более крупная комбинация, он обязан! ее выбрать);
-    }
+    //         }
+    //         pribavka_temp.Add(played_cubes_numbers_in_event, winsum);
+    //         cubes_in.Add(cubes_in_event);
+    //         cubes_out.Add(pribavka_temp);
 
 
-    // GPT
-    public Dictionary<string, int> FindAllCombos(Dictionary<int, int> dice)
-    {
-        var result = new Dictionary<string, int>();
-        var values = dice.Values.ToList();
-        int n = values.Count;
+    //     }
+    //     //тестиков наделай красиво брат!
+    //     foreach (var a in cubes_in)
+    //     {
+    //         foreach (var b in a)
+    //         {
+    //             //Debug.Log($"{b} ");
+    //         }
+    //         //Debug.Log("\n");
+    //     }
+    //     Dictionary<string, int> cubesOutDictionary = new Dictionary<string, int>();
+    //     for (int i = 0; i < cubes_out.Count; i++)
+    //     {
+    //         foreach (var kvp in cubes_out[i])
+    //         {
+    //             // Форматируем ключ (список int) в строку
+    //             string keyList = string.Join("", kvp.Key);
+    //             if (!cubesOutDictionary.ContainsKey(keyList)) cubesOutDictionary.Add(keyList, kvp.Value);
+    //         }
+    //     }
+    //     // Sort value by ascending
+    //     var cubesOutDictionarySorted = from combo in cubesOutDictionary orderby combo.Value ascending select combo;
+    //     // Вывод в Debug.Log
+    //     foreach (var combo in cubesOutDictionarySorted)
+    //     {
+    //         Debug.Log($"  Ключ: {combo.Key}, Значение: {combo.Value}");
+    //     }
+    //     Debug.Log("Test END!!!");
+    //     return cubesOutDictionary;
+    //     //Если что,алгоритм с рекурсией придумала нейронка ,а не я.Это во-первых.Во-вторых,я подумал,что ты должжен давать возможность в некоторых случаях выбирать<широкого> выбора, поэтому
+    //     //    в некоторых ситуациях будет происходить такое, что игрок выбирает костей сколько хочет.Может быть я не знаю правила(по типу того, что если есть более крупная комбинация, он обязан! ее выбрать);
+    // }
 
-        for (int mask = 1; mask < (1 << n); mask++)
-        {
-            List<int> subset = new List<int>();
-            for (int i = 0; i < n; i++)
-            {
-                if ((mask & (1 << i)) != 0)
-                    subset.Add(values[i]);
-            }
 
-            subset.Sort();
-            string subsetKey = string.Join("", subset);
+    // GPT + my Mind - GOVNO code
+    // public Dictionary<string, int> FindAllCombosGPT(Dictionary<int, int> dice)
+    // {
+    //     var result = new Dictionary<string, int>();
+    //     var values = dice.Values.ToList();
+    //     int n = values.Count;
 
-            int points = CalculateSubsetPoints(subset);
-            if (points > 0)
-                result[subsetKey] = points;
-        }
+    //     for (int mask = 1; mask < (1 << n); mask++)
+    //     {
+    //         List<int> subset = new List<int>();
+    //         for (int i = 0; i < n; i++)
+    //         {
+    //             if ((mask & (1 << i)) != 0)
+    //                 subset.Add(values[i]);
+    //         }
 
-        return result.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
-    }
+    //         subset.Sort();
+    //         string subsetKey = string.Join(",", subset);
 
-    private int CalculateSubsetPoints(List<int> subset)
-    {
-        List<int> dice = new List<int>(subset);
-        int points = 0;
+    //         int points = CalculateSubsetPoints(subset);
+    //         if (points > 0)
+    //             result[subsetKey] = points;
+    //     }
 
-        if (IsStraight(dice)) return 1500;
-        if (IsSmallStraight(dice)) return 500;
-        if (IsLargeStraight(dice)) return 750;
+    //     return result.OrderBy(kv => kv.Value).ToDictionary(kv => kv.Key, kv => kv.Value);
+    // }
 
-        Dictionary<int, int> counts = new Dictionary<int, int>();
-        for (int i = 1; i <= 6; i++) counts[i] = 0;
-        foreach (int die in dice) counts[die]++;
+    // private int CalculateSubsetPoints(List<int> subset)
+    // {
+    //     List<int> dice = new List<int>(subset);
+    //     int points = 0;
+    //     Dictionary<int, int> counts = dice.GroupBy(x => x).ToDictionary(g => g.Key, g => g.Count());
 
-        for (int num = 1; num <= 6; num++)
-        {
-            int count = counts[num];
-            if (count == 0) continue;
+    //     if (IsStraight(dice)) return 1500;
+    //     if (IsSmallStraight(dice)) return 500;
+    //     if (IsLargeStraight(dice)) return 750;
 
-            if (count >= 3)
-            {
-                int multiplier = count - 2;
-                points += (num == 1 ? 1000 : num * 100) * multiplier;
-                counts[num] = 0;
-            }
-            else if (num == 1 || num == 5)
-            {
-                points += counts[num] * (num == 1 ? 100 : 50);
-                counts[num] = 0;
-            }
+    //     if (IsSmallStraight(dice) || IsLargeStraight(dice))
+    //     {
+    //         int basePoints = IsSmallStraight(dice) ? 500 : 750;
+    //         int bonus = 0;
 
-            if (counts[num] > 0 && num != 1 && num != 5)
-                return 0;
-        }
-        return points;
-    }
+    //         if (counts.ContainsKey(1) && counts[1] > 0) bonus = 100;
+    //         if (counts.ContainsKey(5) && counts[5] > 0) bonus = 50;
 
-    private bool IsStraight(List<int> dice)
-    {
-        return dice.Count == 6 && dice.Distinct().OrderBy(x => x).SequenceEqual(new[] { 1, 2, 3, 4, 5, 6 });
-    }
+    //         return basePoints + bonus;
+    //     }
 
-    private bool IsSmallStraight(List<int> dice)
-    {
-        return dice.Count == 5 && dice.Distinct().OrderBy(x => x).SequenceEqual(new[] { 1, 2, 3, 4, 5 });
-    }
+    //     for (int num = 1; num <= 6; num++)
+    //     {
+    //         if (!counts.ContainsKey(num) || counts[num] == 0) continue;
 
-    private bool IsLargeStraight(List<int> dice)
-    {
-        return dice.Count == 5 && dice.Distinct().OrderBy(x => x).SequenceEqual(new[] { 2, 3, 4, 5, 6 });
-    }
+    //         int count = counts[num];
+    //         if (count >= 3)
+    //         {
+    //             int multiplier = count - 2;
+    //             points += (num == 1 ? 1000 : num * 100) * multiplier;
+    //         }
+    //         else if (num == 1 || num == 5)
+    //         {
+    //             points += count * (num == 1 ? 100 : 50);
+    //         }
+    //     }
+    //     return points;
+    // }
+
+    // private bool IsStraight(List<int> dice)
+    // {
+    //     return dice.Count == 6 && dice.Distinct().OrderBy(x => x).SequenceEqual(new[] { 1, 2, 3, 4, 5, 6 });
+    // }
+
+    // private bool IsSmallStraight(List<int> dice)
+    // {
+    //     return dice.Count >= 5 && dice.Distinct().OrderBy(x => x).Take(5).SequenceEqual(new[] { 1, 2, 3, 4, 5 });
+    // }
+
+    // private bool IsLargeStraight(List<int> dice)
+    // {
+    //     return dice.Count >= 5 && dice.Distinct().OrderBy(x => x).Take(5).SequenceEqual(new[] { 2, 3, 4, 5, 6 });
+    // }
 }
