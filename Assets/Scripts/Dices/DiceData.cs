@@ -1,16 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
-//using AYellowpaper.SerializedCollections;
 
 [CreateAssetMenu(fileName = "Dice", menuName = "Custom/Dice Data", order = 1)]
 public class DiceData : ScriptableObject
 {
     [Header("Game info")]
     public GameObject dicePref;
-    /*
-    [SerializedDictionary("Damage Type", "Description")]
-    public SerializedDictionary<DamageType, string> ElementDescriptions;
-    */
+
+    public List<int> sidesList;
+    public List<int> probabilityList;
+
     [Header("Shop&Inventory")]
-    public Sprite cubeIcon;
+    public string diceName;
+    public Sprite diceIcon;
+    public int dicePrice;
 }

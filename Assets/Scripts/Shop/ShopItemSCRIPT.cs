@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,6 +14,11 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [Header("Selected Expansion Settings")]
     [SerializeField] private float selectedHorizontalPercent = 20f;
     [SerializeField] private float selectedVerticalPercent = 20f;
+
+    [Header("ShopVisualization")]
+    [SerializeField] private DiceData diceInfo;
+
+    [SerializeField] private TextMesh textMesh;
 
     private Vector2 originalSize;
     private Vector2 expandedSize;
