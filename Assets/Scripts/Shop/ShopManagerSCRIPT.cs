@@ -6,7 +6,8 @@ public class ShopManagerSCRIPT : MonoBehaviour
     public static ShopManagerSCRIPT Instance { get; private set; }
     public ShopItemSCRIPT CurrentlySelectedItem { get; private set; }
 
-    private List<ShopItemSCRIPT> items = new List<ShopItemSCRIPT>();
+    public List<DiceData> diceDataset;
+    public List<Sprite> diceSideIcons;
 
     private void Awake()
     {
@@ -18,10 +19,15 @@ public class ShopManagerSCRIPT : MonoBehaviour
         Instance = this;
     }
 
+    #region Items
+    private List<ShopItemSCRIPT> items = new List<ShopItemSCRIPT>();
     public void RegisterItem(ShopItemSCRIPT item)
     {
         if (!items.Contains(item))
+        {
             items.Add(item);
+            items[items.Count - 1].Visualize(diceDataset[items.Count - 1]);
+        }
     }
 
     public void SelectItem(ShopItemSCRIPT selectedItem)
@@ -44,4 +50,20 @@ public class ShopManagerSCRIPT : MonoBehaviour
             CurrentlySelectedItem = null;
         }
     }
+    #endregion
+
+    #region Inventory
+    [SerializeField] public List<InventoryDiceSCRIPT> inventoryDiceSlots;
+
+    public void AssignInventoryDiceSlots(InventoryDiceSCRIPT inventoryDiceSlot)
+    {
+        inventoryDiceSlots.Add(inventoryDiceSlot);
+        int slotDice = PlayerPrefs.GetInt("DiceInSlot" + inventoryDiceSlots.Count,0);
+        inventoryDiceSlot.AssignDice(diceDataset[slotDice]);
+    }
+    #endregion
+
+    #region DiceSelection
+    [SerializeField] GameObject diceSelectionGO;
+    #endregion
 }

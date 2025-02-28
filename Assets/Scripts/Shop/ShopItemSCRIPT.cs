@@ -1,7 +1,11 @@
 using NUnit.Framework;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using AYellowpaper.SerializedCollections;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(RectTransform))]
 public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
@@ -17,8 +21,12 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     [Header("ShopVisualization")]
     [SerializeField] private DiceData diceInfo;
+    [SerializeField] private TextMeshProUGUI diceName;
+    [SerializeField] private TextMeshProUGUI dicePrice;
+    [SerializeField] Image diceIcon;
+    [SerializeField] List<Image> diceSideIcons;
+    [SerializeField] List<TextMeshProUGUI> diceSideChances;
 
-    [SerializeField] private TextMesh textMesh;
 
     private Vector2 originalSize;
     private Vector2 expandedSize;
@@ -26,7 +34,7 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private RectTransform rectTransform;
     private bool isSelected = false;
 
-    private void Awake()
+    private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         originalSize = rectTransform.sizeDelta;
@@ -34,7 +42,22 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             originalSize.x * (1 + horizontalExpansionPercent / 100f),
             originalSize.y * (1 + verticalExpansionPercent / 100f)
         );
+
         ShopManagerSCRIPT.Instance.RegisterItem(this);
+    }
+
+    public void Visualize(DiceData newDiceInfo)
+    {
+        diceInfo = newDiceInfo;
+        diceIcon.sprite = diceInfo.diceIcon;
+        dicePrice.text = diceInfo.dicePrice.ToString();
+        diceName.text = diceInfo.diceName;
+
+        for (int i = 0; i < diceSideIcons.Count; i++)
+        {
+            diceSideIcons[i].sprite = ShopManagerSCRIPT.Instance.diceSideIcons[diceInfo.sidesList[i]-1];
+            diceSideChances[i].text = diceInfo.probabilityList[i].ToString();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

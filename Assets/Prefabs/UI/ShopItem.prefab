@@ -967,6 +967,24 @@ MonoBehaviour:
   animationDuration: 0.1
   selectedHorizontalPercent: 40
   selectedVerticalPercent: 40
+  diceInfo: {fileID: 0}
+  diceName: {fileID: 1573131404273448747}
+  dicePrice: {fileID: 7662828089633704906}
+  diceIcon: {fileID: 5275786283400832105}
+  diceSideIcons:
+  - {fileID: 566335936827768212}
+  - {fileID: 6360186627566730071}
+  - {fileID: 222906449486828429}
+  - {fileID: 3919225242955438112}
+  - {fileID: 2687736890073588302}
+  - {fileID: 8736847718500963343}
+  diceSideChances:
+  - {fileID: 6157237906300349303}
+  - {fileID: 2287760631651557252}
+  - {fileID: 3489882623548024598}
+  - {fileID: 1101751484408815092}
+  - {fileID: 7275958301563076741}
+  - {fileID: 8021469715052369257}
 --- !u!1 &4934344402653786919
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,7 +1072,7 @@ GameObject:
   - component: {fileID: 2964007749631120435}
   - component: {fileID: 1573131404273448747}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
