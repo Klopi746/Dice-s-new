@@ -4,5 +4,6 @@
         "1": 2,
         "2": 1
     },
-    "description": "No, no, he is not lucky at all. Don't fear. He won only 50 of 100 tournaments."
+    "description": "No, no, he is not lucky at all. Don't fear. He won only 50 of 100 tournaments.",
+    "aiType": "Clever"
 }

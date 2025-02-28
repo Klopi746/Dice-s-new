@@ -32,7 +32,11 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
 
     public void EnemyClick()
     {
+        wasClicked = !wasClicked;
+
         outlineScript.enabled = !outlineScript.enabled;
+        int AddOrRemoveValue = (wasClicked) ? 1 : -1;
+        EnemySCRIPT.Instance.UpdateClickedCubesDigits(cubeGameScript.CurrentNumber.ToString(), AddOrRemoveValue);
     }
 
 
