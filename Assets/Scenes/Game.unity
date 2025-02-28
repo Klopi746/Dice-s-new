@@ -712,10 +712,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: SusIsNumberOne
   playerCubesInWorld: {fileID: 313668789}
+  cubesScripts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   temporaryScoreText: {fileID: 1982258267}
   scoreText: {fileID: 424578335}
   noComboTextObj: {fileID: 84606000}
   cubeMixerTransform: {fileID: 27912111}
+  isFindCombo: 0
   playerLives: 50
 --- !u!114 &187320452
 MonoBehaviour:
@@ -2155,11 +2163,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: SusIsNumberOne
   playerCubesInWorld: {fileID: 208124464}
+  cubesScripts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   temporaryScoreText: {fileID: 1761055313}
   scoreText: {fileID: 1845190876}
   noComboTextObj: {fileID: 84606000}
   cubeMixerTransform: {fileID: 2077487939}
+  isFindCombo: 0
   enemyId: 1
+  continuePlay: 1
 --- !u!1001 &847229006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2211,6 +2228,10 @@ PrefabInstance:
     - target: {fileID: 4665381073272385872, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
+      propertyPath: enemyDice
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: enemyDices
@@ -2405,6 +2426,10 @@ PrefabInstance:
     - target: {fileID: 4665381073272385872, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
+      propertyPath: enemyDice
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: enemyDices
@@ -2910,6 +2935,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
+      propertyPath: enemyDice
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: enemyDices
       value: 1
       objectReference: {fileID: 0}
@@ -3407,6 +3436,10 @@ PrefabInstance:
     - target: {fileID: 4665381073272385872, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
+      propertyPath: enemyDice
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: enemyDices
@@ -5475,6 +5508,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
+      propertyPath: enemyDice
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: enemyDices
       value: 1
       objectReference: {fileID: 0}
@@ -5817,6 +5854,10 @@ PrefabInstance:
     - target: {fileID: 4665381073272385872, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
+      propertyPath: enemyDice
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8834421041665167602, guid: 9f13e7cf83ba18743b6bf4c9695584e4, type: 3}
       propertyPath: enemyDices
