@@ -79,7 +79,7 @@ public class DicePapaSCRIPT : MonoBehaviour
     }
 
 
-    private DiceClickSCRIPT diceClickSCRIPT;
+    public DiceClickSCRIPT diceClickSCRIPT;
     private void Start()
     {
         diceClickSCRIPT = transform.GetComponent<DiceClickSCRIPT>();

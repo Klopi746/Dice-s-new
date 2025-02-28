@@ -14,11 +14,11 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
     }
 
 
-    public bool enemyDices = false;
+    public bool enemyDice = false;
     public bool wasClicked = false;
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (enemyDices) return;
+        if (enemyDice) return;
 
         wasClicked = !wasClicked;
 
@@ -43,7 +43,11 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
     public void TurnOffDiceOutline()
     {
         if (outlineScript.enabled) outlineScript.enabled = false;
-        if (wasClicked) PlayerSCRIPT.Instance.UpdateClickedCubesDigits(cubeGameScript.CurrentNumber.ToString(), -1);
+        if (wasClicked)
+        {
+            if (!enemyDice) PlayerSCRIPT.Instance.UpdateClickedCubesDigits(cubeGameScript.CurrentNumber.ToString(), -1);
+            if (enemyDice) EnemySCRIPT.Instance.UpdateClickedCubesDigits(cubeGameScript.CurrentNumber.ToString(), -1);
+        }
     }
     public void DisableCubeOnContinueIfClicked()
     {

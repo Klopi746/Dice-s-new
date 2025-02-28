@@ -64,16 +64,23 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
         Debug.Log("Enemy turn started! ;)");
         StartCoroutine(DoAIthings());
     }
+    public bool continuePlay = false;
     private IEnumerator DoAIthings()
     {
         yield return StartCoroutine(GetAndDropCubes());
-        yield return StartCoroutine(AiLogicScript.AIChooseLogic()); // HERE AI CHOOSE LOGIC
-        GameHandlerSCRIPT.Instance.EndTurn();
+        yield return StartCoroutine(AiLogicScript.AILogic()); // HERE AI CHOOSE COMBO LOGIC
+        if (continuePlay) ContinuePlay();
+        else
+        {
+            OnTurnEnd();
+            GameHandlerSCRIPT.Instance.EndTurn();
+        }
     }
 
 
     public void OnTurnEnd()
     {
+        Debug.Log("AI end turn;");
         CameraControllerSCRIPT.Instance.SetFarCamView();
 
         scoreText.text = (int.Parse(scoreText.text) + int.Parse(temporaryScoreText.text)).ToString();
@@ -101,19 +108,21 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
         {
             int temporaryScore = curCombos[playerSequence];
             temporaryScoreText.text = (startTemporaryScore + temporaryScore).ToString();
-            ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
         }
         else
         {
             temporaryScoreText.text = startTemporaryScore.ToString();
-            ContinueButtSCRIPT.Instance.ChangeButtInteractable(false);
         }
     }
 
 
     public override void ContinuePlay()
     {
+        Debug.Log("AI continue play");
         startTemporaryScore = int.Parse(temporaryScoreText.text);
-        base.ContinuePlay();
+        TurnOffCubesOutline();
+        DisableCubeOnContinueIfClicked();
+        CheckThatThereIsNoMoreCubes();
+        StartCoroutine(DoAIthings());
     }
 }

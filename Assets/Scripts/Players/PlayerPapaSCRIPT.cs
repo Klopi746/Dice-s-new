@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using TMPro;
+using UnityEngine.AI;
 
 
 /// <summary>
@@ -20,7 +21,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     /// Store gameobjects of all own cubes.
     /// </summary>
     protected GameObject[] cubesArray = new GameObject[6];
-    protected DicePapaSCRIPT[] cubesScripts = new DicePapaSCRIPT[6];
+    public DicePapaSCRIPT[] cubesScripts = new DicePapaSCRIPT[6];
     /// <summary>
     /// Must used to assign ownedCubesToArray to operate with each individually.
     /// </summary>
@@ -39,9 +40,9 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     }
 
 
-    [SerializeField] protected TextMeshProUGUI temporaryScoreText;
-    [SerializeField] protected TextMeshProUGUI scoreText;
-    [SerializeField] protected Transform noComboTextObj;
+    public TextMeshProUGUI temporaryScoreText;
+    public TextMeshProUGUI scoreText;
+    public Transform noComboTextObj;
 
 
     /// <summary>
@@ -54,7 +55,8 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
 
     [SerializeField] Transform cubeMixerTransform;
-    protected Dictionary<string, int> curCombos;
+    public Dictionary<string, int> curCombos;
+    public bool isFindCombo = false;
     protected IEnumerator GetAndDropCubes()
     {
         if (noComboTextObj.gameObject.activeSelf) noComboTextObj.gameObject.SetActive(false);
@@ -67,7 +69,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
         RollAllCubes(); // show cubes
         yield return new WaitForSeconds(0.1f);
-        bool isFindCombo = FindCombos();
+        isFindCombo = FindCombos();
         cubeMixerTransform.gameObject.SetActive(false);
 
 
