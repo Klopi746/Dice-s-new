@@ -14,7 +14,7 @@ public class AIChooseLogicPapaClass : MonoBehaviour
     public IEnumerator AILogic()
     {
         yield return StartCoroutine(CheckForCombo());
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7f);
     }
     private IEnumerator CheckForCombo()
     {
@@ -50,7 +50,7 @@ public class AIChooseLogicPapaClass : MonoBehaviour
         Debug.Log($"AI choosed combo: {combo}");
         for (int i = 0; i < combo.Length; i++)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1f);
 
             int number = int.Parse(combo[i].ToString());
 
