@@ -14,7 +14,7 @@ public class AIChooseLogicPapaClass : MonoBehaviour
     public IEnumerator AILogic()
     {
         yield return StartCoroutine(CheckForCombo());
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(1f);
     }
     private IEnumerator CheckForCombo()
     {
@@ -30,27 +30,25 @@ public class AIChooseLogicPapaClass : MonoBehaviour
             enemy.noComboTextObj.gameObject.SetActive(true);
             enemy.continuePlay = false;
         }
-        yield return null;
     }
     protected virtual IEnumerator AIChooseComboLogic()
     {
         if (int.Parse(enemy.temporaryScoreText.text) > 500) { enemy.continuePlay = false; yield return null; }
         if (enemy.curCombos.Count == 1)
         {
-            StartCoroutine(FindCubesForCombo(enemy.curCombos.ElementAt(0).Key));
+            yield return StartCoroutine(FindCubesForCombo(enemy.curCombos.ElementAt(0).Key));
         }
         else
         {
-            StartCoroutine(FindCubesForCombo(enemy.curCombos.Last().Key));
+            yield return StartCoroutine(FindCubesForCombo(enemy.curCombos.Last().Key));
         }
-        yield return null;
     }
     protected IEnumerator FindCubesForCombo(string combo)
     {
         Debug.Log($"AI choosed combo: {combo}");
         for (int i = 0; i < combo.Length; i++)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.7f);
 
             int number = int.Parse(combo[i].ToString());
 
