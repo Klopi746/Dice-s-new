@@ -41,6 +41,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
 
     [SerializeField] protected TextMeshProUGUI temporaryScoreText;
     [SerializeField] protected TextMeshProUGUI scoreText;
+    [SerializeField] protected Transform noComboTextObj;
 
 
     /// <summary>
@@ -56,6 +57,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     protected Dictionary<string, int> curCombos;
     protected IEnumerator GetAndDropCubes()
     {
+        if (noComboTextObj.gameObject.activeSelf) noComboTextObj.gameObject.SetActive(false);
         TurnOffCubesOutline();
         ResetAllCubes(); // hide cubes
 
@@ -77,9 +79,13 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         }
         else if (GameHandlerSCRIPT.Instance.IsPlayerTurn)
         {
+            Debug.Log("NO COMBO! :(");
+            temporaryScoreText.text = "0";
+            noComboTextObj.gameObject.SetActive(true);
             EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
             CameraControllerSCRIPT.Instance.SetCloseCamView();
         }
+        // Change Cam to See enemy here
         yield return null;
     }
     protected IEnumerator BottleMixerAnimation()
@@ -98,14 +104,21 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     {
         foreach (DicePapaSCRIPT script in cubesScripts)
         {
-            script.ResetDice();
+            if (script.enabled) script.ResetDice();
         }
     }
     protected void RollAllCubes()
     {
         foreach (DicePapaSCRIPT script in cubesScripts)
         {
-            script.Roll();
+            if (script.enabled) script.Roll();
+        }
+    }
+    protected void TurnOffCubesOutline()
+    {
+        foreach (DicePapaSCRIPT script in cubesScripts)
+        {
+            script.TurnOffDiceOutline();
         }
     }
     protected bool FindCombos()
@@ -113,7 +126,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         Dictionary<int, int> diceValues = new Dictionary<int, int>();
         for (int i = 0; i < cubesScripts.Length; i++)
         {
-            diceValues.Add(i + 1, cubesScripts[i].CurrentNumber);
+            if (cubesScripts[i].enabled) diceValues.Add(i + 1, cubesScripts[i].CurrentNumber);
         }
         curCombos = ComboFinder.Instance.FindAllCombos(diceValues);
         foreach (var combo in curCombos)
@@ -121,7 +134,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
             Debug.Log($"combo: {combo.Key}; value: {combo.Value}");
         }
 
-        if (curCombos == null) return false;
+        if (curCombos.Count == 0) return false;
         else return true;
     }
 
@@ -129,15 +142,34 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     public virtual void ContinuePlay() // throw cubes again
     {
         EndTurnButtSCRIPT.Instance.ChangeButtInteractable(false);
+        TurnOffCubesOutline();
+        DisableCubeOnContinueIfClicked();
+        CheckThatThereIsNoMoreCubes();
         StartCoroutine(GetAndDropCubes());
     }
-
-
-    public void TurnOffCubesOutline()
+    protected void DisableCubeOnContinueIfClicked()
     {
         foreach (DicePapaSCRIPT script in cubesScripts)
         {
-            script.TurnOffDiceOutline();
+            script.DisableCubeOnContinueIfClicked();
+        }
+    }
+    protected void CheckThatThereIsNoMoreCubes()
+    {
+        bool thereIsNoMoreCubes = true;
+        foreach (DicePapaSCRIPT script in cubesScripts)
+        {
+            if (script.enabled) thereIsNoMoreCubes = false;
+        }
+        if (thereIsNoMoreCubes) EnableAllCubes();
+    }
+
+
+    protected void EnableAllCubes()
+    {
+        foreach (DicePapaSCRIPT script in cubesScripts)
+        {
+            if (!script.enabled) script.EnableCube();
         }
     }
 }

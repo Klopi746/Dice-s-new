@@ -73,7 +73,8 @@ public class DicePapaSCRIPT : MonoBehaviour
     public void ResetDice()
     {
         CurrentNumber = 1;
-        transform.localRotation = Quaternion.Euler(_numberRotations[0]);;
+        transform.localRotation = Quaternion.Euler(_numberRotations[0]);
+        diceClickSCRIPT.wasClicked = false;
         gameObject.SetActive(false);
     }
 
@@ -89,5 +90,16 @@ public class DicePapaSCRIPT : MonoBehaviour
     public void TurnOffDiceOutline()
     {
         diceClickSCRIPT.TurnOffDiceOutline();
+    }
+    public void DisableCubeOnContinueIfClicked()
+    {
+        diceClickSCRIPT.DisableCubeOnContinueIfClicked();
+    }
+
+
+    public void EnableCube()
+    {
+        this.enabled = true;
+        diceClickSCRIPT.enabled = true;
     }
 }

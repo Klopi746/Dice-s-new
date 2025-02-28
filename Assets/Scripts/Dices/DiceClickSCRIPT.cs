@@ -15,7 +15,7 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
 
 
     public bool enemyDices = false;
-    private bool wasClicked = false;
+    public bool wasClicked = false;
     public void OnPointerClick(PointerEventData eventData)
     {
         if (enemyDices) return;
@@ -40,6 +40,14 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
     {
         if (outlineScript.enabled) outlineScript.enabled = false;
         if (wasClicked) PlayerSCRIPT.Instance.UpdateClickedCubesDigits(cubeGameScript.CurrentNumber.ToString(), -1);
+    }
+    public void DisableCubeOnContinueIfClicked()
+    {
+        if (wasClicked)
+        {
+            cubeGameScript.enabled = false;
+            gameObject.SetActive(false);
+        }
         wasClicked = false;
     }
 }

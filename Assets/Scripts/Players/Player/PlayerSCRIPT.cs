@@ -35,9 +35,12 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
     public void OnEndButtClick()
     {
         CameraControllerSCRIPT.Instance.SetFarCamView();
+
         scoreText.text = (int.Parse(scoreText.text) + int.Parse(temporaryScoreText.text)).ToString();
         temporaryScoreText.text = "0";
         startTemporaryScore = 0;
+
+        EnableAllCubes();
     }
 
 
@@ -45,7 +48,7 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
     public void UpdateClickedCubesDigits(string cubeDigit, int AddOrRemove) // 1 - Add, -1 - Remove
     {
         if (AddOrRemove == 1) clickedCubesDigitsSequence += cubeDigit;
-        if (AddOrRemove == -1) {clickedCubesDigitsSequence = clickedCubesDigitsSequence.Remove(clickedCubesDigitsSequence.IndexOf(cubeDigit), 1);}
+        if (AddOrRemove == -1) { clickedCubesDigitsSequence = clickedCubesDigitsSequence.Remove(clickedCubesDigitsSequence.IndexOf(cubeDigit), 1); }
 
         clickedCubesDigitsSequence = new string(clickedCubesDigitsSequence.OrderBy(c => c).ToArray());
         Debug.Log($"Выбранная игроком последовательность: {clickedCubesDigitsSequence}");
@@ -57,7 +60,7 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
         if (curCombos.ContainsKey(playerSequence))
         {
             int temporaryScore = curCombos[playerSequence];
-            temporaryScoreText.text = (startTemporaryScore+temporaryScore).ToString();
+            temporaryScoreText.text = (startTemporaryScore + temporaryScore).ToString();
             ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
         }
         else
