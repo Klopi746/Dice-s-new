@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class ShopManagerSCRIPT : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public class ShopManagerSCRIPT : MonoBehaviour
         Instance = this;
     }
 
+    private void Start()
+    {
+        DeselectEverything();
+    }
+
     #region Items
     private List<ShopItemSCRIPT> items = new List<ShopItemSCRIPT>();
     public void RegisterItem(ShopItemSCRIPT item)
@@ -26,7 +32,6 @@ public class ShopManagerSCRIPT : MonoBehaviour
         if (!items.Contains(item))
         {
             items.Add(item);
-            items[items.Count - 1].Visualize(diceDataset[items.Count - 1]);
         }
     }
 
@@ -34,6 +39,8 @@ public class ShopManagerSCRIPT : MonoBehaviour
     {
         if (CurrentlySelectedItem == selectedItem)
             return;
+
+        ShopManagerSCRIPT.Instance.DeselectEverything();
 
         if (CurrentlySelectedItem != null)
             CurrentlySelectedItem.SetSelected(false);
@@ -65,5 +72,17 @@ public class ShopManagerSCRIPT : MonoBehaviour
 
     #region DiceSelection
     [SerializeField] GameObject diceSelectionGO;
+
+
+    public void OpenInventoryMenu(GameObject inventorySlot)
+    {
+        diceSelectionGO.transform.DOMove(new Vector3(diceSelectionGO.transform.position.x, inventorySlot.transform.position.y, diceSelectionGO.transform.position.z),0.2f);
+    }
     #endregion
+
+    public void DeselectEverything()
+    {
+        diceSelectionGO.transform.DOMove(new Vector3(diceSelectionGO.transform.position.x,-700, diceSelectionGO.transform.position.z), 0.2f);
+        DeselectCurrentItem();
+    }
 }

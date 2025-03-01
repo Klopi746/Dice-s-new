@@ -26,6 +26,8 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] Image diceIcon;
     [SerializeField] List<Image> diceSideIcons;
     [SerializeField] List<TextMeshProUGUI> diceSideChances;
+    [SerializeField] Image diceIconOnSelection;
+    [SerializeField] TextMeshProUGUI curAmountOfDice;
 
 
     private Vector2 originalSize;
@@ -44,11 +46,11 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         );
 
         ShopManagerSCRIPT.Instance.RegisterItem(this);
+        Visualize();
     }
 
-    public void Visualize(DiceData newDiceInfo)
+    public void Visualize()
     {
-        diceInfo = newDiceInfo;
         diceIcon.sprite = diceInfo.diceIcon;
         dicePrice.text = diceInfo.dicePrice.ToString();
         diceName.text = diceInfo.diceName;
@@ -58,6 +60,9 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
             diceSideIcons[i].sprite = ShopManagerSCRIPT.Instance.diceSideIcons[diceInfo.sidesList[i]-1];
             diceSideChances[i].text = diceInfo.probabilityList[i].ToString();
         }
+
+        diceIconOnSelection.sprite = diceInfo.diceIcon;
+        curAmountOfDice.text = PlayerPrefs.GetInt("Dice"+ diceInfo.diceName+"InInventory",0).ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
