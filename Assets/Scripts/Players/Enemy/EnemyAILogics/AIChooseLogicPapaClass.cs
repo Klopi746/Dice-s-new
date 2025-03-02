@@ -14,10 +14,16 @@ public class AIChooseLogicPapaClass : MonoBehaviour
     public IEnumerator AILogic()
     {
         yield return StartCoroutine(CheckForCombo());
+        if (enemy.continuePlay)
+        {
+            _cubesRemainOnEnd = CubesRemainOnEnd();
+            OnEndLogic();
+        }
         yield return new WaitForSeconds(1f);
     }
     private IEnumerator CheckForCombo()
     {
+        _cubesRemainOnStart = CubesRemainOnStart();
         if (enemy.isFindCombo)
         {
             enemy.continuePlay = true;
@@ -31,9 +37,11 @@ public class AIChooseLogicPapaClass : MonoBehaviour
             enemy.continuePlay = false;
         }
     }
+    /// <summary>
+    /// Here logic before choosing cubes. You have _cubesRemainOnStart
+    /// </summary>
     protected virtual IEnumerator AIChooseComboLogic()
     {
-        if (int.Parse(enemy.temporaryScoreText.text) > 500) { enemy.continuePlay = false; yield return null; }
         if (enemy.curCombos.Count == 1)
         {
             yield return StartCoroutine(FindCubesForCombo(enemy.curCombos.ElementAt(0).Key));
@@ -61,5 +69,48 @@ public class AIChooseLogicPapaClass : MonoBehaviour
             }
         }
         Debug.Log("AI find all needed cubes!");
+    }
+
+
+    protected int _cubesRemainOnStart = 0;
+    protected int CubesRemainOnStart()
+    {
+        int cubesRemain = 0;
+        foreach (DicePapaSCRIPT script in enemy.cubesScripts)
+        {
+            if (script.enabled) cubesRemain += 1;
+        }
+        return cubesRemain;
+    }
+
+
+    protected int _cubesRemainOnEnd = 0;
+    protected int CubesRemainOnEnd()
+    {
+        int cubesRemain = 0;
+        foreach (DicePapaSCRIPT script in enemy.cubesScripts)
+        {
+            if (script.enabled && script.diceClickSCRIPT.wasClicked == false) cubesRemain += 1;
+        }
+        return cubesRemain;
+    }
+
+
+    /// <summary>
+    /// Here logic before choosing cubes. You have _cubesRemainOnEnd
+    /// </summary>
+    protected virtual void OnEndLogic()
+    {
+        if (_cubesRemainOnEnd < 3 && _cubesRemainOnEnd != 0)
+        {
+            float percentOfNoContinue = (_cubesRemainOnEnd > 1) ? 0.5f : 0.75f;
+
+            float randomValue = Random.value;
+            if (randomValue > percentOfNoContinue) enemy.continuePlay = true;
+            else enemy.continuePlay = false;
+            Debug.Log($"Процент что AI продолжит {randomValue * 100}% > {percentOfNoContinue * 100}%? {enemy.continuePlay}");
+        }
+
+        if (_cubesRemainOnEnd == 0) enemy.continuePlay = true;
     }
 }
