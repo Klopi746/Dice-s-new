@@ -22,28 +22,6 @@ public class DicePapaSCRIPT : MonoBehaviour
     };
 
 
-    // Validate and normalize probabilities in editor
-    private void OnValidate()
-    {
-        NormalizeProbabilities();
-    }
-    private void NormalizeProbabilities()
-    {
-        float total = 0f;
-        foreach (float prob in _faceProbabilities)
-        {
-            total += prob;
-        }
-
-        // Avoid division by zero
-        if (total <= Mathf.Epsilon) return;
-
-        // Normalize probabilities
-        for (int i = 0; i < _faceProbabilities.Length; i++)
-        {
-            _faceProbabilities[i] /= total;
-        }
-    }
 #if UNITY_EDITOR
     [ContextMenu("Test Roll")]
     public void TestRoll()
