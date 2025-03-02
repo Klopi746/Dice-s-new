@@ -40,6 +40,8 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
         temporaryScoreText.text = "0";
         startTemporaryScore = 0;
 
+        GameHandlerSCRIPT.Instance.CheckForWin(int.Parse(scoreText.text), this);
+
         EnableAllCubes();
     }
 
