@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using Enemy.AI;
 using System;
+using TMPro;
 
 public class EnemySCRIPT : PlayerPapaSCRIPT
 {
@@ -40,11 +41,13 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
 
     int startTemporaryScore = 0;
+    [SerializeField] TextMeshPro enemyNameTextPro;
     AIChooseLogicPapaClass AiLogicScript;
     void Start()
     {
         // assing enemyData to this GameObj - O, maybe use enemyData... I need to think about that - MOMMY
         playerName = enemyData.enemyName;
+        enemyNameTextPro.text = playerName;
         ownedCubes = enemyData.ownedCubes;
         if (AiLogicDictionary.AI_TypeMap.TryGetValue(enemyData.aiType, out Type type))
         {
