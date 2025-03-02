@@ -14,5 +14,5 @@ public class EnemyItemSCRIPT : MonoBehaviour, IPointerClickHandler
 
 
     [SerializeField] Image image;
-    [SerializeField] Toggle canFightToggle;
+    public Toggle canFightToggle;
 }
