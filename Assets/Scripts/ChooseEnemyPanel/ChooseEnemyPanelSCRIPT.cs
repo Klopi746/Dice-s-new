@@ -34,7 +34,7 @@ public class ChooseEnemyPanelSCRIPT : MonoBehaviour
         {
             if (EnemiesImageComponents[EnemiesImageComponents.Length - i].color == Color.red)
             {
-                PlayerPrefs.SetInt("ChoosedEnemyId", i);
+                PlayerPrefs.SetInt("EnemyId", i);
                 break;
             }
         }
