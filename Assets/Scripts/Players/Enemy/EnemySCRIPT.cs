@@ -71,6 +71,7 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
     private IEnumerator DoAIthings()
     {
         yield return StartCoroutine(GetAndDropCubes());
+        CameraControllerSCRIPT.Instance.SetEnemyCamView();
         yield return StartCoroutine(AiLogicScript.AILogic()); // HERE AI CHOOSE COMBO LOGIC
         if (continuePlay) ContinuePlay();
         else

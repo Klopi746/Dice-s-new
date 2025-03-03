@@ -798,8 +798,8 @@ MonoBehaviour:
   rotation1: {x: 0, y: 0, z: 0}
   position2: {x: 0, y: 5, z: -33}
   rotation2: {x: 45, y: 0, z: 0}
-  position3: {x: 0, y: -5, z: 15}
-  rotation3: {x: 60, y: 0, z: 0}
+  position3: {x: 0, y: 15, z: 15}
+  rotation3: {x: 45, y: 0, z: 0}
   transitionSpeed: 0.4
   actionOverride: 0
 --- !u!114 &187320453

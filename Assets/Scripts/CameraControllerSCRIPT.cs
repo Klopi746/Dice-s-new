@@ -70,6 +70,11 @@ public class CameraControllerSCRIPT : MonoBehaviour
         isAtPos2 = false;
     }
 
+    public void SetEnemyCamView()
+    {
+        SetCamera(position3, rotation3);
+    }
+
     public void ChangeLockOverride()
     {
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn) actionOverride = false;
