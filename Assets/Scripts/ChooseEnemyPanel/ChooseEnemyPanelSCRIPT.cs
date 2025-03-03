@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ public class ChooseEnemyPanelSCRIPT : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
         int enemiesOpen = PlayerPrefs.GetInt("EnemiesOpen", 1);
         for (int i = 1; i <= EnemiesImageComponents.Length; i++)
         {
@@ -17,6 +19,8 @@ public class ChooseEnemyPanelSCRIPT : MonoBehaviour
             EnemiesItemScripts[EnemiesImageComponents.Length - i].canFightToggle.isOn = true;
             enemiesOpen -= 1;
         }
+
+        dropDownComp.onValueChanged.AddListener(CheckThatBetLessThanLivesThenSaveIt);
     }
 
 
@@ -42,10 +46,17 @@ public class ChooseEnemyPanelSCRIPT : MonoBehaviour
 
 
     int choosedBet = 10;
-    public void SaveChoosedBet(int value)
+    [SerializeField] TMP_Dropdown dropDownComp;
+    public void CheckThatBetLessThanLivesThenSaveIt(int value)
     {
         AssignChoosedDropDownButtToBetValue(value);
-        PlayerPrefs.SetInt("ChoosedBet", choosedBet);
+        if (choosedBet > MainMenuManagerSCRIPT.Instance.Lives)
+        {
+            dropDownComp.value = 0;
+            MainMenuManagerSCRIPT.Instance.ShowErrorOnLives();
+            return;
+        } // PlaySound();
+        else PlayerPrefs.SetInt("ChoosedBet", choosedBet);
     }
     private void AssignChoosedDropDownButtToBetValue(int choosedValue)
     {
