@@ -19,6 +19,11 @@ public class ChooseEnemyPanelSCRIPT : MonoBehaviour
             EnemiesItemScripts[EnemiesImageComponents.Length - i].canFightToggle.isOn = true;
             enemiesOpen -= 1;
         }
+        // Load Data to enemyItem
+        for (int i = 1; i <= EnemiesImageComponents.Length; i++)
+        {
+            EnemiesItemScripts[EnemiesImageComponents.Length - i].LoadEnemyData(i);
+        }
 
         dropDownComp.onValueChanged.AddListener(CheckThatBetLessThanLivesThenSaveIt);
     }

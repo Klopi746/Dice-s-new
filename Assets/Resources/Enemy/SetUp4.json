@@ -1,0 +1,9 @@
+{
+    "enemyName": "Robort",
+    "ownedCubes": {
+        "1": 2,
+        "2": 1
+    },
+    "description": "He is painfully good player.",
+    "aiType": "Normal"
+}
