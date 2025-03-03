@@ -21,6 +21,9 @@ public class PassButtSCRIPT : MonoBehaviour
     public void OnButtonClicked()
     {
         button.interactable = false;
+        int playerLives = PlayerPrefs.GetInt("Lives");
+        int curBet = GameHandlerSCRIPT.Instance.curBet;
+        PlayerPrefs.SetInt("Lives", playerLives - curBet);
         LoadSceneManagerSCRIPT.Instance.LoadNewScene();
     }
 
