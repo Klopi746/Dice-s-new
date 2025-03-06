@@ -2253,6 +2253,57 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7322675569842611315, guid: f6308dec4962d0c41908beb64f02ddb1, type: 3}
   m_PrefabInstance: {fileID: 401656983024227193}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1129101758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1129101760}
+  - component: {fileID: 1129101759}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1129101759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129101758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06a1cd59985bdd46acad0064a7afe57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterMixer: {fileID: 24100000, guid: 76f4f4b4039cccf4d8ed3bbf5727bec5, type: 2}
+  generalAudioGroup: {fileID: 7194607198602633986, guid: 76f4f4b4039cccf4d8ed3bbf5727bec5, type: 2}
+  musicAudioGroup: {fileID: 3363570473195731420, guid: 76f4f4b4039cccf4d8ed3bbf5727bec5, type: 2}
+  uiAudioGroup: {fileID: -533903777495314607, guid: 76f4f4b4039cccf4d8ed3bbf5727bec5, type: 2}
+  generalPoolSize: 16
+  musicPoolSize: 1
+  uiPoolSize: 4
+--- !u!4 &1129101760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129101758}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.492496, y: 12.545322, z: 18.562029}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1172277299
 GameObject:
   m_ObjectHideFlags: 0
@@ -4587,3 +4638,4 @@ SceneRoots:
   - {fileID: 3671879021073224195}
   - {fileID: 1668801045}
   - {fileID: 647297384}
+  - {fileID: 1129101760}
