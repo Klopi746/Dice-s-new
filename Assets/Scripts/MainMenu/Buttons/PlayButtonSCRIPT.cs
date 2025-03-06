@@ -16,6 +16,7 @@ public class PlayButtonSCRIPT : MonoBehaviour
 
     public void OnButtonClicked()
     {
-        chooseEnemyPanel.SetActive(true);
+        bool activate = !chooseEnemyPanel.activeSelf;
+        chooseEnemyPanel.SetActive(activate);
     }
 }
