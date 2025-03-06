@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6617af316ae7b87429796bb909f5d434, type: 3}
   m_Name: 02TripleFiveDice
   m_EditorClassIdentifier: 
-  dicePref: {fileID: 0}
-  sidesList: 050000000500000005000000020000000300000004000000
-  probabilityList: 110000001100000011000000110000001100000011000000
-  diceName: "\u0422\u0440\u043E\u0439\u043D\u043E\u0439 \u041F\u044F\u0442\u044C"
+  dicePref: {fileID: 3715653959584989032, guid: cd96fd1d1d69c374abff62d3ea2e4fb5, type: 3}
+  sidesList: 010000000200000003000000040000000500000006000000
+  probabilityList: 0e0000000e0000000e0000000e0000001e0000000e000000
+  diceName: "\u0428\u043A\u043E\u043B\u044C\u043D\u044B\u0439"
   diceIcon: {fileID: 21300000, guid: 4b9617dcdfeff8048a57fd496ef3caaf, type: 3}
-  dicePrice: 15
+  dicePrice: 50

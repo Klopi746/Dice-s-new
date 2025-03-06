@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6617af316ae7b87429796bb909f5d434, type: 3}
   m_Name: 01WeightedDice
   m_EditorClassIdentifier: 
-  dicePref: {fileID: 0}
+  dicePref: {fileID: 3715653959584989032, guid: 8348bd34eb7eac54ba80fed4f62637f4, type: 3}
   sidesList: 010000000200000003000000040000000500000006000000
-  probabilityList: 190000000f0000000f0000000f000000190000000f000000
-  diceName: "\u0423\u0442\u044F\u0436\u0435\u043B\u0451\u043D\u043D\u044B\u0439 \u043A\u0443\u0431"
+  probabilityList: 140000000d000000140000000d000000140000000e000000
+  diceName: "\u0423\u0442\u044F\u0436\u0435\u043B\u0451\u043D\u043D\u044B\u0439"
   diceIcon: {fileID: 21300000, guid: 2558803314ab05943892ccc2a30fa987, type: 3}
-  dicePrice: 5
+  dicePrice: 20
