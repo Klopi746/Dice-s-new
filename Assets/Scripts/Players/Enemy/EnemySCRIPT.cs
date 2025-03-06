@@ -95,6 +95,10 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
         EnableAllCubes();
     }
+    public int CheckCurScore()
+    {
+        return int.Parse(scoreText.text) + int.Parse(temporaryScoreText.text);
+    }
 
 
     string clickedCubesDigitsSequence = "";

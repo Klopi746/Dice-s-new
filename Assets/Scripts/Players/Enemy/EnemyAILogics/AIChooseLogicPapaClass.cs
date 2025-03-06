@@ -112,5 +112,7 @@ public class AIChooseLogicPapaClass : MonoBehaviour
         }
 
         if (_cubesRemainOnEnd == 0) enemy.continuePlay = true;
+
+        if (EnemySCRIPT.Instance.CheckCurScore() >= GameHandlerSCRIPT.Instance.goalScore) enemy.continuePlay = false;
     }
 }
