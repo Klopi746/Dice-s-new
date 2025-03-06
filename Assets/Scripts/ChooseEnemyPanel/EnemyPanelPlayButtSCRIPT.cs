@@ -13,6 +13,8 @@ public class EnemyPanelPlayButtSCRIPT : MonoBehaviour
 
     public void OnButtonClicked()
     {
+        GeneralSoundManagerSCRIPT.Instance.PlayButtSound();
+        AudioManager_SCRIPT.Instance.StopAllLoopingSounds();
         ChooseEnemyPanelSCRIPT.Instance.FindEnemyAndSaveIt();
         LoadSceneManagerSCRIPT.Instance.LoadNewScene(1);
     }

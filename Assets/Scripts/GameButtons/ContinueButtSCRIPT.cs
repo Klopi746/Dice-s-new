@@ -20,6 +20,7 @@ public class ContinueButtSCRIPT : MonoBehaviour
 
     public void OnButtonClicked()
     {
+        GeneralSoundManagerSCRIPT.Instance.PlayButtSound();
         button.interactable = false;
         PlayerSCRIPT.Instance.ContinuePlay();
     }

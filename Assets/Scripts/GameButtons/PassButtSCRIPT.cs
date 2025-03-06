@@ -20,6 +20,7 @@ public class PassButtSCRIPT : MonoBehaviour
 
     public void OnButtonClicked()
     {
+        GeneralSoundManagerSCRIPT.Instance.PlayButtSound();
         button.interactable = false;
         int playerLives = PlayerPrefs.GetInt("Lives");
         int curBet = GameHandlerSCRIPT.Instance.curBet;

@@ -54,6 +54,8 @@ public class ChooseEnemyPanelSCRIPT : MonoBehaviour
     [SerializeField] TMP_Dropdown dropDownComp;
     public void CheckThatBetLessThanLivesThenSaveIt(int value)
     {
+        GeneralSoundManagerSCRIPT.Instance.PlayBuySound();
+
         AssignChoosedDropDownButtToBetValue(value);
         if (choosedBet > MainMenuManagerSCRIPT.Instance.Lives)
         {

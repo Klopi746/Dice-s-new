@@ -13,6 +13,7 @@ public class EnemyItemSCRIPT : MonoBehaviour, IPointerClickHandler
         if (!canFightToggle.isOn) return;
         ChooseEnemyPanelSCRIPT.Instance.DisableAll();
         image.color = Color.red;
+        GeneralSoundManagerSCRIPT.Instance.PlayShopClickSound();
     }
 
 

@@ -20,6 +20,7 @@ public class EndTurnButtSCRIPT : MonoBehaviour
 
     public void OnButtonClicked()
     {
+        GeneralSoundManagerSCRIPT.Instance.PlayButtSound();
         button.interactable = false;
         ContinueButtSCRIPT.Instance.ChangeButtInteractable(false);
         GameHandlerSCRIPT.Instance.EndTurn();

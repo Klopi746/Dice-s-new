@@ -14,5 +14,6 @@ public class ItemDiceSelectionSCRIPT : MonoBehaviour, IPointerClickHandler
         ImageComponent.color = Color.yellow;
         PlayerPrefs.SetInt("DiceInSlot" + DiceSelectorSCRIPT.Instance.curSlotId, diceId);
         ShopManagerSCRIPT.Instance.UpdateSlotDice(DiceSelectorSCRIPT.Instance.curSlotId);
+        GeneralSoundManagerSCRIPT.Instance.PlayShopClickSound();
     }
 }

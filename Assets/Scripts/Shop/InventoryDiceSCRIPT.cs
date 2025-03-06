@@ -25,6 +25,7 @@ public class InventoryDiceSCRIPT : MonoBehaviour, IPointerClickHandler
         ShopManagerSCRIPT.Instance.OpenInventoryMenu(this.gameObject);
         DiceSelectorSCRIPT.Instance.curSlotId = slotId;
         DiceSelectorSCRIPT.Instance.EnableCubeFromInventorySlot(slotDice);
+        GeneralSoundManagerSCRIPT.Instance.PlayShopWindClickSound();
     }
 
     public void AssignDice(DiceData newDiceData)

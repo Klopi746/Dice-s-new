@@ -60,18 +60,18 @@ public class ShopManagerSCRIPT : MonoBehaviour
     #endregion
 
     #region Inventory
-    [SerializeField] public List<InventoryDiceSCRIPT> inventoryDiceSlots;
+    [SerializeField] public List<InventoryDiceSCRIPT> inventoryDiceSlots = new List<InventoryDiceSCRIPT>(6);
 
     public void AssignInventoryDiceSlots(InventoryDiceSCRIPT inventoryDiceSlot)
     {
-        inventoryDiceSlots.Add(inventoryDiceSlot);
-        int slotDice = PlayerPrefs.GetInt("DiceInSlot" + inventoryDiceSlots.Count,0);
+        inventoryDiceSlots[inventoryDiceSlot.slotId] = inventoryDiceSlot;
+        int slotDice = PlayerPrefs.GetInt("DiceInSlot" + inventoryDiceSlot.slotId, 0);
         inventoryDiceSlot.AssignDice(diceDataset[slotDice]);
         inventoryDiceSlot.UpdateSlotDice(slotDice);
     }
     public void UpdateSlotDice(int slotId)
     {
-        int slotDice = PlayerPrefs.GetInt("DiceInSlot" + slotId,0);
+        int slotDice = PlayerPrefs.GetInt("DiceInSlot" + slotId, 0);
         inventoryDiceSlots[slotId].UpdateSlotDice(slotDice);
         inventoryDiceSlots[slotId].AssignDice(diceDataset[slotDice]);
     }
@@ -83,13 +83,13 @@ public class ShopManagerSCRIPT : MonoBehaviour
 
     public void OpenInventoryMenu(GameObject inventorySlot)
     {
-        diceSelectionGO.transform.DOMove(new Vector3(diceSelectionGO.transform.position.x, inventorySlot.transform.position.y, diceSelectionGO.transform.position.z),0.2f);
+        diceSelectionGO.transform.DOMove(new Vector3(diceSelectionGO.transform.position.x, inventorySlot.transform.position.y, diceSelectionGO.transform.position.z), 0.2f);
     }
     #endregion
 
     public void DeselectEverything()
     {
-        diceSelectionGO.transform.DOMove(new Vector3(diceSelectionGO.transform.position.x,-700, diceSelectionGO.transform.position.z), 0.2f);
+        diceSelectionGO.transform.DOMove(new Vector3(diceSelectionGO.transform.position.x, -700, diceSelectionGO.transform.position.z), 0.2f);
         DeselectCurrentItem();
     }
 }

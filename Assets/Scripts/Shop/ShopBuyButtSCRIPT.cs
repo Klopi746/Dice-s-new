@@ -1,11 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayButtonSCRIPT : MonoBehaviour
+public class ShopBuyButtSCRIPT : MonoBehaviour
 {
-    [SerializeField] GameObject chooseEnemyPanel;
-
-
     private Button button;
     private void Awake()
     {
@@ -16,8 +13,6 @@ public class PlayButtonSCRIPT : MonoBehaviour
 
     public void OnButtonClicked()
     {
-        GeneralSoundManagerSCRIPT.Instance.PlayButtSound();
-        bool activate = !chooseEnemyPanel.activeSelf;
-        chooseEnemyPanel.SetActive(activate);
+        GeneralSoundManagerSCRIPT.Instance.PlayBuySound();
     }
 }

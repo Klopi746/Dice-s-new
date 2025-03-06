@@ -19,6 +19,10 @@ public class GameHandlerSCRIPT : MonoBehaviour
         curBet = PlayerPrefs.GetInt("ChoosedBet", 10);
         SetGoalFromBet(curBet);
     }
+    private void Start()
+    {
+        GeneralSoundManagerSCRIPT.Instance.PlayMusicWithDelay(1f);
+    }
 
 
     private bool _isPlayerTurn = false;
@@ -80,9 +84,11 @@ public class GameHandlerSCRIPT : MonoBehaviour
             winTextPro.text = $"В тяжелой борьбе победил {winnerName}";
             winTextPro.gameObject.SetActive(true);
 
+            AudioManager_SCRIPT.Instance.StopAllLoopingSounds();
+
             int playerLives = PlayerPrefs.GetInt("Lives");
-            if (winnerName == "Player") PlayerPrefs.SetInt("Lives", playerLives + curBet);
-            else PlayerPrefs.SetInt("Lives", playerLives - curBet);
+            if (winnerName == "Player") {PlayerPrefs.SetInt("Lives", playerLives + curBet); GeneralSoundManagerSCRIPT.Instance.PlayVictorySound();}
+            else {PlayerPrefs.SetInt("Lives", playerLives - curBet); GeneralSoundManagerSCRIPT.Instance.PlayDefeatSound();}
 
             StartCoroutine(LoadMainMenu());
         }
@@ -91,6 +97,7 @@ public class GameHandlerSCRIPT : MonoBehaviour
     {
         OpenNewEnemy(curBet);
         yield return new WaitForSeconds(3f);
+        AudioManager_SCRIPT.Instance.StopAllCoroutines();
         LoadSceneManagerSCRIPT.Instance.LoadNewScene(0);
     }
     private void OpenNewEnemy(int value)

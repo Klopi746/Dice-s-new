@@ -142,6 +142,6 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnButtonClicked()
     {
-
+        GeneralSoundManagerSCRIPT.Instance.PlayBuySound();
     }
 }
