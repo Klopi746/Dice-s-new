@@ -67,6 +67,12 @@ public class ShopManagerSCRIPT : MonoBehaviour
         inventoryDiceSlots.Add(inventoryDiceSlot);
         int slotDice = PlayerPrefs.GetInt("DiceInSlot" + inventoryDiceSlots.Count,0);
         inventoryDiceSlot.AssignDice(diceDataset[slotDice]);
+        inventoryDiceSlot.UpdateSlotDice(slotDice);
+    }
+    public void UpdateSlotDice(int slotId)
+    {
+        int slotDice = PlayerPrefs.GetInt("DiceInSlot" + slotId,0);
+        inventoryDiceSlots[slotId].UpdateSlotDice(slotDice);
     }
     #endregion
 

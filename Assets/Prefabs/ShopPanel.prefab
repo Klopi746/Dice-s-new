@@ -221,6 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5965095074782387490}
   - component: {fileID: 1172216149115043899}
+  - component: {fileID: 3807695638146830682}
   m_Layer: 5
   m_Name: CubeElement (1)
   m_TagString: Untagged
@@ -257,6 +258,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 587123859055820684}
   m_CullTransparentMesh: 1
+--- !u!114 &3807695638146830682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587123859055820684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e991b8a12b08c4887d99973a4fdc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceId: 1
+  ImageComponent: {fileID: 4019059890215643632}
 --- !u!1 &902389674717127845
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2204285848287008742}
   - component: {fileID: 8737637464071903995}
+  - component: {fileID: 524363585013595845}
   m_Layer: 5
   m_Name: CubeElement
   m_TagString: Untagged
@@ -303,6 +319,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902389674717127845}
   m_CullTransparentMesh: 1
+--- !u!114 &524363585013595845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902389674717127845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e991b8a12b08c4887d99973a4fdc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceId: 0
+  ImageComponent: {fileID: 8503040050166830192}
 --- !u!1 &973644769425148865
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2708664679483911673}
+  - component: {fileID: 1119510208502538827}
   m_Layer: 5
   m_Name: CubeSelection
   m_TagString: Untagged
@@ -593,6 +624,26 @@ RectTransform:
   m_AnchoredPosition: {x: -223.4, y: -600}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1119510208502538827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914503494832734263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 690b9031fcdc7d441a906fee6af355f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curSlotId: 0
+  DiceImageComponents:
+  - {fileID: 8503040050166830192}
+  - {fileID: 4019059890215643632}
+  - {fileID: 8066051703019627991}
+  - {fileID: 4967078675670150695}
+  - {fileID: 4590083148119865183}
+  - {fileID: 5560475888479649042}
 --- !u!1 &2281471209762146051
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,6 +729,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5399251966234688698}
   - component: {fileID: 2829195390144435366}
+  - component: {fileID: 2902453748012097587}
   m_Layer: 5
   m_Name: CubeElement (4)
   m_TagString: Untagged
@@ -714,6 +766,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3175311390154612753}
   m_CullTransparentMesh: 1
+--- !u!114 &2902453748012097587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3175311390154612753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e991b8a12b08c4887d99973a4fdc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceId: 4
+  ImageComponent: {fileID: 4590083148119865183}
 --- !u!1 &4110144484883369336
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 126088164137755619}
   - component: {fileID: 3731131519150142876}
+  - component: {fileID: 8097932611621160764}
   m_Layer: 5
   m_Name: CubeElement (5)
   m_TagString: Untagged
@@ -1053,6 +1120,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5247327000708939602}
   m_CullTransparentMesh: 1
+--- !u!114 &8097932611621160764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247327000708939602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e991b8a12b08c4887d99973a4fdc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceId: 5
+  ImageComponent: {fileID: 5560475888479649042}
 --- !u!1 &5744524013874794203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1357,6 +1438,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1585030589578707438}
   - component: {fileID: 4677540803615879313}
+  - component: {fileID: 9043387237634239858}
   m_Layer: 5
   m_Name: CubeElement (2)
   m_TagString: Untagged
@@ -1393,6 +1475,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6566041548776620497}
   m_CullTransparentMesh: 1
+--- !u!114 &9043387237634239858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6566041548776620497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e991b8a12b08c4887d99973a4fdc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceId: 2
+  ImageComponent: {fileID: 8066051703019627991}
 --- !u!1 &6606637142147596648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,6 +2376,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8505500470271732511}
   - component: {fileID: 509410203847285692}
+  - component: {fileID: 1438248623313299602}
   m_Layer: 5
   m_Name: CubeElement (3)
   m_TagString: Untagged
@@ -2316,6 +2413,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8866865595783522136}
   m_CullTransparentMesh: 1
+--- !u!114 &1438248623313299602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8866865595783522136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2e991b8a12b08c4887d99973a4fdc58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  diceId: 3
+  ImageComponent: {fileID: 4967078675670150695}
 --- !u!1 &9045964448097980930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,7 +2728,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920906203662750053, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: slotId
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8367977103201011018, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: m_Name
@@ -2723,7 +2834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920906203662750053, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: slotId
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8367977103201011018, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: m_Name
@@ -2829,7 +2940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920906203662750053, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: slotId
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8367977103201011018, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: m_Name
@@ -3163,7 +3274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920906203662750053, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: slotId
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8367977103201011018, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: m_Name
@@ -3725,7 +3836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5920906203662750053, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: slotId
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8367977103201011018, guid: 8cd5f51151f70224bbbf805ae5637505, type: 3}
       propertyPath: m_Name

@@ -54,18 +54,18 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
         for (int i = 0; i < diceSideIcons.Count; i++)
         {
-            diceSideIcons[i].sprite = ShopManagerSCRIPT.Instance.diceSideIcons[diceInfo.sidesList[i]-1];
+            diceSideIcons[i].sprite = ShopManagerSCRIPT.Instance.diceSideIcons[diceInfo.sidesList[i] - 1];
             diceSideChances[i].text = diceInfo.probabilityList[i].ToString();
         }
 
         diceIconOnSelection.sprite = diceInfo.diceIcon;
-        curAmountOfDice.text = PlayerPrefs.GetInt("Dice"+ diceInfo.diceName+"InInventory",0).ToString();
+        curAmountOfDice.text = PlayerPrefs.GetInt("Dice" + diceInfo.diceName + "InInventory", 0).ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (!isSelected)
-         StartResize(expandedSize);
+            StartResize(expandedSize);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -89,10 +89,12 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 originalSize.y * (1 + selectedVerticalPercent / 100f)
             );
             StartResize(selectedSize);
+            BuyButtToggleShow();
         }
         else
         {
             StartResize(originalSize);
+            BuyButtToggleShow();
         }
     }
 
@@ -124,5 +126,22 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private void OnDisable()
     {
         rectTransform.sizeDelta = originalSize;
+    }
+
+
+    // Buying
+    [SerializeField] private Button buyButt;
+    private void Awake()
+    {
+        buyButt.onClick.AddListener(OnButtonClicked);
+    }
+    private void BuyButtToggleShow()
+    {
+        buyButt.interactable = !buyButt.interactable;
+    }
+
+    public void OnButtonClicked()
+    {
+
     }
 }

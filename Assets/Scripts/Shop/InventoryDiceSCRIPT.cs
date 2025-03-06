@@ -7,11 +7,11 @@ public class InventoryDiceSCRIPT : MonoBehaviour, IPointerClickHandler
     public int slotId;
     public Image cubeIcon;
     public DiceData diceData;
+    public int slotDice;
 
-
-    private void Awake()
+    public void LoadDataOfSlot(int SlotId)
     {
-
+        slotDice = PlayerPrefs.GetInt("DiceInSlot" + SlotId, 0);
     }
 
     private void Start()
@@ -23,11 +23,17 @@ public class InventoryDiceSCRIPT : MonoBehaviour, IPointerClickHandler
     {
         ShopManagerSCRIPT.Instance.DeselectEverything();
         ShopManagerSCRIPT.Instance.OpenInventoryMenu(this.gameObject);
+        DiceSelectorSCRIPT.Instance.curSlotId = slotId;
+        DiceSelectorSCRIPT.Instance.EnableCubeFromInventorySlot(slotDice);
     }
 
     public void AssignDice(DiceData newDiceData)
     {
         diceData = newDiceData;
         cubeIcon.sprite = diceData.diceIcon;
+    }
+    public void UpdateSlotDice(int slotDice)
+    {
+        this.slotDice = slotDice;
     }
 }
