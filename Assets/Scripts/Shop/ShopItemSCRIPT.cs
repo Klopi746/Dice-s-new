@@ -7,6 +7,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(RectTransform))]
 public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
+    public int diceId;
+
+
     [Header("Hover Expansion Settings")]
     [SerializeField] private float horizontalExpansionPercent = 10f;
     [SerializeField] private float verticalExpansionPercent = 10f;
@@ -25,6 +28,10 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField] List<TextMeshProUGUI> diceSideChances;
     [SerializeField] Image diceIconOnSelection;
     [SerializeField] TextMeshProUGUI curAmountOfDice;
+    public int GetCurAmountOfDice()
+    {
+        return int.Parse(curAmountOfDice.text);
+    }
 
 
     private Vector2 originalSize;
@@ -59,7 +66,7 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
 
         diceIconOnSelection.sprite = diceInfo.diceIcon;
-        curAmountOfDice.text = PlayerPrefs.GetInt("Dice" + diceInfo.diceName + "InInventory", 0).ToString();
+        curAmountOfDice.text = PlayerPrefs.GetInt("Dice" + diceInfo.dicePrice + "Amount", 0).ToString();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -142,6 +149,36 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnButtonClicked()
     {
-        GeneralSoundManagerSCRIPT.Instance.PlayBuySound();
+        if (MainMenuManagerSCRIPT.Instance.Lives >= diceInfo.dicePrice && diceId > 0)
+        {
+            GeneralSoundManagerSCRIPT.Instance.PlayBuySound();
+
+            int curAmount = PlayerPrefs.GetInt("Dice" + diceInfo.dicePrice + "Amount", 0);
+            if (curAmount >= 6) return;
+            PlayerPrefs.SetInt("Dice" + diceInfo.dicePrice + "Amount", curAmount + 1);
+
+            int curLives = MainMenuManagerSCRIPT.Instance.Lives;
+            MainMenuManagerSCRIPT.Instance.UpdateLivesTo(curLives - diceInfo.dicePrice);
+
+            curAmountOfDice.text = PlayerPrefs.GetInt("Dice" + diceInfo.dicePrice + "Amount", 0).ToString();
+        }
+        else if (diceId == 0)
+        {
+            GeneralSoundManagerSCRIPT.Instance.PlayBuySound();
+
+            int curAmount = PlayerPrefs.GetInt("Dice" + diceInfo.dicePrice + "Amount", 0);
+            if (curAmount >= 6) return;
+            PlayerPrefs.SetInt("Dice" + diceInfo.dicePrice + "Amount", curAmount + 1);
+
+            int curLives = MainMenuManagerSCRIPT.Instance.Lives;
+            MainMenuManagerSCRIPT.Instance.UpdateLivesTo(curLives - diceInfo.dicePrice);
+            PlayerPrefs.SetInt("Lives", MainMenuManagerSCRIPT.Instance.Lives);
+
+            curAmountOfDice.text = PlayerPrefs.GetInt("Dice" + diceInfo.dicePrice + "Amount", 0).ToString();
+        }
+        else
+        {
+            MainMenuManagerSCRIPT.Instance.ShowErrorOnLives();
+        }
     }
 }

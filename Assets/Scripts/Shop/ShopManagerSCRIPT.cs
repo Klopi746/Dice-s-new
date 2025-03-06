@@ -26,13 +26,14 @@ public class ShopManagerSCRIPT : MonoBehaviour
     }
 
     #region Items
-    private List<ShopItemSCRIPT> items = new List<ShopItemSCRIPT>();
+    public List<ShopItemSCRIPT> items = new List<ShopItemSCRIPT>(6);
     public void RegisterItem(ShopItemSCRIPT item)
     {
-        if (!items.Contains(item))
-        {
-            items.Add(item);
-        }
+        items[item.diceId] = item;
+    }
+    public int CheckAmountOfBuyedDiceId(int diceId)
+    {
+        return items[diceId].GetCurAmountOfDice();
     }
 
     public void SelectItem(ShopItemSCRIPT selectedItem)
@@ -74,6 +75,15 @@ public class ShopManagerSCRIPT : MonoBehaviour
         int slotDice = PlayerPrefs.GetInt("DiceInSlot" + slotId, 0);
         inventoryDiceSlots[slotId].UpdateSlotDice(slotDice);
         inventoryDiceSlots[slotId].AssignDice(diceDataset[slotDice]);
+    }
+    public int CheckAmountOfAssignDiceId(int diceId)
+    {
+        int amount = 0;
+        foreach (var script in inventoryDiceSlots)
+        {
+            if (script.slotDice == diceId) amount += 1;
+        }
+        return amount;
     }
     #endregion
 

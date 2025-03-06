@@ -18,6 +18,11 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
         Lives = PlayerPrefs.GetInt("Lives", 40);
         LivesTextPro.text = $"Lives: {Lives}";
     }
+    public void UpdateLivesTo(int newValue)
+    {
+        Lives = newValue;
+        LivesTextPro.text = $"Lives: {Lives}";
+    }
 
 
     public void ShowErrorOnLives()

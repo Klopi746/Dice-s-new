@@ -15,7 +15,11 @@ public class EnemyPanelPlayButtSCRIPT : MonoBehaviour
     {
         GeneralSoundManagerSCRIPT.Instance.PlayButtSound();
         AudioManager_SCRIPT.Instance.StopAllLoopingSounds();
+
         ChooseEnemyPanelSCRIPT.Instance.FindEnemyAndSaveIt();
+
+        PlayerPrefs.SetInt("Lives", MainMenuManagerSCRIPT.Instance.Lives);
+
         LoadSceneManagerSCRIPT.Instance.LoadNewScene(1);
     }
 }
