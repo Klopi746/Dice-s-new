@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a0b193bfdba7740b497ecbc5e710d6, type: 3}
+  m_Name: DicePrefab2
+  m_EditorClassIdentifier: 
+  _faceProbabilities: 0e0000000e0000000e0000000e0000001e0000000e000000
+  diceMat: {fileID: 2100000, guid: 02cc665c019cab1489cebdab9a329ee0, type: 2}
