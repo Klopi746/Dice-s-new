@@ -11,19 +11,19 @@ public class UnUsualNotNormalDice : DicePapaSCRIPT
     }
     private int GetWeightedRandomFace()
     {
-        float cumulative = 0f;
+        int cumulative = 0;
         for (int i = 0; i < _faceProbabilities.Length; i++)
         {
             cumulative += _faceProbabilities[i];
         }
 
 
-        float randomPoint = Random.Range(0f, cumulative);
-        cumulative = 0f;
+        int randomPoint = Random.Range(0, cumulative);
+        cumulative = 0;
         for (int i = 0; i < _faceProbabilities.Length; i++)
         {
             cumulative += _faceProbabilities[i];
-            if (randomPoint <= cumulative)
+            if (randomPoint < cumulative)
             {
                 return i + 1;
             }

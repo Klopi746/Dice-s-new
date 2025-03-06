@@ -17,8 +17,8 @@ public class DicePapaSCRIPT : MonoBehaviour
     [Header("Face Probabilities (1-6)")]
     [Tooltip("Probabilities should sum to 1")]
     [SerializeField]
-    protected float[] _faceProbabilities = new float[6] {
-        0.5f, 0f, 0f, 0f, 0f, 0.5f // 50% for 1, 50% for 6
+    protected int[] _faceProbabilities = new int[6] {
+        50, 0, 0, 0, 0, 50 // 50% for 1, 50% for 6
     };
 
 
