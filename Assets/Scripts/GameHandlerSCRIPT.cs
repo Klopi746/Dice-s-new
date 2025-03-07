@@ -87,7 +87,7 @@ public class GameHandlerSCRIPT : MonoBehaviour
             AudioManager_SCRIPT.Instance.StopAllLoopingSounds();
 
             int playerLives = PlayerPrefs.GetInt("Lives");
-            if (winnerName == "Player") {PlayerPrefs.SetInt("Lives", playerLives + curBet); GeneralSoundManagerSCRIPT.Instance.PlayVictorySound();}
+            if (winnerName == "Player") {PlayerPrefs.SetInt("Lives", playerLives + curBet); GeneralSoundManagerSCRIPT.Instance.PlayVictorySound(); OpenNewEnemy(EnemySCRIPT.Instance.enemyId);}
             else {PlayerPrefs.SetInt("Lives", playerLives - curBet); GeneralSoundManagerSCRIPT.Instance.PlayDefeatSound();}
 
             StartCoroutine(LoadMainMenu());
@@ -95,7 +95,6 @@ public class GameHandlerSCRIPT : MonoBehaviour
     }
     private IEnumerator LoadMainMenu()
     {
-        OpenNewEnemy(curBet);
         yield return new WaitForSeconds(3f);
         AudioManager_SCRIPT.Instance.StopAllCoroutines();
         LoadSceneManagerSCRIPT.Instance.LoadNewScene(0);
@@ -103,23 +102,10 @@ public class GameHandlerSCRIPT : MonoBehaviour
     private void OpenNewEnemy(int value)
     {
         int curOpenEnemies = PlayerPrefs.GetInt("EnemiesOpen", 1);
-        switch (curOpenEnemies)
+        if (curOpenEnemies == value)
         {
-            case 1:
-                if (value > 0) PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
-                break;
-            case 2:
-                if (value > 49) PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
-                break;
-            case 3:
-                if (value > 99) PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
-                break;
-            case 4:
-                if (value > 299) PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
-                break;
-            default:
-                if (value > 299) PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
-                break;
+        PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
+
         }
     }
 
