@@ -11,7 +11,7 @@ public class VolumeSlider_SCRIPT : MonoBehaviour
 
     void Start()
     {
-        float volume = PlayerPrefs.GetFloat(playerPrefsKey, 100);
+        float volume = PlayerPrefs.GetFloat(playerPrefsKey, 40);
         SetVolume(volume);
     }
 

@@ -106,7 +106,7 @@ public class GameHandlerSCRIPT : MonoBehaviour
         {
             PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
         }
-        if (curOpenEnemies + 1 == 6) PlayerPrefs.SetInt("RealWin", 1);
+        if (curOpenEnemies + 1 == 7) PlayerPrefs.SetInt("RealWin", 1);
     }
     private void DecreaseRealLives()
     {
