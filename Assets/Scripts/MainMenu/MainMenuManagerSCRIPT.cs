@@ -10,12 +10,12 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
     [SerializeField] TextMeshProUGUI LivesTextPro;
 
 
-    public int Lives = 40;
+    public int Lives = 80;
     private void Awake()
     {
         Instance = this;
         PlayerPrefs.SetInt("ChoosedBet", 10);
-        Lives = PlayerPrefs.GetInt("Lives", 40);
+        Lives = PlayerPrefs.GetInt("Lives", 80);
         LivesTextPro.text = $"Lives: {Lives}";
     }
     public void UpdateLivesTo(int newValue)
