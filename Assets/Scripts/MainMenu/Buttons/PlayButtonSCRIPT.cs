@@ -16,6 +16,7 @@ public class PlayButtonSCRIPT : MonoBehaviour
 
     public void OnButtonClicked()
     {
+        if (!RealLivesManager.Instance.LivesShown) return;
         GeneralSoundManagerSCRIPT.Instance.PlayButtSound();
         bool activate = !chooseEnemyPanel.activeSelf;
         chooseEnemyPanel.SetActive(activate);

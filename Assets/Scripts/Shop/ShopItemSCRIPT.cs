@@ -73,12 +73,14 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if (!isSelected)
             StartResize(expandedSize);
+        BuyButtToggleShow();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (!isSelected)
             StartResize(originalSize);
+        BuyButtToggleShow();
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -96,12 +98,10 @@ public class ShopItemSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitH
                 originalSize.y * (1 + selectedVerticalPercent / 100f)
             );
             StartResize(selectedSize);
-            BuyButtToggleShow();
         }
         else
         {
             StartResize(originalSize);
-            BuyButtToggleShow();
         }
     }
 

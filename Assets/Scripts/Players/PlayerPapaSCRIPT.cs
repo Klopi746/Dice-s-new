@@ -82,6 +82,8 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         {
             Debug.Log("NO COMBO! :(");
             temporaryScoreText.text = "0";
+            temporaryScoreText.transform.DOComplete();
+            temporaryScoreText.transform.DOPunchScale(new Vector3(1, 1, 0), 2f, 8);
             noComboTextObj.gameObject.SetActive(true);
             EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
             CameraControllerSCRIPT.Instance.SetCloseCamView();

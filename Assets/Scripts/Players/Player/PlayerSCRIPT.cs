@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerSCRIPT : PlayerPapaSCRIPT
@@ -59,6 +60,9 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
         temporaryScoreText.text = "0";
         startTemporaryScore = 0;
 
+        scoreText.transform.DOComplete();
+        scoreText.transform.DOPunchScale(new Vector3(1, 1, 0), 1f, 4);
+
         GameHandlerSCRIPT.Instance.CheckForWin(int.Parse(scoreText.text), this);
 
         EnableAllCubes();
@@ -74,7 +78,7 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
         clickedCubesDigitsSequence = new string(clickedCubesDigitsSequence.OrderBy(c => c).ToArray());
         Debug.Log($"Выбранная игроком последовательность: {clickedCubesDigitsSequence}");
 
-        CheckThatClickedSequenceIsCombo(clickedCubesDigitsSequence);
+        if (!noComboTextObj.gameObject.activeSelf) CheckThatClickedSequenceIsCombo(clickedCubesDigitsSequence);
     }
     private void CheckThatClickedSequenceIsCombo(string playerSequence)
     {
@@ -89,6 +93,8 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
             temporaryScoreText.text = startTemporaryScore.ToString();
             ContinueButtSCRIPT.Instance.ChangeButtInteractable(false);
         }
+        temporaryScoreText.transform.DOComplete();
+        temporaryScoreText.transform.DOPunchScale(new Vector3(1, 1, 0), 1f, 4);
     }
 
 

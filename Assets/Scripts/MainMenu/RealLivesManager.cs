@@ -18,6 +18,7 @@ public class RealLivesManager : MonoBehaviour
         StartCoroutine(CheckRealLives());
     }
     public AudioClip LiveDieSound;
+    public bool LivesShown = false;
     private IEnumerator CheckRealLives()
     {
         yield return new WaitForSeconds(0.2f);
@@ -25,14 +26,15 @@ public class RealLivesManager : MonoBehaviour
         int length = LivesImages.Length;
         for (int i = 1; i <= LivesImages.Length; i++)
         {
-            if (RealLives < (length+1)-i)
+            if (RealLives < (length + 1) - i)
             {
                 Tween tween = LivesImages[length - i].DOColor(Color.black, 0.4f);
                 AudioManager_SCRIPT.Instance.PlaySound(LiveDieSound, pitch: length + 1 - i);
                 yield return tween.WaitForCompletion();
             }
-            
+
         }
+        LivesShown = true;
         MainMenuManagerSCRIPT.Instance.CheckWinLoose();
     }
 }

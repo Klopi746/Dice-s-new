@@ -13,13 +13,13 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
     [SerializeField] TextMeshProUGUI LivesTextPro;
 
 
-    public int Lives = 80;
+    public int Lives = 290;
     public int RealLives = 10;
     private void Awake()
     {
         Instance = this;
         PlayerPrefs.SetInt("ChoosedBet", 10);
-        Lives = PlayerPrefs.GetInt("Lives", 80);
+        Lives = PlayerPrefs.GetInt("Lives", 290);
         LivesTextPro.text = $"Money: {Lives}";
 
         RealLives = PlayerPrefs.GetInt("RealLives", 10);
