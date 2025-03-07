@@ -56,6 +56,7 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
     }
     private IEnumerator LooseGame()
     {
+        RealLivesManager.Instance.LivesShown = false;
         PlayerPrefs.DeleteAll();
         GeneralSoundManagerSCRIPT.Instance.PlayMusicWithDelay(1f);
         LivesTextPro.text = "ПОРАЖЕНИЕ";
