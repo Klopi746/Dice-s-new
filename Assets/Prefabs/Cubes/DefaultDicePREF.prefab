@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _faceProbabilities: 110000001100000011000000110000001100000011000000
-  diceClickSCRIPT: {fileID: 0}
+  diceClickSCRIPT: {fileID: 8834421041665167602}
 --- !u!114 &8834421041665167602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b848cc6d32883ab4eb67b9fe4df588f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineScript: {fileID: 0}
-  cubeGameScript: {fileID: 0}
+  outlineScript: {fileID: 1214479573171878070}
+  cubeGameScript: {fileID: -8103228571894291435}
   enemyDice: 0
   wasClicked: 0
 --- !u!114 &1214479573171878070

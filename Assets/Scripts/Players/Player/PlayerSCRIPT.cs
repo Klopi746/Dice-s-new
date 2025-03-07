@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
@@ -32,6 +33,11 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
     {
         // Subscribe to OnTurnChanged event
         GameHandlerSCRIPT.Instance.OnTurnChanged.AddListener(HandleTurnChange);
+        StartCoroutine(StartGameWithDelay(1f));
+    }
+    private IEnumerator StartGameWithDelay(float timeDelay)
+    {
+        yield return new WaitForSeconds(timeDelay);
         GameHandlerSCRIPT.Instance.IsPlayerTurn = true; // the Player always go the first
     }
     int startTemporaryScore = 0;

@@ -17,7 +17,7 @@ public class VolumeSlider_SCRIPT : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        if (volume < 0.1f) volume = 0.001f;
+        if (volume < 1f) volume = 0.001f;
 
         RefreshSlider(volume);
 
