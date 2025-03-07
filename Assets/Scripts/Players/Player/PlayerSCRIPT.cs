@@ -9,10 +9,23 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
     override protected void Awake()
     {
         base.Awake();
+        LoadChoosedDices();
 
         playerLives = PlayerPrefs.GetInt("PlayerLives", 50);
 
         Instance = this;
+    }
+    private void LoadChoosedDices()
+    {
+        for (int i = 0; i < cubesArray.Length; i++)
+        {
+
+            int diceId = PlayerPrefs.GetInt("DiceInSlot" + i, 0);
+            DicePrefabData data = Resources.Load<DicePrefabData>($"Dice/DicePrefab{diceId}");
+
+            cubesArray[i].GetComponent<MeshRenderer>().material = data.diceMat;
+            cubesScripts[i]._faceProbabilities = data._faceProbabilities;
+        }
     }
 
     void Start()

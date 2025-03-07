@@ -33,15 +33,8 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
         for (int i = 0; i < playerCubesInWorld.childCount; i++)
         {
             GameObject gameObject = playerCubesInWorld.GetChild(i).gameObject;
-
-            int diceId = PlayerPrefs.GetInt("DiceInSlot" + i, 0);
-            DicePrefabData data = Resources.Load<DicePrefabData>($"Dice/DicePrefab{diceId}");
-            gameObject.GetComponent<MeshRenderer>().material = data.diceMat;
-
             cubesArray[i] = gameObject;
             cubesScripts[i] = gameObject.GetComponent<DicePapaSCRIPT>();
-
-            cubesScripts[i]._faceProbabilities = data._faceProbabilities;
         }
         Debug.Log($"Cubes for {gameObject.name} succesfully initialized");
     }
