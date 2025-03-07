@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "DicePrefabData", menuName = "Custom/DicePrefabData", order = 1)]
 public class DicePrefabData : ScriptableObject
