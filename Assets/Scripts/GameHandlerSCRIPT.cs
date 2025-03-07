@@ -79,16 +79,16 @@ public class GameHandlerSCRIPT : MonoBehaviour
         if (score >= goalScore && someoneWinned == false)
         {
             someoneWinned = true;
-            
-            string winnerName = (caller is PlayerSCRIPT) ? "Player": EnemySCRIPT.Instance.playerName;
+
+            string winnerName = (caller is PlayerSCRIPT) ? "Player" : EnemySCRIPT.Instance.playerName;
             winTextPro.text = $"В тяжелой борьбе победил {winnerName}";
             winTextPro.gameObject.SetActive(true);
 
             AudioManager_SCRIPT.Instance.StopAllLoopingSounds();
 
             int playerLives = PlayerPrefs.GetInt("Lives");
-            if (winnerName == "Player") {PlayerPrefs.SetInt("Lives", playerLives + curBet); GeneralSoundManagerSCRIPT.Instance.PlayVictorySound(); OpenNewEnemy(EnemySCRIPT.Instance.enemyId);}
-            else {PlayerPrefs.SetInt("Lives", playerLives - curBet); GeneralSoundManagerSCRIPT.Instance.PlayDefeatSound();}
+            if (winnerName == "Player") { PlayerPrefs.SetInt("Lives", playerLives + curBet); GeneralSoundManagerSCRIPT.Instance.PlayVictorySound(); OpenNewEnemy(EnemySCRIPT.Instance.enemyId); }
+            else { PlayerPrefs.SetInt("Lives", playerLives - curBet); GeneralSoundManagerSCRIPT.Instance.PlayDefeatSound(); DecreaseRealLives(); }
 
             StartCoroutine(LoadMainMenu());
         }
@@ -104,9 +104,15 @@ public class GameHandlerSCRIPT : MonoBehaviour
         int curOpenEnemies = PlayerPrefs.GetInt("EnemiesOpen", 1);
         if (curOpenEnemies == value)
         {
-        PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
-
+            PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
         }
+        if (curOpenEnemies + 1 == 6) PlayerPrefs.SetInt("RealWin", 1);
+    }
+    private void DecreaseRealLives()
+    {
+        int curRealLives = PlayerPrefs.GetInt("RealLives", 10);
+        PlayerPrefs.SetInt("RealLives", curRealLives - 1);
+        if (curRealLives - 1 == 0) PlayerPrefs.SetInt("RealWin", -1);
     }
 
 
@@ -130,4 +136,14 @@ public class GameHandlerSCRIPT : MonoBehaviour
             Instance.OnTurnChanged.RemoveAllListeners();
         }
     }
+
+#if UNITY_EDITOR
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            goalScore = 0;
+        }
+    }
+#endif
 }

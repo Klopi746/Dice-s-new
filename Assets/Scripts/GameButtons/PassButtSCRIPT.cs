@@ -26,6 +26,10 @@ public class PassButtSCRIPT : MonoBehaviour
         int curBet = GameHandlerSCRIPT.Instance.curBet;
         PlayerPrefs.SetInt("Lives", playerLives - curBet);
 
+        int curRealLives = PlayerPrefs.GetInt("RealLives", 10);
+        PlayerPrefs.SetInt("RealLives", curRealLives - 1);
+        if (curRealLives - 1 == 0) PlayerPrefs.SetInt("RealWin", -1);
+
         AudioManager_SCRIPT.Instance.StopAllLoopingSounds();
 
         LoadSceneManagerSCRIPT.Instance.LoadNewScene();
