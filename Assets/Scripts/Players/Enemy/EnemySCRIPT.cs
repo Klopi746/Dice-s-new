@@ -49,6 +49,14 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
         playerName = enemyData.enemyName;
         enemyNameTextPro.text = playerName;
         ownedCubes = enemyData.ownedCubes;
+        for (int i = 0; i < ownedCubes.Count; i++)
+        {
+            DicePrefabData data = Resources.Load<DicePrefabData>($"Dice/DicePrefab{ownedCubes[i.ToString()]}");
+
+            cubesArray[i].GetComponent<MeshRenderer>().material = data.diceMat;
+            cubesScripts[i]._faceProbabilities = data._faceProbabilities;
+        }
+
         if (AiLogicDictionary.AI_TypeMap.TryGetValue(enemyData.aiType, out Type type))
         {
             gameObject.AddComponent(type);
