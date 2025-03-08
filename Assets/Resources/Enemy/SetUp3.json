@@ -1,5 +1,5 @@
 {
-    "enemyName": "Fat Tony",
+    "enemyName": "SlavSus",
     "ownedCubes": {
         "0": 3,
         "1": 3,
@@ -8,6 +8,6 @@
         "4": 2,
         "5": 2
     },
-    "description": "He is not Fat at all. He is Rich at all.",
-    "aiType": "Normal"
+    "description": "Hard times give birth to strong people",
+    "aiType": "Clever"
 }

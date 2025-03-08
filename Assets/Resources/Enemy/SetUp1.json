@@ -1,5 +1,5 @@
 {
-    "enemyName": "Bond, JsBd",
+    "enemyName": "RuBin",
     "ownedCubes": {
         "0": 0,
         "1": 0,
@@ -8,6 +8,6 @@
         "4": 0,
         "5": 0
     },
-    "description": "The Most Honest Player. Really! Believe me!!!",
-    "aiType": "Stupid"
+    "description": "Beaver is too cool, maximum lollipop",
+    "aiType": "Normal"
 }

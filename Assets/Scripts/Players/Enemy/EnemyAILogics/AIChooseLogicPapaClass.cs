@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AIChooseLogicPapaClass : MonoBehaviour
 {
-    private EnemySCRIPT enemy;
+    protected EnemySCRIPT enemy;
     private void Awake()
     {
         enemy = transform.GetComponent<EnemySCRIPT>();

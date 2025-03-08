@@ -1,7 +1,66 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 public class AICleverLogicSCRIPT : AIChooseLogicPapaClass
 {
-    
+    protected override IEnumerator AIChooseComboLogic()
+    {
+        if (enemy.curCombos.Count == 1)
+        {
+            yield return StartCoroutine(FindCubesForCombo(enemy.curCombos.ElementAt(0).Key));
+        }
+        else
+        {
+            float finalRatio = 100;
+            int comboIndex = 0;
+            for (int i = 0; i < enemy.curCombos.Count; i++)
+            {
+                var combo = enemy.curCombos.ElementAt(i);
+                float comboRatio = combo.Key.Length / combo.Value;
+                if (comboRatio < finalRatio)
+                {
+                    finalRatio = comboRatio;
+                    comboIndex = i;
+                }
+            }
+            yield return StartCoroutine(FindCubesForCombo(enemy.curCombos.ElementAt(comboIndex).Key));
+        }
+    }
+    protected override void OnEndLogic()
+    {
+        if (_cubesRemainOnEnd == 3 &&_cubesRemainOnEnd != 0)
+        {
+            float percentOfNoContinue = (int.Parse(enemy.temporaryScoreText.text) < 400) ? 0f : 0.15f;
+
+            float randomValue = Random.value;
+            if (randomValue > percentOfNoContinue) enemy.continuePlay = true;
+            else enemy.continuePlay = false;
+            Debug.Log($"Процент что AI продолжит {randomValue * 100}% > {percentOfNoContinue * 100}%? {enemy.continuePlay}");
+        }
+
+        if (_cubesRemainOnEnd == 2 &&_cubesRemainOnEnd != 0)
+        {
+            float percentOfNoContinue = (int.Parse(enemy.temporaryScoreText.text) < 500 && GameHandlerSCRIPT.Instance.goalScore / int.Parse(PlayerSCRIPT.Instance.scoreText.text) >= 3) ? 0.1f : 0.7f;
+
+            float randomValue = Random.value;
+            if (randomValue > percentOfNoContinue) enemy.continuePlay = true;
+            else enemy.continuePlay = false;
+            Debug.Log($"Процент что AI продолжит {randomValue * 100}% > {percentOfNoContinue * 100}%? {enemy.continuePlay}");
+        }
+
+        if (_cubesRemainOnEnd == 1 &&_cubesRemainOnEnd != 0)
+        {
+            float percentOfNoContinue = (int.Parse(enemy.temporaryScoreText.text) < 600 && GameHandlerSCRIPT.Instance.goalScore / int.Parse(PlayerSCRIPT.Instance.scoreText.text) >= 3) ? 0.7f : 1f;
+
+            float randomValue = Random.value;
+            if (randomValue > percentOfNoContinue) enemy.continuePlay = true;
+            else enemy.continuePlay = false;
+            Debug.Log($"Процент что AI продолжит {randomValue * 100}% > {percentOfNoContinue * 100}%? {enemy.continuePlay}");
+        }
+
+        if (_cubesRemainOnEnd == 0) enemy.continuePlay = true;
+
+        if (EnemySCRIPT.Instance.CheckCurScore() >= GameHandlerSCRIPT.Instance.goalScore) enemy.continuePlay = false;
+    }
 }
