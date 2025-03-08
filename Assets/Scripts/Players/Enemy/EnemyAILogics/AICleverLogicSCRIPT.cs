@@ -12,13 +12,13 @@ public class AICleverLogicSCRIPT : AIChooseLogicPapaClass
         }
         else
         {
-            float finalRatio = 100;
+            float finalRatio = 0;
             int comboIndex = 0;
             for (int i = 0; i < enemy.curCombos.Count; i++)
             {
                 var combo = enemy.curCombos.ElementAt(i);
                 float comboRatio = combo.Key.Length / combo.Value;
-                if (comboRatio < finalRatio)
+                if (comboRatio > finalRatio)
                 {
                     finalRatio = comboRatio;
                     comboIndex = i;
