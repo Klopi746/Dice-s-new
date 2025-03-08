@@ -17,7 +17,7 @@ public class AICleverLogicSCRIPT : AIChooseLogicPapaClass
             for (int i = 0; i < enemy.curCombos.Count; i++)
             {
                 var combo = enemy.curCombos.ElementAt(i);
-                float comboRatio = combo.Key.Length / combo.Value;
+                float comboRatio = combo.Value / combo.Key.Length;
                 if (comboRatio > finalRatio)
                 {
                     finalRatio = comboRatio;
