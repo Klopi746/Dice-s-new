@@ -80,7 +80,7 @@ public class AICleverLogicSCRIPT : AIChooseLogicPapaClass
             float goalScore = GameHandlerSCRIPT.Instance.goalScore;
             float seq = 1000;
             if (enemyScore > 0.1f) seq = goalScore / enemyScore;
-            if (seq <= 2f) enemy.continuePlay = false;
+            if (seq <= 2.4f) enemy.continuePlay = false;
             Debug.Log($"AI боится и заканчивает");
         }
 
