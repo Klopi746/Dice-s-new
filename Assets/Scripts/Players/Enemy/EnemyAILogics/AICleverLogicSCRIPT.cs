@@ -51,7 +51,7 @@ public class AICleverLogicSCRIPT : AIChooseLogicPapaClass
             float seq = 0;
             if (playerScore > 0.1f) seq = enemyScore - playerScore;
 
-            float percentOfNoContinue = (int.Parse(enemy.temporaryScoreText.text) < 500 && seq >= 1000) ? 0.1f : 0.85f;
+            float percentOfNoContinue = (int.Parse(enemy.temporaryScoreText.text) < 500 && seq >= 1000) ? 0.1f : 0.9f;
 
             float randomValue = Random.value;
             if (randomValue > percentOfNoContinue) enemy.continuePlay = true;
@@ -66,7 +66,7 @@ public class AICleverLogicSCRIPT : AIChooseLogicPapaClass
             float seq = 0;
             if (playerScore > 0.1f) seq = enemyScore - playerScore;
 
-            float percentOfNoContinue = (int.Parse(enemy.temporaryScoreText.text) < 600 && seq >= 1000) ? 0.7f : 1f;
+            float percentOfNoContinue = (int.Parse(enemy.temporaryScoreText.text) < 600 && seq >= 1000) ? 0.95f : 1f;
 
             float randomValue = Random.value;
             if (randomValue > percentOfNoContinue) enemy.continuePlay = true;
@@ -80,8 +80,7 @@ public class AICleverLogicSCRIPT : AIChooseLogicPapaClass
             float goalScore = GameHandlerSCRIPT.Instance.goalScore;
             float seq = 1000;
             if (enemyScore > 0.1f) seq = goalScore / enemyScore;
-            if (seq <= 2.4f) enemy.continuePlay = false;
-            Debug.Log($"AI боится и заканчивает");
+            if (seq <= 2.4f) {enemy.continuePlay = false; Debug.Log($"AI боится и заканчивает");}
         }
 
         if (_cubesRemainOnEnd == 0) enemy.continuePlay = true;
