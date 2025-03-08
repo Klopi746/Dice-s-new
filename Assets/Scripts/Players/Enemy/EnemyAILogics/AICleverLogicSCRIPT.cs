@@ -24,7 +24,8 @@ public class AICleverLogicSCRIPT : AIChooseLogicPapaClass
                     comboIndex = i;
                 }
             }
-            if (enemy.curCombos.Last().Key.Length == 6) comboIndex = enemy.curCombos.Count - 1;
+            if (enemy.curCombos.Last().Key.Length == 2 && _cubesRemainOnStart == 3) comboIndex = enemy.curCombos.Count - 1;
+            if (enemy.curCombos.Last().Key.Length == _cubesRemainOnStart) comboIndex = enemy.curCombos.Count - 1;
             yield return StartCoroutine(FindCubesForCombo(enemy.curCombos.ElementAt(comboIndex).Key));
         }
     }
