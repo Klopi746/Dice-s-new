@@ -13,6 +13,8 @@ public class EnemyPanelPlayButtSCRIPT : MonoBehaviour
 
     public void OnButtonClicked()
     {
+        if (!RealLivesManager.Instance.LivesShown) return;
+
         GeneralSoundManagerSCRIPT.Instance.PlayButtSound();
         AudioManager_SCRIPT.Instance.StopAllLoopingSounds();
 
