@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class GameHandlerSCRIPT : MonoBehaviour
 {
+    public int allInAllEnemies = 6;
     public static GameHandlerSCRIPT Instance;
     private void Awake()
     {
@@ -106,7 +107,7 @@ public class GameHandlerSCRIPT : MonoBehaviour
         {
             PlayerPrefs.SetInt("EnemiesOpen", curOpenEnemies + 1);
         }
-        if (curOpenEnemies + 1 == 7) PlayerPrefs.SetInt("RealWin", 1);
+        if (curOpenEnemies + 1 == allInAllEnemies + 1) PlayerPrefs.SetInt("RealWin", 1);
     }
     private void DecreaseRealLives()
     {

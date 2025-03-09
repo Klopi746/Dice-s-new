@@ -54,6 +54,8 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
 
     public void OnEndButtClick()
     {
+        PutCubesAsideOnTurnEnd();
+
         CameraControllerSCRIPT.Instance.SetFarCamView();
 
         scoreText.text = (int.Parse(scoreText.text) + int.Parse(temporaryScoreText.text)).ToString();

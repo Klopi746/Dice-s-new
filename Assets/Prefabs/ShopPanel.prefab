@@ -820,7 +820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -630.00006}
+  m_AnchoredPosition: {x: 0, y: -630}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &2578407781095173115
@@ -983,7 +983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3312d7739989d2b4e91e6319e9a96d76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Padding: {x: -200, y: 44, z: 0, w: 44}
+  m_Padding: {x: -200, y: 8, z: 0, w: 8}
   m_Softness: {x: 0, y: 64}
 --- !u!1 &4895288135275929631
 GameObject:
@@ -1052,17 +1052,24 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u041A\u0430\u043A \u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F
     \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u043E\u043C?\n\n\u0421\u043F\u0440\u0430\u0432\u0430
-    \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043F\u043E\u043A\u0443\u043F\u0430\u0442\u044C
-    \u043A\u0443\u0431\u044B.\n\n\u0421\u043B\u0435\u0432\u0430 \u0441\u0432\u0435\u0440\u0445\u0443-\u0432\u043D\u0438\u0437
-    \u0438\u0434\u0443\u0442 \u0432\u0430\u0448\u0438 \u043A\u0443\u0431\u044B.\n\n\u041D\u0430\u0436\u0430\u0432
+    \u0432\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043A\u0443\u043F\u0438\u0442\u044C
+    \u043A\u0443\u0431\u044B.\n\u041D\u0430\u0436\u043C\u0438\u0442\u0435 \u043D\u0430
+    \u043D\u0435\u0433\u043E, \u0430 \u0437\u0430\u0442\u0435\u043C \u043D\u0430
+    \u043A\u043E\u0440\u0437\u0438\u043D\u0443.\n\n\u0421\u043B\u0435\u0432\u0430
+    \u0441\u0432\u0435\u0440\u0445\u0443-\u0432\u043D\u0438\u0437 \u0438\u0434\u0443\u0442
+    \u0432\u0430\u0448\u0438 \u043A\u0443\u0431\u044B.\n\n\u041D\u0430\u0436\u0430\u0432
     \u043D\u0430 \u043E\u0434\u0438\u043D \u0438\u0437 \u043D\u0438\u0445 \u043E\u0442\u043A\u0440\u043E\u0435\u0442\u0441\u044F
-    \u043F\u0430\u043D\u0435\u043B\u044C \u0441 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u0435\u043C
-    \u0438 \u0442\u0435\u043A\u0443\u0449\u0438\u043C \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E\u043C
-    \u043A\u0443\u0431\u043E\u0432 \u043A\u0430\u0436\u0434\u043E\u0433\u043E \u0442\u0438\u043F\u0430\n\u0422\u0435\u043A\u0443\u0449\u0438\u0439
-    \u043A\u0443\u0431 <color=yellow>\u0436\u0435\u043B\u0442\u044B\u0439</color>\n\n\u041D\u0435\u043B\u044C\u0437\u044F
+    \u043F\u0430\u043D\u0435\u043B\u044C \u0441 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u0435\u043C.
+    \u0427\u0438\u0441\u043B\u043E \u043F\u043E\u0434 \u043A\u0443\u0431\u043E\u043C
+    - \u044D\u0442\u043E \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E
+    \u043A\u0443\u043F\u043B\u0435\u043D\u043D\u044B\u0445 \u043A\u0443\u0431\u043E\u0432
+    \u044D\u0442\u043E\u0433\u043E \u0442\u0438\u043F\u0430.\n\u0422\u0435\u043A\u0443\u0449\u0438\u0439
+    \u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u043D\u044B\u0439 \u043A\u0443\u0431
+    <color=yellow>\u0436\u0435\u043B\u0442\u044B\u0439</color>\n\n\u041D\u0435\u043B\u044C\u0437\u044F
     \u043D\u0430\u0437\u043D\u0430\u0447\u0438\u0442\u044C \u0431\u043E\u043B\u044C\u0448\u0435
-    \u043A\u0443\u0431\u043E\u0432, \u0447\u0435\u043C \u0432 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u0435\n\u041F\u0440\u0438
-    \u043D\u0430\u0436\u0430\u0442\u0438\u0438 \u0443\u0432\u0438\u0434\u0438\u0448\u044C
+    \u043A\u0443\u0431\u043E\u0432, \u0447\u0435\u043C \u0432 \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u0435\n\u0415\u0441\u043B\u0438
+    \u043F\u043E\u043F\u044B\u0442\u0430\u0435\u0448\u044C\u0441\u044F, \u0442\u043E
+    \u043F\u0440\u0438 \u043D\u0430\u0436\u0430\u0442\u0438\u0438 \u0443\u0432\u0438\u0434\u0438\u0448\u044C
     <color=red>\u043A\u0440\u0430\u0441\u043D\u044B\u0439</color> \u0446\u0432\u0435\u0442\n\n\u0423
     \u043A\u0430\u0436\u0434\u043E\u0433\u043E \u043A\u0443\u0431\u0430 \u0441\u0432\u043E\u044F
     \u043A\u0430\u0440\u0442\u0438\u043D\u043A\u0430"
@@ -1092,8 +1099,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1420,6 +1427,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chooseEnemyPanel: {fileID: 4895288135275929631}
+  OnButtClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5509983534846395028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,6 +1565,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chooseEnemyPanel: {fileID: 7605339731875233455}
+  OnButtClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5744524013874794203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,8 +1854,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f687a5ce1603094292967fa51c1f137, type: 2}
+  m_sharedMaterial: {fileID: -5170374484103230987, guid: 4f687a5ce1603094292967fa51c1f137, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2249,8 +2262,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4f687a5ce1603094292967fa51c1f137, type: 2}
+  m_sharedMaterial: {fileID: -5170374484103230987, guid: 4f687a5ce1603094292967fa51c1f137, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

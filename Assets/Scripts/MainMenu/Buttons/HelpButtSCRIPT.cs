@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class PlayButtonSCRIPT : MonoBehaviour
+public class HelpButtSCRIPT : MonoBehaviour
 {
-    [SerializeField] GameObject chooseEnemyPanel;
+    [SerializeField] TextMeshProUGUI helpPanel;
 
 
     private Button button;
@@ -14,13 +15,11 @@ public class PlayButtonSCRIPT : MonoBehaviour
         button.onClick.AddListener(OnButtonClicked);
     }
 
-    public UnityEvent OnButtClick;
     public void OnButtonClicked()
     {
         if (!RealLivesManager.Instance.LivesShown) return;
         GeneralSoundManagerSCRIPT.Instance.PlayButtSound();
-        bool activate = !chooseEnemyPanel.activeSelf;
-        chooseEnemyPanel.SetActive(activate);
-        OnButtClick.Invoke();
+        bool activate = !helpPanel.enabled;
+        helpPanel.enabled = activate;
     }
 }

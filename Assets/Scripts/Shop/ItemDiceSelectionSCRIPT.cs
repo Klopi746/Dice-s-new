@@ -30,9 +30,12 @@ public class ItemDiceSelectionSCRIPT : MonoBehaviour, IPointerClickHandler
         if (amount >= buyedAmount) return false;
         else return true;
     }
+
+    private Coroutine routine;
     private void ShowError()
     {
-        StartCoroutine(ShowErrorRutine());
+        if (routine != null) return;
+        routine = StartCoroutine(ShowErrorRutine());
     }
     private IEnumerator ShowErrorRutine()
     {
@@ -41,5 +44,6 @@ public class ItemDiceSelectionSCRIPT : MonoBehaviour, IPointerClickHandler
         yield return tween.WaitForCompletion();
         tween = ImageComponent.DOColor(startColor, 0.4f);
         yield return tween.WaitForCompletion();
+        routine = null;
     }
 }

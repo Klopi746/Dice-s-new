@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using TMPro;
+using System.Linq;
 
 
 /// <summary>
@@ -58,18 +59,21 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     public bool isFindCombo = false;
     protected IEnumerator GetAndDropCubes()
     {
+        canClickCubes = false;
+
         if (noComboTextObj.gameObject.activeSelf) noComboTextObj.gameObject.SetActive(false);
         TurnOffCubesOutline();
-        ResetAllCubes(); // hide cubes
+        StartCoroutine(ResetAllCubes()); // hide cubes
 
         // bottle animation realization
-        cubeMixerTransform.gameObject.SetActive(true);
-        yield return StartCoroutine(BottleMixerAnimation());
+        //cubeMixerTransform.gameObject.SetActive(true);
+        StartCoroutine(BottleMixerAnimation());
+        yield return new WaitForSeconds(4f); // need to be > the length of BottleMixerAnim
 
-        RollAllCubes(); // show cubes
+        //StartCoroutine(RollAllCubes()); // show cubes (now in BottleMixerAnim)
         yield return new WaitForSeconds(0.1f);
         isFindCombo = FindCombos();
-        cubeMixerTransform.gameObject.SetActive(false);
+        //cubeMixerTransform.gameObject.SetActive(false);
 
 
         if (GameHandlerSCRIPT.Instance.IsPlayerTurn && isFindCombo)
@@ -93,28 +97,40 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
     }
     protected IEnumerator BottleMixerAnimation()
     {
-        Tween tween = cubeMixerTransform.DOLocalMove(new Vector3(0f, 0f, -15f), 0.5f);
+        Tween tween = (GameHandlerSCRIPT.Instance.IsPlayerTurn) ? cubeMixerTransform.DOLocalRotate(new Vector3(0, 0, 90), 0.2f) : cubeMixerTransform.DOLocalRotate(-new Vector3(0, 0, 90), 0.2f);
+        tween = (GameHandlerSCRIPT.Instance.IsPlayerTurn) ? cubeMixerTransform.DOLocalMove(new Vector3(-22f, -1.5f, 0f), 0.5f) : cubeMixerTransform.DOLocalMove(-new Vector3(-22f, 1.5f, 0f), 0.5f);
+        yield return tween.WaitForCompletion();
+        tween = cubeMixerTransform.DOLocalRotate(new Vector3(0, 0, 0), 0.2f);
         yield return tween.WaitForCompletion();
         tween = cubeMixerTransform.DOShakePosition(2f, strength: new Vector3(0, 0, 2f), vibrato: 5, randomness: 10, fadeOut: false, randomnessMode: ShakeRandomnessMode.Harmonic);
         yield return tween.WaitForCompletion();
-        tween = cubeMixerTransform.DOLocalMove(new Vector3(0f, 0f, -15f), 0.1f);
+        tween = (GameHandlerSCRIPT.Instance.IsPlayerTurn) ? cubeMixerTransform.DOLocalMove(new Vector3(-22f, -1.5f, 0f), 0.1f) : cubeMixerTransform.DOLocalMove(-new Vector3(-22f, 1.5f, 0f), 0.1f);
         yield return tween.WaitForCompletion();
-        tween = cubeMixerTransform.DOLocalMove(new Vector3(0, 0, 0), 0.5f);
+        tween = (GameHandlerSCRIPT.Instance.IsPlayerTurn) ? cubeMixerTransform.DOLocalRotate(new Vector3(0, 0, 90), 0.2f) : cubeMixerTransform.DOLocalRotate(-new Vector3(0, 0, 90), 0.2f);
+        yield return tween.WaitForCompletion();
+        StartCoroutine(RollAllCubes());
+        tween = cubeMixerTransform.DOLocalMove(new Vector3(0f, -1.5f, 0f), 0.4f);
+        yield return tween.WaitForCompletion();
+        tween = cubeMixerTransform.DOLocalRotate(new Vector3(0, 0, 0), 0.5f);
+        tween = cubeMixerTransform.DOLocalMove(new Vector3(0f, -3f, 0f), 0.5f);
         yield return tween.WaitForCompletion();
         yield return null;
     }
-    protected void ResetAllCubes()
+    protected IEnumerator ResetAllCubes()
     {
-        foreach (DicePapaSCRIPT script in cubesScripts)
+        var cubeScriptsReversed = cubesScripts.Reverse();
+        foreach (DicePapaSCRIPT script in cubeScriptsReversed)
         {
             if (script.enabled) script.ResetDice();
+            yield return new WaitForSeconds(0.06f);
         }
     }
-    protected void RollAllCubes()
+    protected IEnumerator RollAllCubes()
     {
         foreach (DicePapaSCRIPT script in cubesScripts)
         {
             if (script.enabled) script.Roll();
+            yield return new WaitForSeconds(0.06f);
         }
     }
     protected void TurnOffCubesOutline()
@@ -124,6 +140,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
             script.TurnOffDiceOutline();
         }
     }
+    public bool canClickCubes = false;
     protected bool FindCombos()
     {
         Dictionary<int, int> diceValues = new Dictionary<int, int>();
@@ -137,8 +154,8 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
             Debug.Log($"combo: {combo.Key}; value: {combo.Value}");
         }
 
-        if (curCombos.Count == 0) return false;
-        else return true;
+        if (curCombos.Count == 0) { canClickCubes = false; return false; }
+        else { canClickCubes = true; return true; }
     }
 
 
@@ -165,6 +182,16 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
             if (script.enabled) thereIsNoMoreCubes = false;
         }
         if (thereIsNoMoreCubes) EnableAllCubes();
+    }
+
+
+    protected void PutCubesAsideOnTurnEnd()
+    {
+        foreach (DicePapaSCRIPT script in cubesScripts)
+        {
+            if (!script.gameObject.activeSelf) return;
+            script.PutCubeAsideOnTurnEnd();
+        }
     }
 
 

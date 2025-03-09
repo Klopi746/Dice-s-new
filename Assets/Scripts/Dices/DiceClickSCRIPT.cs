@@ -1,3 +1,5 @@
+using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,6 +13,8 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
 
         outlineScript = GetComponent<OutlineSCRIPT>();
         if (outlineScript == null) Debug.LogWarning($"{this.name} can't find outline script!");
+
+        startPos = transform.position;
     }
 
 
@@ -19,6 +23,8 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (enemyDice) return;
+
+        if (!PlayerSCRIPT.Instance.canClickCubes) return;
 
         wasClicked = !wasClicked;
 
@@ -54,8 +60,26 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
         if (wasClicked)
         {
             cubeGameScript.enabled = false;
-            gameObject.SetActive(false);
+            this.enabled = false;
+            StartCoroutine(PutCubeAside());
         }
         wasClicked = false;
+    }
+    private Vector3 startPos;
+    private IEnumerator PutCubeAside()
+    {
+        Tween tween = (GameHandlerSCRIPT.Instance.IsPlayerTurn) ? transform.DOLocalJump(new Vector3(transform.position.x, 0, -10), 10f, 1, 0.5f) : transform.DOLocalJump(new Vector3(transform.position.x, 0, 10), 10f, 1, 0.5f);
+        yield return tween.WaitForCompletion();
+        gameObject.SetActive(false);
+    }
+    public IEnumerator PutCubeAsideOnTurnEnd()
+    {
+        if (!wasClicked) yield break;
+        Tween tween = (GameHandlerSCRIPT.Instance.IsPlayerTurn) ? transform.DOLocalJump(new Vector3(transform.position.x, -2, -10), 10f, 1, 0.5f) : transform.DOLocalJump(new Vector3(transform.position.x, 0, 10), 10f, 1, 0.5f);
+        yield return tween.WaitForCompletion();
+    }
+    private void OnEnable()
+    {
+        transform.position = startPos;
     }
 }

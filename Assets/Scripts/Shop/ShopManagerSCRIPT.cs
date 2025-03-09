@@ -89,11 +89,21 @@ public class ShopManagerSCRIPT : MonoBehaviour
 
     #region DiceSelection
     [SerializeField] GameObject diceSelectionGO;
+    private float yPosOfInventorySlot = -10000;
 
 
     public void OpenInventoryMenu(GameObject inventorySlot)
     {
-        diceSelectionGO.transform.DOMove(new Vector3(diceSelectionGO.transform.position.x, inventorySlot.transform.position.y, diceSelectionGO.transform.position.z), 0.2f);
+        if (inventorySlot.transform.position.y == yPosOfInventorySlot)
+        {
+            DeselectEverything();
+            yPosOfInventorySlot = -10000;
+        }
+        else
+        {
+            diceSelectionGO.transform.DOMove(new Vector3(diceSelectionGO.transform.position.x, inventorySlot.transform.position.y, diceSelectionGO.transform.position.z), 0.2f);
+            yPosOfInventorySlot = inventorySlot.transform.position.y;
+        }
     }
     #endregion
 

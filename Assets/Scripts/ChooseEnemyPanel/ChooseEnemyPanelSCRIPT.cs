@@ -13,16 +13,16 @@ public class ChooseEnemyPanelSCRIPT : MonoBehaviour
         Instance = this;
 
         int enemiesOpen = PlayerPrefs.GetInt("EnemiesOpen", 1);
-        for (int i = 1; i <= EnemiesImageComponents.Length; i++)
+        for (int i = 0; i < EnemiesImageComponents.Length; i++)
         {
             if (enemiesOpen < 1) break;
-            EnemiesItemScripts[EnemiesImageComponents.Length - i].canFightToggle.isOn = true;
+            EnemiesItemScripts[i].canFightToggle.isOn = true;
             enemiesOpen -= 1;
         }
         // Load Data to enemyItem
-        for (int i = 1; i <= EnemiesImageComponents.Length; i++)
+        for (int i = 0; i < EnemiesImageComponents.Length; i++)
         {
-            EnemiesItemScripts[EnemiesImageComponents.Length - i].LoadEnemyData(i);
+            EnemiesItemScripts[i].LoadEnemyData(i+1);
         }
 
         dropDownComp.onValueChanged.AddListener(CheckThatBetLessThanLivesThenSaveIt);
@@ -39,11 +39,11 @@ public class ChooseEnemyPanelSCRIPT : MonoBehaviour
     }
     public void FindEnemyAndSaveIt()
     {
-        for (int i = 1; i <= EnemiesImageComponents.Length; i++)
+        for (int i = 0; i < EnemiesImageComponents.Length; i++)
         {
-            if (EnemiesImageComponents[EnemiesImageComponents.Length - i].color == Color.red)
+            if (EnemiesImageComponents[i].color == Color.red)
             {
-                PlayerPrefs.SetInt("EnemyId", i);
+                PlayerPrefs.SetInt("EnemyId", i+1);
                 break;
             }
         }

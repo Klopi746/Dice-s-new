@@ -73,6 +73,12 @@ public class DicePapaSCRIPT : MonoBehaviour
     }
 
 
+    public void PutCubeAsideOnTurnEnd()
+    {
+        StartCoroutine(diceClickSCRIPT.PutCubeAsideOnTurnEnd());
+    }
+
+
     public void EnableCube()
     {
         this.enabled = true;

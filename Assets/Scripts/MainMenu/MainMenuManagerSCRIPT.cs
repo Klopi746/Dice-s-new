@@ -21,7 +21,7 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
     {
         Instance = this;
         PlayerPrefs.SetInt("ChoosedBet", 10);
-        Lives = PlayerPrefs.GetInt("Lives", 290);
+        Lives = PlayerPrefs.GetInt("Lives", 190);
         LivesTextPro.text = $"Money: {Lives}";
 
         RealLives = PlayerPrefs.GetInt("RealLives", 10);

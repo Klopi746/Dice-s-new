@@ -98,6 +98,8 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
     public void OnTurnEnd()
     {
+        PutCubesAsideOnTurnEnd();
+
         Debug.Log("AI end turn;");
         CameraControllerSCRIPT.Instance.SetFarCamView();
 
