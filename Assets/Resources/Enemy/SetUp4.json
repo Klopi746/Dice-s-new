@@ -9,5 +9,6 @@
         "5": 4
     },
     "description": "He is painfully good player.",
-    "aiType": "Normal"
+    "aiType": "Normal",
+    "spritePath": "Enemy/EnemySprite4"
 }

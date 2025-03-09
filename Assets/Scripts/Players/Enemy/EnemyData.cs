@@ -16,6 +16,7 @@ namespace Enemy.AI
         public Dictionary<string, int> ownedCubes = new Dictionary<string, int>();
         public string description;
         public string aiType;
+        public string spritePath;
     }
 
 

@@ -9,5 +9,6 @@
         "5": 3
     },
     "description": "Hard times give birth to strong people",
-    "aiType": "Clever"
+    "aiType": "Clever",
+    "spritePath": "Enemy/EnemySprite3"
 }

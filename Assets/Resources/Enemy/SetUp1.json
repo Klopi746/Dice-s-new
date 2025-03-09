@@ -9,5 +9,6 @@
         "5": 0
     },
     "description": "Beaver is too cool, maximum lollipop",
-    "aiType": "Normal"
+    "aiType": "Normal",
+    "spritePath": "Enemy/EnemySprite1"
 }

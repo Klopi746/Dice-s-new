@@ -21,6 +21,8 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
         enemyId = PlayerPrefs.GetInt("EnemyId", 1);
 
         LoadEnemyData();
+
+        AssignEnemyData();
     }
     private void LoadEnemyData()
     {
@@ -42,13 +44,15 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
 
     int startTemporaryScore = 0;
     [SerializeField] TextMeshPro enemyNameTextPro;
+    [SerializeField] SpriteRenderer enemyRendererComp;
     AIChooseLogicPapaClass AiLogicScript;
-    void Start()
+    private void AssignEnemyData()
     {
         // assing enemyData to this GameObj - O, maybe use enemyData... I need to think about that - MOMMY
         playerName = enemyData.enemyName;
         enemyNameTextPro.text = playerName;
         ownedCubes = enemyData.ownedCubes;
+        enemyRendererComp.sprite = Resources.Load<Sprite>(enemyData.spritePath);
         for (int i = 0; i < ownedCubes.Count; i++)
         {
             DicePrefabData data = Resources.Load<DicePrefabData>($"Dice/DicePrefab{ownedCubes[i.ToString()]}");
@@ -63,7 +67,9 @@ public class EnemySCRIPT : PlayerPapaSCRIPT
             AiLogicScript = gameObject.GetComponent<AIChooseLogicPapaClass>();
         }
         else Debug.LogWarning("AI не загрузился!");
-
+    }
+    void Start()
+    {
         // Subscribe to OnTurnChanged event
         GameHandlerSCRIPT.Instance.OnTurnChanged.AddListener(HandleTurnChange);
     }

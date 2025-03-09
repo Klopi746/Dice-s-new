@@ -9,5 +9,6 @@
         "5": 3
     },
     "description": "Not Kut, but GOOD like a God.",
-    "aiType": "Clever"
+    "aiType": "Clever",
+    "spritePath": "Enemy/EnemySprite6"
 }

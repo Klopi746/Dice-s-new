@@ -9,5 +9,6 @@
         "5": 4
     },
     "description": "Not Yellow at all, but really Kaiser!.",
-    "aiType": "Normal"
+    "aiType": "Normal",
+    "spritePath": "Enemy/EnemySprite5"
 }

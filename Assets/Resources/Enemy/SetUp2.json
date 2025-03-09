@@ -9,5 +9,6 @@
         "5": 3
     },
     "description": "No, no, he is not lucky at all. Don't fear. He won only 5 of 10 tournaments.",
-    "aiType": "Normal"
+    "aiType": "Normal",
+    "spritePath": "Enemy/EnemySprite2"
 }
