@@ -41,10 +41,15 @@ public class RealLivesManager : MonoBehaviour, IPointerClickHandler
 
 
     // REACTION TO PLAYER
+    int clicks = 0;
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (clicks >= RealLives) return;
         transform.DOComplete();
-        transform.DOPunchPosition(new Vector3(0, -1000, 0), 1f, 1);
-        transform.DOPunchScale(new Vector3(2, 2, 1), 1f, 1);
+        transform.DOShakeScale(1f, randomnessMode: ShakeRandomnessMode.Harmonic);
+        int curLives = MainMenuManagerSCRIPT.Instance.Lives;
+        MainMenuManagerSCRIPT.Instance.UpdateLivesTo(curLives + 1);
+        GeneralSoundManagerSCRIPT.Instance.PlayBuySound();
+        clicks += 1;
     }
 }
