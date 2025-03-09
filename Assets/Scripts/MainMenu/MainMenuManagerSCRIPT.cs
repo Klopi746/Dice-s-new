@@ -12,6 +12,8 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI LivesTextPro;
 
+    public int firstStart = 1;
+
 
     public int Lives = 290;
     public int RealLives = 10;
@@ -23,17 +25,41 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
         LivesTextPro.text = $"Money: {Lives}";
 
         RealLives = PlayerPrefs.GetInt("RealLives", 10);
+
+        firstStart = PlayerPrefs.GetInt("FirstStart", 1);
+        if (firstStart == 1) PlayerPrefs.SetInt("FirstStart", 0);
     }
     public void UpdateLivesTo(int newValue)
     {
         Lives = newValue;
         LivesTextPro.text = $"Money: {Lives}";
+        ShowErrorOnLives();
     }
 
 
+    private Coroutine currentCoroutine;
+    private Color originalLivesColor = Color.black;
     public void ShowErrorOnLives()
     {
-        LivesTextPro.transform.DOPunchScale(new Vector3(1, 1, 0), 1f, 4);
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+            LivesTextPro.transform.DOComplete();
+            LivesTextPro.color = originalLivesColor;
+        }
+        currentCoroutine = StartCoroutine(ShowErrorOnLivesCoroutine());
+    }
+
+    private IEnumerator ShowErrorOnLivesCoroutine()
+    {
+        LivesTextPro.transform.DOComplete();
+        LivesTextPro.color = Color.yellow;
+
+        Tween tween = LivesTextPro.transform.DOPunchScale(new Vector3(1, 1, 0), 1f, 4);
+        yield return tween.WaitForCompletion();
+
+        LivesTextPro.color = originalLivesColor;
+        currentCoroutine = null;
     }
 
 
@@ -61,7 +87,7 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
         GeneralSoundManagerSCRIPT.Instance.PlayMusicWithDelay(1f);
         LivesTextPro.text = "ПОРАЖЕНИЕ";
         LivesTextPro.color = Color.red;
-        Tween tween = LivesTextPro.transform.DOJump(Vector2.zero,100,10,5f);
+        Tween tween = LivesTextPro.transform.DOJump(Vector2.zero, 100, 10, 5f);
         yield return tween.WaitForCompletion();
         LoadSceneManagerSCRIPT.Instance.LoadNewScene();
     }

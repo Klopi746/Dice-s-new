@@ -45,5 +45,6 @@ public class RealLivesManager : MonoBehaviour, IPointerClickHandler
     {
         transform.DOComplete();
         transform.DOPunchPosition(new Vector3(0, -1000, 0), 1f, 1);
+        transform.DOPunchScale(new Vector3(2, 2, 1), 1f, 1);
     }
 }
