@@ -1,9 +1,10 @@
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class RealLivesManager : MonoBehaviour
+public class RealLivesManager : MonoBehaviour, IPointerClickHandler
 {
     public static RealLivesManager Instance;
 
@@ -36,5 +37,13 @@ public class RealLivesManager : MonoBehaviour
         }
         LivesShown = true;
         MainMenuManagerSCRIPT.Instance.CheckWinLoose();
+    }
+
+
+    // REACTION TO PLAYER
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        transform.DOComplete();
+        transform.DOPunchPosition(new Vector3(0, -1000, 0), 1f, 1);
     }
 }

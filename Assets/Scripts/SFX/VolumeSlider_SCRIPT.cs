@@ -9,10 +9,11 @@ public class VolumeSlider_SCRIPT : MonoBehaviour
     [SerializeField] string playerPrefsKey;
     [SerializeField] string mixerExposedParamName;
 
+    public int startVolume = 40;
+
     void Start()
     {
-        float volume = PlayerPrefs.GetFloat(playerPrefsKey, 40);
-        SetVolume(volume);
+        SetVolume(startVolume);
     }
 
     public void SetVolume(float volume)

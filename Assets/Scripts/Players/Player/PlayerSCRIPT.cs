@@ -87,6 +87,8 @@ public class PlayerSCRIPT : PlayerPapaSCRIPT
             int temporaryScore = curCombos[playerSequence];
             temporaryScoreText.text = (startTemporaryScore + temporaryScore).ToString();
             ContinueButtSCRIPT.Instance.ChangeButtInteractable(true);
+            ContinueButtSCRIPT.Instance.transform.DOComplete();
+            ContinueButtSCRIPT.Instance.transform.DOPunchPosition(new Vector3(-200, 0, 0), 0.8f, 1);
         }
         else
         {
