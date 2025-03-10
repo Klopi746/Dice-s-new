@@ -75,7 +75,7 @@ public class DiceClickSCRIPT : MonoBehaviour, IPointerClickHandler
     public IEnumerator PutCubeAsideOnTurnEnd()
     {
         if (!wasClicked) yield break;
-        Tween tween = (GameHandlerSCRIPT.Instance.IsPlayerTurn) ? transform.DOLocalJump(new Vector3(transform.position.x, -2, -10), 10f, 1, 0.5f) : transform.DOLocalJump(new Vector3(transform.position.x, 0, 10), 10f, 1, 0.5f);
+        Tween tween = (GameHandlerSCRIPT.Instance.IsPlayerTurn) ? transform.DOLocalJump(new Vector3(transform.position.x, -2, -10), 10f, 1, 0.5f) : transform.DOLocalJump(new Vector3(transform.position.x, -2, 10), 10f, 1, 0.5f);
         yield return tween.WaitForCompletion();
     }
     private void OnEnable()
