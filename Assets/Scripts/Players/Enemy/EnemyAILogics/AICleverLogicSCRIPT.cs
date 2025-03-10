@@ -29,7 +29,7 @@ public class AICleverLogicSCRIPT : AIChooseLogicPapaClass
             if (enemy.curCombos.Last().Key.Length == 3 && _cubesRemainOnStart == 4 && enemy.curCombos.Last().Value >= 300) comboIndex = enemy.curCombos.Count - 1;
             if (enemy.curCombos.Last().Key.Length == 2 && _cubesRemainOnStart == 3) comboIndex = enemy.curCombos.Count - 1;
             if (enemy.curCombos.Last().Key.Length == _cubesRemainOnStart) comboIndex = enemy.curCombos.Count - 1;
-            if (enemy.curCombos.Last().Value + int.Parse(enemy.temporaryScoreText.text) >= GameHandlerSCRIPT.Instance.goalScore) comboIndex = enemy.curCombos.Count - 1;
+            if (enemy.curCombos.Last().Value + int.Parse(enemy.temporaryScoreText.text) + int.Parse(enemy.scoreText.text) >= GameHandlerSCRIPT.Instance.goalScore) comboIndex = enemy.curCombos.Count - 1;
             yield return StartCoroutine(FindCubesForCombo(enemy.curCombos.ElementAt(comboIndex).Key));
         }
     }
