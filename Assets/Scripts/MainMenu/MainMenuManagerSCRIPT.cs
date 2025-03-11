@@ -64,7 +64,6 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
 
 
     public int RealWin = 0;
-    [SerializeField] private Button InstantMoneyButt;
     public void CheckWinLoose()
     {
         StartCoroutine(CheckWinLooseRoutine());
@@ -76,10 +75,13 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
         if (RealWin == 1) DoOnRealWin();
         else if (RealWin == -1) StartCoroutine(LooseGame());
     }
+    
+    [SerializeField] private Button InstantMoneyButt;
     private void DoOnRealWin()
     {
         InstantMoneyButt.gameObject.SetActive(true);
     }
+
     private IEnumerator LooseGame()
     {
         RealLivesManager.Instance.LivesShown = false;
