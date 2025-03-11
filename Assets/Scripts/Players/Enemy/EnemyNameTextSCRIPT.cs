@@ -1,14 +1,15 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class EnemyNameTextSCRIPT : MonoBehaviour
+public class EnemyNameTextSCRIPT : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] TextMeshPro textMeshProComponent;
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData eventData)
     {
         textMeshProComponent.enabled = true;
     }
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
         textMeshProComponent.enabled = false;
     }

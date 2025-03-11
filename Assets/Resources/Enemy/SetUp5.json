@@ -1,14 +1,14 @@
 {
-    "enemyName": "YellowKaiser",
+    "enemyName": "Emily Star",
     "ownedCubes": {
-        "0": 3,
-        "1": 3,
-        "2": 3,
+        "0": 4,
+        "1": 4,
+        "2": 4,
         "3": 4,
         "4": 4,
         "5": 4
     },
-    "description": "Not Yellow at all, but really Kaiser!.",
-    "aiType": "Normal",
-    "spritePath": "Enemy/EnemySprite5"
+    "description": "I kick gum and chew ass. And I'm all out of gum",
+    "aiType": "Clever",
+    "spritePath": "Enemy/EnemyEmilySprite"
 }

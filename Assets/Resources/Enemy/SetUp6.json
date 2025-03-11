@@ -1,14 +1,14 @@
 {
-    "enemyName": "Gardean Name",
+    "enemyName": "YellowKaiser",
     "ownedCubes": {
-        "0": 1,
-        "1": 1,
-        "2": 4,
+        "0": 3,
+        "1": 3,
+        "2": 3,
         "3": 4,
-        "4": 0,
-        "5": 0
+        "4": 4,
+        "5": 4
     },
-    "description": "The strongest player: https://www.twitch.tv/gardean_name",
-    "aiType": "Clever",
-    "spritePath": "Enemy/EnemySprite6"
+    "description": "Not Yellow at all, but really Kaiser!.",
+    "aiType": "Normal",
+    "spritePath": "Enemy/EnemySprite5"
 }

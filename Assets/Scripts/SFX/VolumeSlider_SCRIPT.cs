@@ -13,7 +13,7 @@ public class VolumeSlider_SCRIPT : MonoBehaviour
 
     void Start()
     {
-        startVolume = PlayerPrefs.GetFloat(playerPrefsKey, 40f);
+        startVolume = PlayerPrefs.GetFloat(playerPrefsKey, 0f) == 0f ? startVolume : PlayerPrefs.GetFloat(playerPrefsKey);
         SetVolume(startVolume);
     }
 
