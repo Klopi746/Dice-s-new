@@ -17,7 +17,7 @@ public class CameraControllerSCRIPT : MonoBehaviour
 
     [Header("Misc")]
     public bool actionOverride = false;
-    private bool isAtPos2 = false;
+    // private bool isAtPos2 = false;
 
     public static CameraControllerSCRIPT Instance { get; private set; }
     private void Awake()
@@ -29,21 +29,22 @@ public class CameraControllerSCRIPT : MonoBehaviour
         SetCamera(position1, rotation1);
     }
 
-    void Update()
-    {
-        if (actionOverride) return;
-        if (Input.GetKeyDown(KeyCode.W) && !isAtPos2)
-        {
-            SetCamera(position2, rotation2);
-            WaitforMovementEnd();
-            isAtPos2 = true;
-        }
-        else if (Input.GetKeyDown(KeyCode.S) && isAtPos2)
-        {
-            SetCamera(position1, rotation1);
-            isAtPos2 = false;
-        }
-    }
+    // NEED TO BE REWRITED to new input system
+    // void Update()
+    // {
+    //     if (actionOverride) return;
+    //     if (Input.GetKeyDown(KeyCode.W) && !isAtPos2)
+    //     {
+    //         SetCamera(position2, rotation2);
+    //         WaitforMovementEnd();
+    //         isAtPos2 = true;
+    //     }
+    //     else if (Input.GetKeyDown(KeyCode.S) && isAtPos2)
+    //     {
+    //         SetCamera(position1, rotation1);
+    //         isAtPos2 = false;
+    //     }
+    // }
 
     void SetCamera(Vector3 position, Vector3 rotation)
     {
@@ -60,13 +61,13 @@ public class CameraControllerSCRIPT : MonoBehaviour
     public void SetCloseCamView()
     {
         SetCamera(position2, rotation2);
-        isAtPos2 = true;
+        // isAtPos2 = true;
     }
 
     public void SetFarCamView()
     {
         SetCamera(position1, rotation1);
-        isAtPos2 = false;
+        // isAtPos2 = false;
     }
 
     public void SetEnemyCamView()

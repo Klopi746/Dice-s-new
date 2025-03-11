@@ -137,14 +137,4 @@ public class GameHandlerSCRIPT : MonoBehaviour
             Instance.OnTurnChanged.RemoveAllListeners();
         }
     }
-
-#if UNITY_EDITOR
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            goalScore = 0;
-        }
-    }
-#endif
 }
