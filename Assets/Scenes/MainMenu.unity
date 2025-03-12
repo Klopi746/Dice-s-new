@@ -1921,7 +1921,7 @@ MonoBehaviour:
   ShopWindClickSound: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
   ShopClickSound: {fileID: 8300000, guid: 0994c12e202f342459a4212e7287f7e8, type: 3}
   BuySound: {fileID: 8300000, guid: 79180f511d89441b9aa23ccae1992fe0, type: 3}
-  LooseSound: {fileID: 8300000, guid: 63d9cf74a87ffd74599615f67fba392e, type: 3}
+  LooseSound: {fileID: 8300000, guid: b868efaa0c8e0014b949c6e1d6d32dad, type: 3}
 --- !u!4 &326266107
 Transform:
   m_ObjectHideFlags: 0

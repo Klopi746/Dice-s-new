@@ -13,9 +13,10 @@ public class LoosePanelSCRIPT : MonoBehaviour
     private IEnumerator AnimateEnableCoroutine()
     {
         Tween tween = image.transform.DOScale(new Vector3(5, 5, 5), 3f);
-        yield return tween.WaitForCompletion();
-        GeneralSoundManagerSCRIPT.Instance.PlayLooseSound();
         yield return new WaitForSeconds(2f);
+        GeneralSoundManagerSCRIPT.Instance.PlayLooseSound();
+        yield return tween.WaitForCompletion();
+        yield return new WaitForSeconds(1f);
         LoadSceneManagerSCRIPT.Instance.LoadNewScene();
     }
 }
