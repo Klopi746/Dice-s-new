@@ -70,4 +70,9 @@ public class GeneralSoundManagerSCRIPT : MonoBehaviour
     {
         AudioManager_SCRIPT.Instance.PlaySound(BuySound);
     }
+    public AudioClip LooseSound;
+    public void PlayLooseSound()
+    {
+        AudioManager_SCRIPT.Instance.PlaySound(LooseSound);
+    }
 }

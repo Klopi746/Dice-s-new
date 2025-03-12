@@ -75,22 +75,19 @@ public class MainMenuManagerSCRIPT : MonoBehaviour
         if (RealWin == 1) DoOnRealWin();
         else if (RealWin == -1) StartCoroutine(LooseGame());
     }
-    
+
     [SerializeField] private Button InstantMoneyButt;
     private void DoOnRealWin()
     {
         InstantMoneyButt.gameObject.SetActive(true);
     }
 
+    [SerializeField] GameObject LoosePanelObj;
     private IEnumerator LooseGame()
     {
         RealLivesManager.Instance.LivesShown = false;
         PlayerPrefs.DeleteAll();
-        GeneralSoundManagerSCRIPT.Instance.PlayMusicWithDelay(1f);
-        LivesTextPro.text = "ПОРАЖЕНИЕ";
-        LivesTextPro.color = Color.red;
-        Tween tween = LivesTextPro.transform.DOJump(Vector2.zero, 100, 10, 5f);
-        yield return tween.WaitForCompletion();
-        LoadSceneManagerSCRIPT.Instance.LoadNewScene();
+        yield return null;
+        LoosePanelObj.SetActive(true);
     }
 }
