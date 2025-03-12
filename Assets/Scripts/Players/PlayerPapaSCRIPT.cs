@@ -90,6 +90,7 @@ public abstract class PlayerPapaSCRIPT : MonoBehaviour
             temporaryScoreText.transform.DOPunchScale(new Vector3(1, 1, 0), 2f, 8);
             noComboTextObj.gameObject.SetActive(true);
             EndTurnButtSCRIPT.Instance.ChangeButtInteractable(true);
+            PassButtSCRIPT.Instance.ChangeButtInteractable(true);
             CameraControllerSCRIPT.Instance.SetCloseCamView();
         }
         // Change Cam to See enemy here
